@@ -1,0 +1,1666 @@
+function TabletSVG(p){var s=p.size||26;return React.createElement("svg",{width:s,height:s,viewBox:"0 0 32 32"},React.createElement("circle",{cx:"16",cy:"16",r:"13",fill:"#eaf4ff",stroke:"#3b82f6",strokeWidth:"2"}),React.createElement("line",{x1:"5",y1:"16",x2:"27",y2:"16",stroke:"#2563eb",strokeWidth:"2.2",strokeLinecap:"round"}));}
+function LungsSVG(p){var s=p.size||26;return React.createElement("svg",{width:s,height:s,viewBox:"0 0 32 32"},React.createElement("rect",{x:"14",y:"2",width:"4",height:"9",rx:"2",fill:"#0891b2"}),React.createElement("path",{d:"M14 9 Q7 10 5 15 Q3 19 3 23 Q3 28 8 28 Q12 28 13 24 Q14 20 14 16 L14 9",fill:"#bae6fd",stroke:"#0891b2",strokeWidth:"1.6",strokeLinejoin:"round"}),React.createElement("path",{d:"M18 9 Q25 10 27 15 Q29 19 29 23 Q29 28 24 28 Q20 28 19 24 Q18 20 18 16 L18 9",fill:"#bae6fd",stroke:"#0891b2",strokeWidth:"1.6",strokeLinejoin:"round"}));}
+function SuppSVG(p){var s=p.size||26;return React.createElement("svg",{width:s,height:s,viewBox:"0 0 32 32"},React.createElement("rect",{x:"11",y:"10",width:"10",height:"16",fill:"#ddd6fe",stroke:"#7c3aed",strokeWidth:"1.6"}),React.createElement("ellipse",{cx:"16",cy:"10",rx:"5",ry:"5",fill:"#a78bfa",stroke:"#7c3aed",strokeWidth:"1.6"}),React.createElement("ellipse",{cx:"16",cy:"26",rx:"5",ry:"3",fill:"#ddd6fe",stroke:"#7c3aed",strokeWidth:"1.6"}));}
+function PatchSVG(p){var s=p.size||26;return React.createElement("svg",{width:s,height:s,viewBox:"0 0 32 32"},React.createElement("rect",{x:"4",y:"4",width:"24",height:"24",rx:"5",fill:"#ccfbf1",stroke:"#0d9488",strokeWidth:"2"}),React.createElement("rect",{x:"11",y:"11",width:"10",height:"10",rx:"2",fill:"#0d9488",opacity:"0.3"}),React.createElement("line",{x1:"11",y1:"11",x2:"21",y2:"21",stroke:"#0d9488",strokeWidth:"1.5"}),React.createElement("line",{x1:"21",y1:"11",x2:"11",y2:"21",stroke:"#0d9488",strokeWidth:"1.5"}));}
+function tabletSVGStr(s){s=s||22;return'<svg width="'+s+'" height="'+s+'" viewBox="0 0 32 32"><circle cx="16" cy="16" r="13" fill="#eaf4ff" stroke="#3b82f6" stroke-width="2"/><line x1="5" y1="16" x2="27" y2="16" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round"/></svg>';}
+function lungsSVGStr(s){s=s||22;return'<svg width="'+s+'" height="'+s+'" viewBox="0 0 32 32"><rect x="14" y="2" width="4" height="9" rx="2" fill="#0891b2"/><path d="M14 9 Q7 10 5 15 Q3 19 3 23 Q3 28 8 28 Q12 28 13 24 Q14 20 14 16 L14 9" fill="#bae6fd" stroke="#0891b2" stroke-width="1.6" stroke-linejoin="round"/><path d="M18 9 Q25 10 27 15 Q29 19 29 23 Q29 28 24 28 Q20 28 19 24 Q18 20 18 16 L18 9" fill="#bae6fd" stroke="#0891b2" stroke-width="1.6" stroke-linejoin="round"/></svg>';}
+function suppSVGStr(s){s=s||22;return'<svg width="'+s+'" height="'+s+'" viewBox="0 0 32 32"><rect x="11" y="10" width="10" height="16" fill="#ddd6fe" stroke="#7c3aed" stroke-width="1.6"/><ellipse cx="16" cy="10" rx="5" ry="5" fill="#a78bfa" stroke="#7c3aed" stroke-width="1.6"/><ellipse cx="16" cy="26" rx="5" ry="3" fill="#ddd6fe" stroke="#7c3aed" stroke-width="1.6"/></svg>';}
+function patchSVGStr(s){s=s||22;return'<svg width="'+s+'" height="'+s+'" viewBox="0 0 32 32"><rect x="4" y="4" width="24" height="24" rx="5" fill="#ccfbf1" stroke="#0d9488" stroke-width="2"/><rect x="11" y="11" width="10" height="10" rx="2" fill="#0d9488" opacity="0.3"/><line x1="11" y1="11" x2="21" y2="21" stroke="#0d9488" stroke-width="1.5"/><line x1="21" y1="11" x2="11" y2="21" stroke="#0d9488" stroke-width="1.5"/></svg>';}
+function getEmoji(t){return({capsule:"💊",injection:"💉",topical:"🧴",syrup:"🥄",eye:"👁️",drops:"💧",sachet:"🧧",patch:"🩹"})[t]||"💊";}
+function resolveIconType(m){
+  if(m.category==="Inhalado"||m.type==="inhaler")return"inhaler";
+  if(m.type==="suppository")return"suppository";
+  if(m.category==="Inyectable"||m.type==="injection")return"injection";
+  if(m.category==="Topico"||m.type==="topical"||m.type==="patch")return m.type;
+  return m.type||"tablet";
+}
+function MedIcon(p){var t=resolveIconType({type:p.type,category:p.category});var s=p.size||26;
+  if(t==="tablet")return React.createElement("span",{style:{display:"inline-flex",alignItems:"center"}},React.createElement(TabletSVG,{size:s}));
+  if(t==="inhaler")return React.createElement("span",{style:{display:"inline-flex",alignItems:"center"}},React.createElement(LungsSVG,{size:s}));
+  if(t==="suppository")return React.createElement("span",{style:{display:"inline-flex",alignItems:"center"}},React.createElement(SuppSVG,{size:s}));
+  if(t==="patch")return React.createElement("span",{style:{display:"inline-flex",alignItems:"center"}},React.createElement(PatchSVG,{size:s}));
+  return React.createElement("span",{style:{fontSize:s*0.85,lineHeight:1}},getEmoji(t));}
+function medIconStr(type,category,s){s=s||22;var t=resolveIconType({type:type,category:category});
+  if(t==="tablet")return tabletSVGStr(s);
+  if(t==="inhaler")return lungsSVGStr(s);
+  if(t==="suppository")return suppSVGStr(s);
+  if(t==="patch")return patchSVGStr(s);
+  return'<span style="font-size:'+(s*0.85)+'px;line-height:1">'+getEmoji(t)+'</span>';}
+
+var LOGO_URL="https://res.cloudinary.com/dla3kesj4/image/upload/f_auto,q_auto/WhatsApp_Image_2026-04-10_at_20.23.12-removebg-preview_gghhmz";
+function LogoImg(p){return React.createElement("img",{src:LOGO_URL,alt:"Logo HUG",style:{height:p.height||52,width:"auto",objectFit:"contain",flexShrink:0}});}
+var TYPE_ES={tablet:"Comprimido",capsule:"Capsula",sachet:"Sobre",patch:"Parche",syrup:"Jarabe/Sol. oral",injection:"Inyectable",inhaler:"Inhalador",topical:"Topico",eye:"Colirio",drops:"Gotas",suppository:"Supositorio"};
+var ALL_TYPES=["tablet","capsule","sachet","patch","syrup","injection","inhaler","topical","eye","drops","suppository"];
+var NON_ORAL_TYPES=["injection","inhaler","patch","topical","eye","drops","suppository"];
+var VIAS_PAR=["Subcutanea (SC)","Intramuscular (IM)","Intravenosa (IV)"];
+var NON_ORAL=["Inhalado","Inyectable","Topico"];
+function defaultVia(cat,type){if(cat==="Inyectable"||type==="injection")return"Subcutanea (SC)";if(cat==="Inhalado"||type==="inhaler")return"Via inhalatoria";if(cat==="Topico"||type==="topical"||type==="patch")return"Via topica";return"";}
+var STATUS_META={new:{label:"NUEVO",symbol:"\u2746",color:"#059669",bg:"#d1fae5",border:"#059669"},maintain:{label:"MANTENER",symbol:"\u25cf",color:"#1e40af",bg:"#dbeafe",border:"#1e40af"},change:{label:"CAMBIO",symbol:"\u25b2",color:"#d97706",bg:"#fef3c7",border:"#d97706"},suspend:{label:"SUSPENDIDO",symbol:"\u2715",color:"#dc2626",bg:"#fee2e2",border:"#dc2626"}};
+var STATUS_DISP={new:0,change:1,maintain:2,suspend:3};
+var STATUS_PRIO={suspend:0,new:1,change:2,maintain:3};
+var BOX_COL={tablet:"#1a56db",capsule:"#1a56db",sachet:"#1a56db",syrup:"#1a56db",patch:"#0d9488",injection:"#dc2626",inhaler:"#0891b2",topical:"#059669",eye:"#0284c7",drops:"#0369a1",suppository:"#6d28d9"};
+var TIPS_PRESET=["Tomar con alimentos","Tomar en ayunas","No triturar","No masticar","Con abundante agua","Evitar alcohol","Precaucion al conducir","Vigilar tension","Control analitico","Misma hora cada dia","Enjuagar boca despues","Rotar zonas de inyeccion","Por la noche","Control INR"];
+var SEM_META={red:{label:"NO MANIPULAR",color:"#991b1b",bg:"#fee2e2",border:"#fecaca",icon:"🔴"},yellow:{label:"CON PRECAUCION",color:"#92400e",bg:"#fef3c7",border:"#fde68a",icon:"🟡"},green:{label:"PUEDE ADMINISTRARSE",color:"#065f46",bg:"#d1fae5",border:"#a7f3d0",icon:"🟢"},unknown:{label:"Sin datos",color:"#475569",bg:"#f1f5f9",border:"#e2e8f0",icon:"❓"}};
+var EQUIV_GROUPS=[
+  ["simvastatina","atorvastatina","rosuvastatina","pravastatina","fluvastatina","pitavastatina"],
+  ["ibuprofeno","espidifen","naproxeno","diclofenaco","dexketoprofeno"],
+  ["paracetamol","efferalgan","gelocatil"],
+  ["enalapril","lisinopril","ramipril","captopril","perindopril","fosinopril","quinapril","trandolapril"],
+  ["losartan","valsartan","irbesartan","olmesartan","candesartan","telmisartan"],
+  ["furosemida","seguril","torasemida"],
+  ["insulina","lantus","toujeo","tresiba","levemir","humalog","novorapid","apidra"],
+  ["metformina","janumet","sitagliptina"],
+  ["digoxina","lanacordin"],
+  ["acenocumarol","sintrom","warfarina","apixaban","eliquis","rivaroxaban","dabigatran","enoxaparina","clexane","bemiparina"],
+  ["vortioxetina","brintellix"],
+  ["oxicodona","naloxona","targin"],
+  ["bisoprolol","carvedilol","nebivolol","atenolol","metoprolol","propranolol","labetalol"],
+  ["omeprazol","pantoprazol","lansoprazol","esomeprazol","rabeprazol"],
+  ["amlodipino","lercanidipino","nifedipino","felodipino","diltiazem","verapamilo"],
+  ["espironolactona","eplerenona"],
+  ["dapagliflozina","empagliflozina","canagliflozina","ertugliflozina"],
+  ["sitagliptina","linagliptina","saxagliptina","alogliptina","vildagliptina"],
+  ["liraglutida","semaglutida","dulaglutida","exenatida"],
+  ["pregabalina","gabapentina"],
+  ["lorazepam","diazepam","alprazolam","clonazepam","bromazepam"],
+  ["zolpidem","zopiclona","lormetazepam"],
+  ["sertralina","escitalopram","fluoxetina","paroxetina","citalopram","fluvoxamina"],
+  ["venlafaxina","duloxetina","desvenlafaxina"],
+  ["mirtazapina","trazodona"],
+  ["quetiapina","olanzapina","risperidona","aripiprazol"],
+  ["pramipexol","ropinirol","rotigotina"],
+  ["alopurinol","febuxostat"],
+  ["apixaban","rivaroxaban","dabigatran","edoxaban"],
+  ["enoxaparina","clexane","bemiparina","tinzaparina","dalteparina"]
+];
+
+var DB=[
+  {id:1,brand:"Adiro",activeNames:["ACIDO ACETILSALICILICO"],dosage:"100mg",category:"Oral",type:"tablet",tips:[]},
+  {id:2,brand:"Omeprazol",activeNames:["OMEPRAZOL"],dosage:"20mg",category:"Oral",type:"capsule",tips:["Tomar en ayunas"]},
+  {id:3,brand:"Enalapril",activeNames:["ENALAPRIL"],dosage:"10mg",category:"Oral",type:"tablet",tips:["Vigilar tension"]},
+  {id:4,brand:"Metformina",activeNames:["METFORMINA"],dosage:"850mg",category:"Oral",type:"tablet",tips:["Tomar con alimentos"]},
+  {id:5,brand:"Ventolin",activeNames:["SALBUTAMOL"],dosage:"100mcg",category:"Inhalado",type:"inhaler",tips:[]},
+  {id:6,brand:"Trelegy",activeNames:["FLUTICASONA","UMECLIDINIO","VILANTEROL"],dosage:"92/55/22mcg",category:"Inhalado",type:"inhaler",tips:["Enjuagar boca"]},
+  {id:7,brand:"Pregabalina",activeNames:["PREGABALINA"],dosage:"75mg",category:"Oral",type:"capsule",tips:[]},
+  {id:8,brand:"Amlodipino",activeNames:["AMLODIPINO"],dosage:"5mg",category:"Oral",type:"tablet",tips:[]},
+  {id:9,brand:"Paracetamol",activeNames:["PARACETAMOL"],dosage:"1g",category:"Oral",type:"tablet",tips:[]},
+  {id:10,brand:"Hidroferol",activeNames:["CALCIFEDIOL"],dosage:"0.266mg",category:"Oral",type:"capsule",tips:[]},
+  {id:11,brand:"Acetilcisteina",activeNames:["ACETILCISTEINA"],dosage:"600mg",category:"Oral",type:"sachet",tips:["Disolver en agua"]},
+  {id:12,brand:"Lantus",activeNames:["INSULINA GLARGINA"],dosage:"100 U/mL",category:"Inyectable",type:"injection",tips:["Rotar zonas"]},
+  {id:13,brand:"Novorapid",activeNames:["INSULINA ASPART"],dosage:"100 U/mL",category:"Inyectable",type:"injection",tips:[]},
+  {id:14,brand:"Furosemida",activeNames:["FUROSEMIDA"],dosage:"40mg",category:"Oral",type:"tablet",tips:[]},
+  {id:15,brand:"Levotiroxina",activeNames:["LEVOTIROXINA"],dosage:"50mcg",category:"Oral",type:"tablet",tips:["En ayunas"]},
+  {id:16,brand:"Sintrom",activeNames:["ACENOCUMAROL"],dosage:"4mg",category:"Oral",type:"tablet",tips:["Control INR"]},
+  {id:17,brand:"Lorazepam",activeNames:["LORAZEPAM"],dosage:"1mg",category:"Oral",type:"tablet",tips:[]},
+  {id:18,brand:"Voltaren",activeNames:["DICLOFENACO"],dosage:"1%",category:"Topico",type:"topical",tips:[]},
+  {id:19,brand:"Amoxicilina",activeNames:["AMOXICILINA"],dosage:"500mg",category:"Oral",type:"capsule",tips:["Completar tratamiento"]},
+  {id:20,brand:"Eliquis",activeNames:["APIXABAN"],dosage:"5mg",category:"Oral",type:"tablet",tips:[]},
+  {id:21,brand:"Crestor",activeNames:["ROSUVASTATINA"],dosage:"10mg",category:"Oral",type:"tablet",tips:["Tomar por la noche"]},
+  {id:22,brand:"Espidifen",activeNames:["IBUPROFENO"],dosage:"600mg",category:"Oral",type:"sachet",tips:["Tomar con alimentos"]},
+  {id:23,brand:"Nolotil",activeNames:["METAMIZOL"],dosage:"575mg",category:"Oral",type:"capsule",tips:[]},
+  {id:24,brand:"Metamizol",activeNames:["METAMIZOL"],dosage:"575mg",category:"Oral",type:"capsule",tips:[]},
+  {id:25,brand:"Atorvastatina",activeNames:["ATORVASTATINA"],dosage:"40mg",category:"Oral",type:"tablet",tips:["Tomar por la noche"]},
+  {id:26,brand:"Bisoprolol",activeNames:["BISOPROLOL"],dosage:"5mg",category:"Oral",type:"tablet",tips:[]},
+  {id:27,brand:"Ramipril",activeNames:["RAMIPRIL"],dosage:"5mg",category:"Oral",type:"tablet",tips:["Vigilar tension"]},
+  {id:28,brand:"Ibuprofeno",activeNames:["IBUPROFENO"],dosage:"600mg",category:"Oral",type:"tablet",tips:["Tomar con alimentos"]},
+  {id:29,brand:"Naproxeno",activeNames:["NAPROXENO"],dosage:"550mg",category:"Oral",type:"tablet",tips:["Tomar con alimentos"]},
+  {id:30,brand:"Enantyum",activeNames:["DEXKETOPROFENO"],dosage:"25mg",category:"Oral",type:"tablet",tips:["Tomar con alimentos"]},
+  {id:31,brand:"Dexketoprofeno",activeNames:["DEXKETOPROFENO"],dosage:"25mg",category:"Oral",type:"tablet",tips:["Tomar con alimentos"]},
+  {id:32,brand:"Tramadol",activeNames:["TRAMADOL"],dosage:"50mg",category:"Oral",type:"capsule",tips:[]},
+  {id:34,brand:"Pantoprazol",activeNames:["PANTOPRAZOL"],dosage:"40mg",category:"Oral",type:"tablet",tips:["Tomar en ayunas"]},
+  {id:35,brand:"Lansoprazol",activeNames:["LANSOPRAZOL"],dosage:"30mg",category:"Oral",type:"capsule",tips:["Tomar en ayunas"]},
+  {id:36,brand:"Seguril",activeNames:["FUROSEMIDA"],dosage:"40mg",category:"Oral",type:"tablet",tips:[]},
+  {id:37,brand:"Torasemida",activeNames:["TORASEMIDA"],dosage:"10mg",category:"Oral",type:"tablet",tips:[]},
+  {id:38,brand:"Espironolactona",activeNames:["ESPIRONOLACTONA"],dosage:"25mg",category:"Oral",type:"tablet",tips:["Tomar con alimentos"]},
+  {id:39,brand:"Aldactone",activeNames:["ESPIRONOLACTONA"],dosage:"25mg",category:"Oral",type:"tablet",tips:["Tomar con alimentos"]},
+  {id:40,brand:"Efferalgan",activeNames:["PARACETAMOL"],dosage:"1g",category:"Oral",type:"sachet",tips:[]},
+  {id:41,brand:"Gelocatil",activeNames:["PARACETAMOL"],dosage:"650mg",category:"Oral",type:"tablet",tips:[]},
+  {id:42,brand:"Indapamida",activeNames:["INDAPAMIDA"],dosage:"1.5mg",category:"Oral",type:"tablet",tips:[]},
+  {id:43,brand:"Hidroclorotiazida",activeNames:["HIDROCLOROTIAZIDA"],dosage:"25mg",category:"Oral",type:"tablet",tips:[]},
+  {id:44,brand:"Losartan",activeNames:["LOSARTAN"],dosage:"50mg",category:"Oral",type:"tablet",tips:["Vigilar tension"]},
+  {id:45,brand:"Cozaar",activeNames:["LOSARTAN"],dosage:"50mg",category:"Oral",type:"tablet",tips:["Vigilar tension"]},
+  {id:46,brand:"Valsartan",activeNames:["VALSARTAN"],dosage:"160mg",category:"Oral",type:"tablet",tips:[]},
+  {id:47,brand:"Irbesartan",activeNames:["IRBESARTAN"],dosage:"150mg",category:"Oral",type:"tablet",tips:[]},
+  {id:48,brand:"Olmesartan",activeNames:["OLMESARTAN"],dosage:"20mg",category:"Oral",type:"tablet",tips:[]},
+  {id:49,brand:"Candesartan",activeNames:["CANDESARTAN"],dosage:"8mg",category:"Oral",type:"tablet",tips:[]},
+  {id:50,brand:"Lercanidipino",activeNames:["LERCANIDIPINO"],dosage:"10mg",category:"Oral",type:"tablet",tips:["Tomar con alimentos"]},
+  {id:51,brand:"Nifedipino",activeNames:["NIFEDIPINO"],dosage:"30mg",category:"Oral",type:"tablet",tips:[]},
+  {id:52,brand:"Carvedilol",activeNames:["CARVEDILOL"],dosage:"25mg",category:"Oral",type:"tablet",tips:["Tomar con alimentos"]},
+  {id:53,brand:"Nebivolol",activeNames:["NEBIVOLOL"],dosage:"5mg",category:"Oral",type:"tablet",tips:[]},
+  {id:54,brand:"Atenolol",activeNames:["ATENOLOL"],dosage:"50mg",category:"Oral",type:"tablet",tips:[]},
+  {id:55,brand:"Metoprolol",activeNames:["METOPROLOL"],dosage:"50mg",category:"Oral",type:"tablet",tips:[]},
+  {id:56,brand:"Simvastatina",activeNames:["SIMVASTATINA"],dosage:"20mg",category:"Oral",type:"tablet",tips:["Tomar por la noche"]},
+  {id:57,brand:"Rosuvastatina",activeNames:["ROSUVASTATINA"],dosage:"10mg",category:"Oral",type:"tablet",tips:["Tomar por la noche"]},
+  {id:58,brand:"Pravastatina",activeNames:["PRAVASTATINA"],dosage:"40mg",category:"Oral",type:"tablet",tips:["Tomar por la noche"]},
+  {id:60,brand:"Fluvastatina",activeNames:["FLUVASTATINA"],dosage:"80mg",category:"Oral",type:"tablet",tips:["Tomar por la noche"]},
+  {id:61,brand:"Janumet",activeNames:["SITAGLIPTINA","METFORMINA"],dosage:"50/1000mg",category:"Oral",type:"tablet",tips:["Tomar con alimentos"]},
+  {id:62,brand:"Januvia",activeNames:["SITAGLIPTINA"],dosage:"100mg",category:"Oral",type:"tablet",tips:[]},
+  {id:63,brand:"Jardiance",activeNames:["EMPAGLIFLOZINA"],dosage:"10mg",category:"Oral",type:"tablet",tips:[]},
+  {id:64,brand:"Forxiga",activeNames:["DAPAGLIFLOZINA"],dosage:"10mg",category:"Oral",type:"tablet",tips:[]},
+  {id:65,brand:"Ozempic",activeNames:["SEMAGLUTIDA"],dosage:"1mg",category:"Inyectable",type:"injection",tips:["Semanal"]},
+  {id:67,brand:"Toujeo",activeNames:["INSULINA GLARGINA"],dosage:"300 U/mL",category:"Inyectable",type:"injection",tips:["Rotar zonas"]},
+  {id:68,brand:"Tresiba",activeNames:["INSULINA DEGLUDEC"],dosage:"100 U/mL",category:"Inyectable",type:"injection",tips:["Rotar zonas"]},
+  {id:69,brand:"Levemir",activeNames:["INSULINA DETEMIR"],dosage:"100 U/mL",category:"Inyectable",type:"injection",tips:["Rotar zonas"]},
+  {id:70,brand:"Humalog",activeNames:["INSULINA LISPRO"],dosage:"100 U/mL",category:"Inyectable",type:"injection",tips:[]},
+  {id:74,brand:"Xarelto",activeNames:["RIVAROXABAN"],dosage:"20mg",category:"Oral",type:"tablet",tips:["Tomar con alimentos"]},
+  {id:75,brand:"Pradaxa",activeNames:["DABIGATRAN"],dosage:"110mg",category:"Oral",type:"capsule",tips:[]},
+  {id:76,brand:"Gabapentina",activeNames:["GABAPENTINA"],dosage:"300mg",category:"Oral",type:"capsule",tips:[]},
+  {id:77,brand:"Lisinopril",activeNames:["LISINOPRIL"],dosage:"10mg",category:"Oral",type:"tablet",tips:["Vigilar tension"]},
+  {id:79,brand:"Digoxina",activeNames:["DIGOXINA"],dosage:"0.25mg",category:"Oral",type:"tablet",tips:["Control frecuencia"]},
+  {id:81,brand:"Clexane",activeNames:["ENOXAPARINA"],dosage:"40mg",category:"Inyectable",type:"injection",tips:["Via subcutanea"]},
+  {id:84,brand:"Seretide",activeNames:["SALMETEROL","FLUTICASONA"],dosage:"50/500mcg",category:"Inhalado",type:"inhaler",tips:["Enjuagar boca despues"]},
+  {id:85,brand:"Symbicort",activeNames:["BUDESONIDA","FORMOTEROL"],dosage:"160/4.5mcg",category:"Inhalado",type:"inhaler",tips:["Enjuagar boca despues"]},
+  {id:87,brand:"Spiriva",activeNames:["TIOTROPIO"],dosage:"18mcg",category:"Inhalado",type:"inhaler",tips:[]},
+  {id:88,brand:"Relvar",activeNames:["FLUTICASONA","VILANTEROL"],dosage:"92/22mcg",category:"Inhalado",type:"inhaler",tips:["Enjuagar boca despues"]},
+  {id:89,brand:"Capenon",activeNames:["LOSARTAN","HIDROCLOROTIAZIDA"],dosage:"50/12.5mg",category:"Oral",type:"tablet",tips:["Vigilar tension"]},
+  {id:91,brand:"Losartan/Hidroclorotiazida",activeNames:["LOSARTAN","HIDROCLOROTIAZIDA"],dosage:"50/12.5mg",category:"Oral",type:"tablet",tips:["Vigilar tension"]},
+  {id:96,brand:"Renitec",activeNames:["ENALAPRIL"],dosage:"20mg",category:"Oral",type:"tablet",tips:["Vigilar tension"]},
+  {id:97,brand:"Zarator",activeNames:["ATORVASTATINA"],dosage:"40mg",category:"Oral",type:"tablet",tips:["Tomar por la noche"]},
+  {id:98,brand:"Dianben",activeNames:["METFORMINA"],dosage:"850mg",category:"Oral",type:"tablet",tips:["Tomar con alimentos"]},
+  {id:99,brand:"Losec",activeNames:["OMEPRAZOL"],dosage:"20mg",category:"Oral",type:"capsule",tips:["Tomar en ayunas"]},
+  {id:100,brand:"Inegy",activeNames:["SIMVASTATINA","EZETIMIBA"],dosage:"20/10mg",category:"Oral",type:"tablet",tips:["Tomar por la noche"]},
+  {id:102,brand:"Ezetimiba",activeNames:["EZETIMIBA"],dosage:"10mg",category:"Oral",type:"tablet",tips:["Tomar por la noche"]},
+  {id:110,brand:"Inclisiran",activeNames:["INCLISIRAN"],dosage:"284mg",category:"Inyectable",type:"injection",tips:["Cada 6 meses, SC"]},
+  {id:121,brand:"Torenteva",activeNames:["RAMIPRIL","AMLODIPINO"],dosage:"5/5mg",category:"Oral",type:"tablet",tips:["Vigilar tension"]},
+  {id:125,brand:"Exforge",activeNames:["VALSARTAN","AMLODIPINO"],dosage:"160/5mg",category:"Oral",type:"tablet",tips:["Vigilar tension"]},
+  {id:133,brand:"Telmisartan",activeNames:["TELMISARTAN"],dosage:"40mg",category:"Oral",type:"tablet",tips:[]},
+  {id:137,brand:"Perindopril",activeNames:["PERINDOPRIL"],dosage:"5mg",category:"Oral",type:"tablet",tips:["Tomar en ayunas"]},
+  {id:142,brand:"Preterax",activeNames:["PERINDOPRIL","INDAPAMIDA"],dosage:"5/1.25mg",category:"Oral",type:"tablet",tips:["Tomar en ayunas"]},
+  {id:148,brand:"Lodoz",activeNames:["BISOPROLOL","HIDROCLOROTIAZIDA"],dosage:"2.5/6.25mg",category:"Oral",type:"tablet",tips:[]},
+  {id:157,brand:"Ivabradina",activeNames:["IVABRADINA"],dosage:"5mg",category:"Oral",type:"tablet",tips:["Tomar con alimentos"]},
+  {id:159,brand:"Entresto",activeNames:["SACUBITRIL","VALSARTAN"],dosage:"49/51mg",category:"Oral",type:"tablet",tips:["Vigilar tension"]},
+  {id:183,brand:"Trimbow",activeNames:["BECLOMETASONA","FORMOTEROL","GLICOPIRRONIO"],dosage:"87/5/9mcg",category:"Inhalado",type:"inhaler",tips:["Enjuagar boca despues"]},
+  {id:189,brand:"Elebrato",activeNames:["FLUTICASONA","UMECLIDINIO","VILANTEROL"],dosage:"92/55/22mcg",category:"Inhalado",type:"inhaler",tips:["Enjuagar boca despues"]},
+  {id:194,brand:"Atrovent",activeNames:["IPRATROPIO"],dosage:"20mcg",category:"Inhalado",type:"inhaler",tips:[]},
+  {id:195,brand:"Combivent",activeNames:["SALBUTAMOL","IPRATROPIO"],dosage:"100/20mcg",category:"Inhalado",type:"inhaler",tips:[]},
+  {id:198,brand:"Dupixent",activeNames:["DUPILUMAB"],dosage:"300mg",category:"Inyectable",type:"injection",tips:["Cada 2 semanas, SC"]},
+  {id:210,brand:"Valproato",activeNames:["VALPROATO SODICO"],dosage:"500mg",category:"Oral",type:"tablet",tips:["Tomar con alimentos"]},
+  {id:211,brand:"Depakine",activeNames:["VALPROATO SODICO"],dosage:"500mg",category:"Oral",type:"tablet",tips:["Tomar con alimentos"]},
+  {id:213,brand:"Carbamazepina",activeNames:["CARBAMAZEPINA"],dosage:"200mg",category:"Oral",type:"tablet",tips:["Control analitico"]},
+  {id:218,brand:"Fenobarbital",activeNames:["FENOBARBITAL"],dosage:"100mg",category:"Oral",type:"tablet",tips:[]},
+  {id:222,brand:"Lamotrigina",activeNames:["LAMOTRIGINA"],dosage:"100mg",category:"Oral",type:"tablet",tips:[]},
+  {id:224,brand:"Levetiracetam",activeNames:["LEVETIRACETAM"],dosage:"500mg",category:"Oral",type:"tablet",tips:[]},
+  {id:225,brand:"Keppra",activeNames:["LEVETIRACETAM"],dosage:"500mg",category:"Oral",type:"tablet",tips:[]},
+  {id:230,brand:"Lacosamida",activeNames:["LACOSAMIDA"],dosage:"100mg",category:"Oral",type:"tablet",tips:[]},
+  {id:234,brand:"Perampanel",activeNames:["PERAMPANEL"],dosage:"4mg",category:"Oral",type:"tablet",tips:["Por la noche"]},
+  {id:250,brand:"Sinemet",activeNames:["LEVODOPA","CARBIDOPA"],dosage:"250/25mg",category:"Oral",type:"tablet",tips:["30 min antes comida"]},
+  {id:254,brand:"Madopar",activeNames:["LEVODOPA","BENSERAZIDA"],dosage:"200/50mg",category:"Oral",type:"capsule",tips:["30 min antes comida"]},
+  {id:257,brand:"Stalevo",activeNames:["LEVODOPA","CARBIDOPA","ENTACAPONA"],dosage:"100/25/200mg",category:"Oral",type:"tablet",tips:["30 min antes comida"]},
+  {id:259,brand:"Pramipexol",activeNames:["PRAMIPEXOL"],dosage:"0.18mg",category:"Oral",type:"tablet",tips:[]},
+  {id:264,brand:"Neupro",activeNames:["ROTIGOTINA"],dosage:"2mg/24h",category:"Topico",type:"patch",tips:["Rotar zona aplicacion"]},
+  {id:275,brand:"Rasagilina",activeNames:["RASAGILINA"],dosage:"1mg",category:"Oral",type:"tablet",tips:[]},
+  {id:300,brand:"Fosfomicina",activeNames:["FOSFOMICINA"],dosage:"500mg",category:"Oral",type:"capsule",tips:["Con agua abundante"]},
+  {id:301,brand:"Siccafluid",activeNames:["CARBOMERO"],dosage:"",category:"Topico",type:"eye",tips:[]},
+  {id:302,brand:"Quetiapina",activeNames:["QUETIAPINA"],dosage:"25mg",category:"Oral",type:"tablet",tips:[]},
+  {id:304,brand:"Mastical D",activeNames:["CALCIO CARBONATO","COLECALCIFEROL"],dosage:"1500mg/400UI",category:"Oral",type:"tablet",tips:["Masticar antes de tragar"]},
+  {id:306,brand:"Movicol",activeNames:["MACROGOL 3350"],dosage:"",category:"Oral",type:"sachet",tips:["Disolver en agua"]},
+  {id:307,brand:"Brintellix",activeNames:["VORTIOXETINA"],dosage:"10mg",category:"Oral",type:"tablet",tips:[]},
+  {id:308,brand:"Acfol",activeNames:["ACIDO FOLICO"],dosage:"5mg",category:"Oral",type:"tablet",tips:[]},
+  {id:309,brand:"Metotrexato",activeNames:["METOTREXATO"],dosage:"2.5mg",category:"Oral",type:"tablet",tips:["Control analitico"]},
+  {id:310,brand:"Higrotona",activeNames:["CLORTALIDONA"],dosage:"50mg",category:"Oral",type:"tablet",tips:[]},
+  {id:311,brand:"Manidon",activeNames:["VERAPAMILO"],dosage:"80mg",category:"Oral",type:"tablet",tips:["Tomar con alimentos"]},
+  {id:312,brand:"Targin",activeNames:["OXICODONA","NALOXONA"],dosage:"10/5mg",category:"Oral",type:"tablet",tips:[]},
+  {id:313,brand:"Oxicodona/Naloxona",activeNames:["OXICODONA","NALOXONA"],dosage:"10/5mg",category:"Oral",type:"tablet",tips:[]},
+  {id:314,brand:"Oxicodona",activeNames:["OXICODONA"],dosage:"10mg",category:"Oral",type:"tablet",tips:[]},
+  {id:315,brand:"Enema",activeNames:["FOSFATO SODICO"],dosage:"",category:"Topico",type:"suppository",tips:["Uso rectal"]},
+  {id:316,brand:"Lagrimas artificiales",activeNames:["HIALURONATO SODICO"],dosage:"",category:"Topico",type:"eye",tips:[]},
+  {id:317,brand:"Prednisona",activeNames:["PREDNISONA"],dosage:"",category:"Oral",type:"tablet",tips:["Tomar con alimentos"]},
+  {id:318,brand:"Dacortin",activeNames:["PREDNISONA"],dosage:"",category:"Oral",type:"tablet",tips:["Tomar con alimentos"]},
+  {id:319,brand:"Mirtazapina",activeNames:["MIRTAZAPINA"],dosage:"15mg",category:"Oral",type:"tablet",tips:[]},
+  {id:321,brand:"Lyrica",activeNames:["PREGABALINA"],dosage:"75mg",category:"Oral",type:"capsule",tips:[]},
+  {id:322,brand:"Alopurinol",activeNames:["ALOPURINOL"],dosage:"100mg",category:"Oral",type:"tablet",tips:["Tomar con alimentos"]},
+  {id:323,brand:"Zolpidem",activeNames:["ZOLPIDEM"],dosage:"10mg",category:"Oral",type:"tablet",tips:[]},
+  {id:324,brand:"Fentanilo",activeNames:["FENTANILO"],dosage:"50mcg/h",category:"Topico",type:"patch",tips:["Rotar zona aplicacion"]},
+  {id:325,brand:"Carduran Neo",activeNames:["DOXAZOSINA"],dosage:"4mg",category:"Oral",type:"tablet",tips:[]},
+  {id:326,brand:"Nitrofix",activeNames:["NITROGLICERINA"],dosage:"5mg",category:"Topico",type:"patch",tips:["Rotar zona aplicacion"]},
+  {id:327,brand:"Valsartan/Hidroclorotiazida",activeNames:["VALSARTAN","HIDROCLOROTIAZIDA"],dosage:"160/12.5mg",category:"Oral",type:"tablet",tips:["Vigilar tension"]},
+  {id:3271,brand:"Valsartan/Hidroclorotiazida",activeNames:["VALSARTAN","HIDROCLOROTIAZIDA"],dosage:"80/12.5mg",category:"Oral",type:"tablet",tips:["Vigilar tension"]},
+  {id:328,brand:"Ferbisol",activeNames:["SULFATO FERROSO"],dosage:"",category:"Oral",type:"capsule",tips:["En ayunas"]},
+  {id:329,brand:"Cafinitrina",activeNames:["NITROGLICERINA"],dosage:"",category:"Oral",type:"tablet",tips:["Si precisa"]},
+  {id:330,brand:"Prolia",activeNames:["DENOSUMAB"],dosage:"60mg",category:"Inyectable",type:"injection",tips:["Cada 6 meses, SC"]},
+  {id:331,brand:"Magnesio",activeNames:["MAGNESIO"],dosage:"",category:"Oral",type:"tablet",tips:[]},
+  {id:500,brand:"Balzak",activeNames:["OLMESARTAN","AMLODIPINO"],dosage:"40/10mg",category:"Oral",type:"tablet",tips:["Vigilar tension"]},
+  {id:501,brand:"Sevikar",activeNames:["OLMESARTAN","AMLODIPINO"],dosage:"40/10mg",category:"Oral",type:"tablet",tips:["Vigilar tension"]},
+  {id:502,brand:"Sevikar HCT",activeNames:["OLMESARTAN","AMLODIPINO","HIDROCLOROTIAZIDA"],dosage:"40/10/12.5mg",category:"Oral",type:"tablet",tips:["Vigilar tension"]},
+  {id:503,brand:"Olmetec",activeNames:["OLMESARTAN"],dosage:"20mg",category:"Oral",type:"tablet",tips:["Vigilar tension"]},
+  {id:504,brand:"Coolmetec",activeNames:["OLMESARTAN","HIDROCLOROTIAZIDA"],dosage:"20/12.5mg",category:"Oral",type:"tablet",tips:["Vigilar tension"]},
+  {id:505,brand:"Atacand Plus",activeNames:["CANDESARTAN","HIDROCLOROTIAZIDA"],dosage:"16/12.5mg",category:"Oral",type:"tablet",tips:["Vigilar tension"]},
+  {id:506,brand:"Twynsta",activeNames:["TELMISARTAN","AMLODIPINO"],dosage:"80/5mg",category:"Oral",type:"tablet",tips:["Vigilar tension"]},
+  {id:507,brand:"Coveram",activeNames:["PERINDOPRIL","AMLODIPINO"],dosage:"5/5mg",category:"Oral",type:"tablet",tips:["Vigilar tension"]},
+  {id:508,brand:"Triplixam",activeNames:["PERINDOPRIL","INDAPAMIDA","AMLODIPINO"],dosage:"5/1.25/5mg",category:"Oral",type:"tablet",tips:["Vigilar tension"]},
+  {id:509,brand:"Dafiro",activeNames:["VALSARTAN","AMLODIPINO","HIDROCLOROTIAZIDA"],dosage:"160/5/12.5mg",category:"Oral",type:"tablet",tips:[]},
+  {id:510,brand:"Zestoretic",activeNames:["LISINOPRIL","HIDROCLOROTIAZIDA"],dosage:"20/12.5mg",category:"Oral",type:"tablet",tips:["Vigilar tension"]},
+  {id:511,brand:"Coaprovel",activeNames:["IRBESARTAN","HIDROCLOROTIAZIDA"],dosage:"150/12.5mg",category:"Oral",type:"tablet",tips:[]},
+  {id:512,brand:"Coversyl Plus",activeNames:["PERINDOPRIL","INDAPAMIDA"],dosage:"4/1.25mg",category:"Oral",type:"tablet",tips:["Tomar en ayunas"]},
+  {id:520,brand:"Komboglyze",activeNames:["SAXAGLIPTINA","METFORMINA"],dosage:"5/1000mg",category:"Oral",type:"tablet",tips:["Tomar con alimentos"]},
+  {id:521,brand:"Jentadueto",activeNames:["LINAGLIPTINA","METFORMINA"],dosage:"2.5/1000mg",category:"Oral",type:"tablet",tips:["Tomar con alimentos"]},
+  {id:523,brand:"Xigduo",activeNames:["DAPAGLIFLOZINA","METFORMINA"],dosage:"10/1000mg",category:"Oral",type:"tablet",tips:["Tomar con alimentos"]},
+  {id:524,brand:"Synjardy",activeNames:["EMPAGLIFLOZINA","METFORMINA"],dosage:"12.5/1000mg",category:"Oral",type:"tablet",tips:["Tomar con alimentos"]},
+  {id:528,brand:"Trajenta",activeNames:["LINAGLIPTINA"],dosage:"5mg",category:"Oral",type:"tablet",tips:[]},
+  {id:530,brand:"Victoza",activeNames:["LIRAGLUTIDA"],dosage:"1.2mg",category:"Inyectable",type:"injection",tips:["SC diaria"]},
+  {id:531,brand:"Trulicity",activeNames:["DULAGLUTIDA"],dosage:"0.75mg",category:"Inyectable",type:"injection",tips:["SC semanal"]},
+  {id:532,brand:"Rybelsus",activeNames:["SEMAGLUTIDA"],dosage:"7mg",category:"Oral",type:"tablet",tips:["En ayunas"]},
+  {id:540,brand:"Atozet",activeNames:["ATORVASTATINA","EZETIMIBA"],dosage:"40/10mg",category:"Oral",type:"tablet",tips:["Tomar por la noche"]},
+  {id:541,brand:"Lipofix",activeNames:["ROSUVASTATINA","EZETIMIBA"],dosage:"10/10mg",category:"Oral",type:"tablet",tips:["Tomar por la noche"]},
+  {id:543,brand:"Praluent",activeNames:["ALIROCUMAB"],dosage:"75mg",category:"Inyectable",type:"injection",tips:["SC quincenal"]},
+  {id:544,brand:"Repatha",activeNames:["EVOLOCUMAB"],dosage:"140mg",category:"Inyectable",type:"injection",tips:["SC quincenal"]},
+  {id:554,brand:"Requip",activeNames:["ROPINIROL"],dosage:"1mg",category:"Oral",type:"tablet",tips:[]},
+  {id:556,brand:"Mirapexin",activeNames:["PRAMIPEXOL"],dosage:"0.18mg",category:"Oral",type:"tablet",tips:[]},
+  {id:557,brand:"Comtan",activeNames:["ENTACAPONA"],dosage:"200mg",category:"Oral",type:"tablet",tips:["Con levodopa"]},
+  {id:558,brand:"Xadago",activeNames:["SAFINAMIDA"],dosage:"50mg",category:"Oral",type:"tablet",tips:[]},
+  {id:560,brand:"Briviact",activeNames:["BRIVARACETAM"],dosage:"50mg",category:"Oral",type:"tablet",tips:[]},
+  {id:561,brand:"Zebinix",activeNames:["ESLICARBAZEPINA"],dosage:"800mg",category:"Oral",type:"tablet",tips:[]},
+  {id:563,brand:"Topamax",activeNames:["TOPIRAMATO"],dosage:"50mg",category:"Oral",type:"capsule",tips:[]},
+  {id:565,brand:"Zonegran",activeNames:["ZONISAMIDA"],dosage:"100mg",category:"Oral",type:"capsule",tips:[]},
+  {id:568,brand:"Epidyolex",activeNames:["CANNABIDIOL"],dosage:"100mg/ml",category:"Oral",type:"syrup",tips:["Tomar con alimentos"]},
+  {id:570,brand:"Opiren",activeNames:["LANSOPRAZOL"],dosage:"30mg",category:"Oral",type:"tablet",tips:["Tomar en ayunas"]},
+  {id:571,brand:"Duphalac",activeNames:["LACTULOSA"],dosage:"",category:"Oral",type:"sachet",tips:[]},
+  {id:572,brand:"Risperidona",activeNames:["RISPERIDONA"],dosage:"1mg",category:"Oral",type:"syrup",tips:[]},
+  {id:573,brand:"Sertralina",activeNames:["SERTRALINA"],dosage:"50mg",category:"Oral",type:"tablet",tips:[]},
+  {id:574,brand:"Trazodona",activeNames:["TRAZODONA"],dosage:"100mg",category:"Oral",type:"tablet",tips:[]},
+  {id:575,brand:"Eutirox",activeNames:["LEVOTIROXINA"],dosage:"88mcg",category:"Oral",type:"tablet",tips:["En ayunas"]},
+  {id:576,brand:"Xalatan",activeNames:["LATANOPROST"],dosage:"50mcg/ml",category:"Topico",type:"eye",tips:[]},
+  {id:577,brand:"Trixeo Aerosphere",activeNames:["BECLOMETASONA","FORMOTEROL","GLICOPIRRONIO"],dosage:"5/7.2/160mcg",category:"Inhalado",type:"inhaler",tips:["Enjuagar boca despues"]},
+  {id:578,brand:"Foster Nexthaler",activeNames:["BECLOMETASONA","FORMOTEROL"],dosage:"100/6mcg",category:"Inhalado",type:"inhaler",tips:["Enjuagar boca despues"]},
+  {id:579,brand:"Foster",activeNames:["BECLOMETASONA","FORMOTEROL"],dosage:"100/6mcg",category:"Inhalado",type:"inhaler",tips:["Enjuagar boca despues"]},
+  {id:580,brand:"Vitamina B12",activeNames:["CIANOCOBALAMINA"],dosage:"1000mcg",category:"Oral",type:"capsule",tips:[]},
+  {id:581,brand:"Augmentine",activeNames:["AMOXICILINA","ACIDO CLAVULANICO"],dosage:"875/125mg",category:"Oral",type:"tablet",tips:["Tomar con alimentos"]},
+  {id:582,brand:"Amoxicilina/Clavulanico",activeNames:["AMOXICILINA","ACIDO CLAVULANICO"],dosage:"875/125mg",category:"Oral",type:"tablet",tips:["Tomar con alimentos"]},
+  {id:583,brand:"Eucreas",activeNames:["VILDAGLIPTINA","METFORMINA"],dosage:"50/1000mg",category:"Oral",type:"tablet",tips:["Tomar con alimentos"]},
+  {id:584,brand:"Trinomia",activeNames:["ACIDO ACETILSALICILICO","ATORVASTATINA","RAMIPRIL"],dosage:"100/20/10mg",category:"Oral",type:"capsule",tips:["Tomar con alimentos"]},
+  {id:585,brand:"Duvroq",activeNames:["DAPAGLIFLOZINA","METFORMINA"],dosage:"10/1000mg",category:"Oral",type:"tablet",tips:["Tomar con alimentos"]},
+  {id:586,brand:"Vimovo",activeNames:["NAPROXENO","ESOMEPRAZOL"],dosage:"500/20mg",category:"Oral",type:"tablet",tips:["Tomar con alimentos"]}
+];
+
+var COMBO_FIXED_DOSES={
+  "targin":{pas:["OXICODONA","NALOXONA"],ratio:function(d){var n=parseFloat(d);return isNaN(n)?null:[d,(n/2)+"mg"];}},
+  "oxicodona/naloxona":{pas:["OXICODONA","NALOXONA"],ratio:function(d){var n=parseFloat(d);return isNaN(n)?null:[d,(n/2)+"mg"];}},
+  "sinemet":{pas:["LEVODOPA","CARBIDOPA"]}
+};
+var MARCA_DOSIS_DEFAULT={
+  "natecal d":{"activeNames":["CALCIO CARBONATO 1500mg","COLECALCIFEROL 400 UI"],"dosage":"1500mg/400UI"},
+  "mastical d":{"activeNames":["CALCIO CARBONATO 1500mg","COLECALCIFEROL 400 UI"],"dosage":"1500mg/400UI"},
+  "prolia":{"activeNames":["DENOSUMAB 60mg"],"dosage":"60mg"},
+  "calcioro":{"activeNames":["CALCIO CARBONATO 1250mg","COLECALCIFEROL 400 UI"],"dosage":"1250mg/400UI"}
+};
+var MARCA_PA_DICT={
+  "augmentine":["AMOXICILINA","ACIDO CLAVULANICO"],
+  "amoxicilina/clavulanico":["AMOXICILINA","ACIDO CLAVULANICO"],
+  "clavulanico":["ACIDO CLAVULANICO"],
+  "eucreas":["VILDAGLIPTINA","METFORMINA"],
+  "trinomia":["ACIDO ACETILSALICILICO","ATORVASTATINA","RAMIPRIL"],
+  "acfol":["ACIDO FOLICO"],
+  "prolia":["DENOSUMAB"],"fosfomicina":["FOSFOMICINA"],"fosfocina":["FOSFOMICINA"],
+  "omeprazol":["OMEPRAZOL"],"pantoprazol":["PANTOPRAZOL"],"lansoprazol":["LANSOPRAZOL"],
+  "ipratropio":["IPRATROPIO"],
+  "oxicodona/naloxona":["OXICODONA","NALOXONA"],
+  "siccafluid":["CARBOMERO"],"lagrimas artificiales":["HIALURONATO SODICO"],
+  "quetiapina":["QUETIAPINA"],"seroquel":["QUETIAPINA"],
+  "movicol":["MACROGOL 3350"],"brintellix":["VORTIOXETINA"],
+  "metotrexato":["METOTREXATO"],
+  "higrotona":["CLORTALIDONA"],"manidon":["VERAPAMILO"],
+  "targin":["OXICODONA","NALOXONA"],"oxicodona":["OXICODONA"],"enema":["FOSFATO SODICO"],
+  "prednisona":["PREDNISONA"],"dacortin":["PREDNISONA"],
+  "prednisolona":["PREDNISOLONA"],"urbason":["METILPREDNISOLONA"],
+  "mirtazapina":["MIRTAZAPINA"],"rexer":["MIRTAZAPINA"],
+  "mastical d":["CALCIO CARBONATO","COLECALCIFEROL"],"mastical":["CALCIO CARBONATO"],
+  "natecal d":["CALCIO CARBONATO","COLECALCIFEROL"],"natecal":["CALCIO CARBONATO","COLECALCIFEROL"],
+  "calcioro":["CALCIO CARBONATO","COLECALCIFEROL"],
+  "lanacordin":["DIGOXINA"],"cozaar":["LOSARTAN"],"renitec":["ENALAPRIL"],
+  "zarator":["ATORVASTATINA"],"dianben":["METFORMINA"],"losec":["OMEPRAZOL"],
+  "aldactone":["ESPIRONOLACTONA"],"seguril":["FUROSEMIDA"],"adiro":["ACIDO ACETILSALICILICO"],
+  "sintrom":["ACENOCUMAROL"],"efferalgan":["PARACETAMOL"],"gelocatil":["PARACETAMOL"],
+  "nolotil":["METAMIZOL"],"espidifen":["IBUPROFENO"],
+  "crestor":["ROSUVASTATINA"],"eliquis":["APIXABAN"],"xarelto":["RIVAROXABAN"],
+  "pradaxa":["DABIGATRAN"],"janumet":["SITAGLIPTINA","METFORMINA"],"januvia":["SITAGLIPTINA"],
+  "lantus":["INSULINA GLARGINA"],"toujeo":["INSULINA GLARGINA"],"tresiba":["INSULINA DEGLUDEC"],
+  "levemir":["INSULINA DETEMIR"],
+  "insulina levemir":["INSULINA DETEMIR"],
+  "insulina glargina":["INSULINA GLARGINA"],
+  "insulina aspart":["INSULINA ASPART"],
+  "insulina lispro":["INSULINA LISPRO"],
+  "insulina degludec":["INSULINA DEGLUDEC"],
+  "humalog":["INSULINA LISPRO"],"novorapid":["INSULINA ASPART"],
+  "voltaren":["DICLOFENACO"],"adolonta":["TRAMADOL"],
+  "inegy":["SIMVASTATINA","EZETIMIBA"],"ezetrol":["EZETIMIBA"],
+  "torenteva":["RAMIPRIL","AMLODIPINO"],"exforge":["VALSARTAN","AMLODIPINO"],
+  "micardisplus":["TELMISARTAN","HIDROCLOROTIAZIDA"],"micardis":["TELMISARTAN"],
+  "preterax":["PERINDOPRIL","INDAPAMIDA"],"lodoz":["BISOPROLOL","HIDROCLOROTIAZIDA"],
+  "entresto":["SACUBITRIL","VALSARTAN"],"depakine":["VALPROATO SODICO"],
+  "tegretol":["CARBAMAZEPINA"],"lamictal":["LAMOTRIGINA"],"keppra":["LEVETIRACETAM"],
+  "vimpat":["LACOSAMIDA"],"fycompa":["PERAMPANEL"],
+  "sinemet":["LEVODOPA","CARBIDOPA"],"madopar":["LEVODOPA","BENSERAZIDA"],
+  "stalevo":["LEVODOPA","CARBIDOPA","ENTACAPONA"],
+  "neupro":["ROTIGOTINA"],"azilect":["RASAGILINA"],
+  "capenon":["LOSARTAN","HIDROCLOROTIAZIDA"],
+  "losartan/hidroclorotiazida":["LOSARTAN","HIDROCLOROTIAZIDA"],
+  "valsartan/hidroclorotiazida":["VALSARTAN","HIDROCLOROTIAZIDA"],
+  "valsartan/hct":["VALSARTAN","HIDROCLOROTIAZIDA"],
+  "valsartan/hctz":["VALSARTAN","HIDROCLOROTIAZIDA"],
+  "trimbow":["BECLOMETASONA","FORMOTEROL","GLICOPIRRONIO"],
+  "elebrato":["FLUTICASONA","UMECLIDINIO","VILANTEROL"],
+  "trelegy":["FLUTICASONA","UMECLIDINIO","VILANTEROL"],
+  "clexane":["ENOXAPARINA"],"atrovent":["IPRATROPIO"],
+  "combivent":["SALBUTAMOL","IPRATROPIO"],"dupixent":["DUPILUMAB"],
+  "lyrica":["PREGABALINA"],
+  "alopurinol":["ALOPURINOL"],"zolpidem":["ZOLPIDEM"],
+  "fentanilo":["FENTANILO"],
+  "carduran neo":["DOXAZOSINA"],"carduran":["DOXAZOSINA"],
+  "nitrofix":["NITROGLICERINA"],"nitroglicerina":["NITROGLICERINA"],
+  "ferbisol":["SULFATO FERROSO"],
+  "cafinitrina":["NITROGLICERINA"],
+  "magnesioboi":["MAGNESIO"],"magnesio":["MAGNESIO"],
+  "hidroferol":["CALCIFEDIOL"],
+  "eutirox":["LEVOTIROXINA"],"eutiroid":["LEVOTIROXINA"],
+  "xalatan":["LATANOPROST"],"lumigan":["BIMATOPROST"],"travatan":["TRAVOPROST"],
+  "trixeo aerosphere":["BECLOMETASONA","FORMOTEROL","GLICOPIRRONIO"],
+  "trixeo":["BECLOMETASONA","FORMOTEROL","GLICOPIRRONIO"],
+  "foster nexthaler":["BECLOMETASONA","FORMOTEROL"],
+  "foster":["BECLOMETASONA","FORMOTEROL"],
+  "vitamina b12":["CIANOCOBALAMINA"],"b12":["CIANOCOBALAMINA"],
+  "balzak":["OLMESARTAN","AMLODIPINO"],"sevikar":["OLMESARTAN","AMLODIPINO"],
+  "sevikar hct":["OLMESARTAN","AMLODIPINO","HIDROCLOROTIAZIDA"],
+  "olmetec":["OLMESARTAN"],"coolmetec":["OLMESARTAN","HIDROCLOROTIAZIDA"],
+  "atacand plus":["CANDESARTAN","HIDROCLOROTIAZIDA"],"twynsta":["TELMISARTAN","AMLODIPINO"],
+  "coveram":["PERINDOPRIL","AMLODIPINO"],"triplixam":["PERINDOPRIL","INDAPAMIDA","AMLODIPINO"],
+  "dafiro":["VALSARTAN","AMLODIPINO","HIDROCLOROTIAZIDA"],
+  "zestoretic":["LISINOPRIL","HIDROCLOROTIAZIDA"],"coaprovel":["IRBESARTAN","HIDROCLOROTIAZIDA"],
+  "coversyl plus":["PERINDOPRIL","INDAPAMIDA"],
+  "komboglyze":["SAXAGLIPTINA","METFORMINA"],"jentadueto":["LINAGLIPTINA","METFORMINA"],
+  "xigduo":["DAPAGLIFLOZINA","METFORMINA"],"synjardy":["EMPAGLIFLOZINA","METFORMINA"],
+  "trajenta":["LINAGLIPTINA"],"victoza":["LIRAGLUTIDA"],"trulicity":["DULAGLUTIDA"],
+  "rybelsus":["SEMAGLUTIDA"],
+  "atozet":["ATORVASTATINA","EZETIMIBA"],"lipofix":["ROSUVASTATINA","EZETIMIBA"],
+  "praluent":["ALIROCUMAB"],"repatha":["EVOLOCUMAB"],
+  "comtan":["ENTACAPONA"],"xadago":["SAFINAMIDA"],
+  "requip":["ROPINIROL"],"mirapexin":["PRAMIPEXOL"],
+  "briviact":["BRIVARACETAM"],"zebinix":["ESLICARBAZEPINA"],
+  "topamax":["TOPIRAMATO"],"zonegran":["ZONISAMIDA"],
+  "epidyolex":["CANNABIDIOL"],
+  "opiren":["LANSOPRAZOL"],"opiren flas":["LANSOPRAZOL"],
+  "duphalac":["LACTULOSA"],"risperidona":["RISPERIDONA"],
+  "sertralina":["SERTRALINA"],"trazodona":["TRAZODONA"],"deprax":["TRAZODONA"],
+  "escitalopram":["ESCITALOPRAM"],"cipralex":["ESCITALOPRAM"],
+  "mirtazapina":["MIRTAZAPINA"]
+};
+
+function norm(s){return s.toLowerCase().replace(/\u00e1/g,"a").replace(/\u00e9/g,"e").replace(/\u00ed/g,"i").replace(/\u00f3/g,"o").replace(/\u00fa/g,"u").replace(/\u00f1/g,"n");}
+function paKey(n){return norm(n).replace(/\d[\d.,]*\s*(?:mg|mcg|g|ml|ui|%)[^\s]*/gi,"").replace(/\s+/g,"").trim();}
+function extractDosage(t){
+  // Primero intentar dosis combinada (875/125mg, 100/20/10mg)
+  var mc=t.match(/\b(\d[\d.]*(?:\/\d[\d.]*){1,3}\s*(?:mg|mcg|g|ml|ui|%))/i);
+  if(mc)return mc[1].replace(/\s+/g,"").trim();
+  // Luego dosis simple
+  var m=t.match(/\b(\d[\d.,]*\s*(?:mg|mcg|g|ml|%|u\/ml|ui|ug|unidades)(?:\/\d[\d.,]*\s*(?:mg|mcg|g|ml|%))?)/i);
+  return m?m[1].trim():"";
+}
+function parseQty(r){var s=String(r).replace(/,/g,".");var f=s.match(/^(\d+)\s*\/\s*(\d+)$/);if(f){var v=parseInt(f[1])/parseInt(f[2]);return isNaN(v)?null:v;}var n=parseFloat(s);return isNaN(n)?null:n;}
+function fmtQty(v){return v===0.5?"1/2":v===0.25?"1/4":v===0.75?"3/4":String(v);}
+function emptyDoses(){return{fasting:"",morning:"",noon:"",afternoon:"",night:"",sleep:""};}
+function activeNamesToString(an){return(an||[]).map(function(n){return n.charAt(0)+n.slice(1).toLowerCase();}).join(" / ");}
+function extractPAFromString(s){return s.replace(/\b\d[\d.,]*\s*(?:mg|mcg|g\b|ml\b|%|ui\b|u\/ml\b|ug\b|unidades\b)[^,;\s]*/gi,"").replace(/\s{2,}/g," ").trim().toUpperCase();}
+function levenshtein(a,b){var m=a.length,n=b.length,dp=[],i,j;for(i=0;i<=m;i++){dp[i]=[i];}for(j=0;j<=n;j++){dp[0][j]=j;}for(i=1;i<=m;i++){for(j=1;j<=n;j++){dp[i][j]=a[i-1]===b[j-1]?dp[i-1][j-1]:1+Math.min(dp[i-1][j],dp[i][j-1],dp[i-1][j-1]);}}return dp[m][n];}
+
+function matchDB(name){
+  var lo=norm(name).replace(/[()[\]]/g,"").trim();
+  var h=DB.find(function(d){return norm(d.brand)===lo;});if(h)return h;
+  var candidates=DB.filter(function(d){return d.brand.length>=4&&lo.includes(norm(d.brand));});
+  if(candidates.length>0){candidates.sort(function(a,b){return norm(b.brand).length-norm(a.brand).length;});return candidates[0];}
+  var fw=lo.split(/[\s+()]+/)[0];
+  if(fw.length>=4){h=DB.find(function(d){return d.activeNames.some(function(an){return norm(an).split(/[\s\/]+/)[0]===fw;});});if(h)return h;}
+  var best=null,bestDist=3;
+  DB.forEach(function(d){var bn=norm(d.brand);if(bn.length<5||lo.length<5)return;var dist=levenshtein(lo.split(/[\s\d]/)[0],bn.split(/[\s\d]/)[0]);if(dist<bestDist){bestDist=dist;best=d;}});
+  return best;
+}
+
+function resolveActiveNames(brandRaw){
+  var lo=norm(brandRaw).replace(/\s{2,}/g," ").trim();
+  var loNoNum=lo.replace(/\b\d[\d.,]*\s*(?:mg|mcg|g|ml|ui|%)[^\s]*/gi,"").replace(/\s+/g," ").trim();
+  if(MARCA_DOSIS_DEFAULT[lo])return MARCA_DOSIS_DEFAULT[lo].activeNames.slice();
+  if(MARCA_DOSIS_DEFAULT[loNoNum])return MARCA_DOSIS_DEFAULT[loNoNum].activeNames.slice();
+  if(MARCA_PA_DICT[lo])return MARCA_PA_DICT[lo].slice();
+  if(MARCA_PA_DICT[loNoNum])return MARCA_PA_DICT[loNoNum].slice();
+  var keys=Object.keys(MARCA_DOSIS_DEFAULT).concat(Object.keys(MARCA_PA_DICT));
+  var bestKey=null,bestLen=0;
+  for(var i=0;i<keys.length;i++){if((lo.includes(keys[i])||loNoNum.includes(keys[i]))&&keys[i].length>bestLen){bestKey=keys[i];bestLen=keys[i].length;}}
+  if(bestKey){if(MARCA_DOSIS_DEFAULT[bestKey])return MARCA_DOSIS_DEFAULT[bestKey].activeNames.slice();if(MARCA_PA_DICT[bestKey])return MARCA_PA_DICT[bestKey].slice();}
+  var dbMatch=matchDB(brandRaw);
+  if(dbMatch&&dbMatch.activeNames&&dbMatch.activeNames.length)return dbMatch.activeNames.slice();
+  var clean=loNoNum.replace(/comprimidos|capsulas|sobres|gotas|jarabe|inyectable|inhaladores|parche|gel|crema|solucion|suspension|jeringa|precargada|vial/gi,"").replace(/\s+/g," ").trim().toUpperCase();
+  return clean.length>=3?[clean]:["DESCONOCIDO"];
+}
+
+function lookupBrandToPA(name){
+  var lo=norm(name).replace(/\s+/g,"").trim();
+  var lo2=norm(name).replace(/\s+/g," ").trim();
+  if(MARCA_PA_DICT[lo])return MARCA_PA_DICT[lo];
+  if(MARCA_PA_DICT[lo2])return MARCA_PA_DICT[lo2];
+  var keys=Object.keys(MARCA_PA_DICT);
+  for(var i=0;i<keys.length;i++){if(lo.includes(keys[i])||lo2.includes(keys[i]))return MARCA_PA_DICT[keys[i]];}
+  return null;
+}
+
+var DRUG_BLACKLIST=["tratamiento","antirretroviral","indicaciones","observaciones","terapia","farmaco","medicacion","medicamento","pauta","prescripcion","regimen","ajustar","segun","glucemias","evitar","no usar"];
+function isRealDrug(text){var lo=norm(text||"").trim();if(!lo||lo.length<3)return false;return!DRUG_BLACKLIST.some(function(w){return lo===norm(w)||lo.startsWith(norm(w)+" ")||lo.startsWith(norm(w)+"/");});}
+function isClinicInstruction(line){
+  var lo=norm(cleanLinePrefix(line)).trim();
+  if(/^(ajustar|segun|evitar|no\s+usar|no\s+tomar|vigilar|controlar|monitorizar|revisar|realizar|acudir|consultar|dieta|reposo|curas)/.test(lo))return true;
+  if(/^(de\s+|del\s+|por\s+|para\s+|con\s+|sin\s+|a\s+cargo\s+)[a-z]/.test(lo)&&lo.split(/\s+/).length<=5)return true;
+  return false;
+}
+
+var SLOTS=[
+  {key:"fasting",label:"En ayunas",sub:"Antes desayuno",emoji:"\uD83C\uDF04"},
+  {key:"morning",label:"Manana",sub:"Desayuno",emoji:"\uD83C\uDF05"},
+  {key:"noon",label:"Mediodia",sub:"Almuerzo",emoji:"\u2600\uFE0F"},
+  {key:"afternoon",label:"Tarde",sub:"Merienda",emoji:"\uD83C\uDF24\uFE0F"},
+  {key:"night",label:"Noche",sub:"Cena",emoji:"\uD83C\uDF19"},
+  {key:"sleep",label:"Al Dormir",sub:"Acostarse",emoji:"\uD83D\uDCA4"}
+];
+var NIGHT_MEDS=["crestor","rosuvastatina","atorvastatina","simvastatina","pravastatina","pitavastatina","fluvastatina","ezetimiba","inegy"];
+var FASTING_MEDS=["omeprazol","pantoprazol","lansoprazol","esomeprazol","levotiroxina","eutirox","eutiroid","perindopril","preterax","ferbisol","sulfato ferroso"];
+var SLEEP_MEDS=["lantus","toujeo","tresiba","insulina glargina","insulina degludec","insulina detemir","levemir","zolpidem"];
+var MULTI_DOSE_BRANDS=["seretide","symbicort","relvar","trelegy","trimbow","elebrato"];
+
+function stripMarkdown(l){return l.replace(/\*\*([^*]+)\*\*/g,"$1").replace(/\*([^*]+)\*/g,"$1").replace(/_{1,2}([^_]+)_{1,2}/g,"$1").trim();}
+function cleanLinePrefix(l){return l.replace(/^[\s\d\-\u2013\u2014\u00b7\u2022.,:;\/\\()[\]]+/,"").trim();}
+function stripLabName(n){return n.replace(/\b(?:stada|sandoz|teva|mylan|kern\s*pharma|kern|cinfa|normon|alter|aurobindo|apotex|actavis|zentiva|ratiopharm|hexal|pensa|bexal|qualigen|aristo|accord|krka|amneal|viatris|tillomed|farmasierra)\b\s*/gi,"").replace(/\s{2,}/g," ").trim();}
+function stripPresentacionColetilla(n){return n.replace(/\b\d+\s*(?:jeringas\s*precargadas|ampollas|viales|comprimidos|capsulas|sobres|parches|sachets)\b[^,;\n]*/gi,"").replace(/\s{2,}/g," ").trim();}
+function cleanMedName(raw){return stripPresentacionColetilla(stripLabName(raw.replace(/\([^)]{1,60}\)/g,function(m){return/\d/.test(m)?m:" ";}).replace(/\b\d+\s*al\s*dia\b/gi," ").replace(/\b\d+\s*(?:inhalaciones|comprimidos|capsulas|pastillas|sobres)\b[^,;\n]*/gi," ").replace(/\b(un|una)\s+(?:comprimidos|capsulas|pastillas|sobres)\b/gi," ").replace(/\bmedio\s+(?:comprimidos|pastillas|capsulas)?\b/gi," ").replace(/\s+\d+\s+(?=(?:en|al?|por|antes|a)\s)/gi," ").replace(/\bcronico\b/gi," ").replace(/\b(retard|forte|flash)\b/gi," ").replace(/\s{2,}/g," ").trim()));}
+function removePharmaFormFromName(name,ft){
+  if(!ft)return name;
+  var p={patch:/\bparches?\b|\btransdermicos?\b/gi,sachet:/\bsobres?\b|\bgranulados?\b/gi,syrup:/\bjarabe\b|\bsolucion\s*oral\b|\bsuspension\s*oral\b/gi,capsule:/\bcapsulas?\b/gi,inhaler:/\binhaladores?\b|\binhalaciones?\b/gi,injection:/\binyectable\b|\bviales?\b|\bjeringas\s*precargadas?\b/gi,suppository:/\bsupositorios?\b/gi,eye:/\bcolirios?\b/gi,drops:/\bgotas?\b/gi};
+  var re=p[ft];if(!re)return name;
+  return name.replace(re,"").replace(/\s{2,}/g," ").trim();
+}
+function cleanNameFromSlotRefs(name){
+  return name
+    .replace(/\bse\s+(?:sube|baja|aumenta|disminuye|reduce|incrementa)\b/gi,"")
+    .replace(/\bpor\s+la\s+manana\b/gi,"").replace(/\bpor\s+la\s+noche\b/gi,"")
+    .replace(/\bpor\s+la\s+tarde\b/gi,"").replace(/\ben\s+el\s+desayuno\b/gi,"")
+    .replace(/\ben\s+la\s+comida\b/gi,"").replace(/\ben\s+la\s+cena\b/gi,"")
+    .replace(/\ben\s+la\s+merienda\b/gi,"").replace(/\bantes\s+de\s+dormir\b/gi,"")
+    .replace(/\bal\s+acostarse\b/gi,"").replace(/\ben\s+ayunas\b/gi,"")
+    .replace(/\ba\s+la\s+manana\b/gi,"").replace(/\ba\s+la\s+noche\b/gi,"")
+    .replace(/\bantes\s+del\s+desayuno\b/gi,"")
+    .replace(/\b\d+\s+inhalaciones?\b/gi,"").replace(/\bpastillas?\b/gi,"")
+    .replace(/\bmedio\s+(?:comprimidos?|pastilla|capsula|sobre)?\b/gi,"")
+    .replace(/\b(?:tomar|administrar|toma|oral|y\s+comida|y\s+cena|y\s+desayuno|y\s+merienda)\b/gi,"")
+    .replace(/\bexcepto\s+.{0,60}/gi,"")
+    .replace(/[,:.]+$/,"").replace(/\s{2,}/g," ").trim();
+}
+function tipContradictsText(tip,rawText){var lo=norm(rawText||""),t=norm(tip);if((t.includes("manana")||t.includes("ayunas"))&&/noche|cena|dormir|acostarse/.test(lo))return true;if(t.includes("noche")&&/manana|desayuno|ayunas/.test(lo))return true;return false;}
+function detectLongInterval(line){
+  var lo=norm(line);
+  var ms=lo.match(/cada\s*(\d+)\s*(semanas?)/);
+  if(ms){var n=parseInt(ms[1]);if(n===1)return"Administracion semanal";if(n===2)return"Administracion quincenal";if(n===4)return"Administracion mensual";return"Administrar cada "+n+" semanas";}
+  var mm=lo.match(/cada\s*(\d+)\s*(meses?)/);
+  if(mm){var nm=parseInt(mm[1]);return nm===1?"Administracion mensual":"Administrar cada "+nm+" meses";}
+  if(/al\s+mes|mensual/.test(lo))return"Administracion mensual";
+  if(/semanal/.test(lo))return"Administracion semanal";
+  if(/quincenal|cada\s+15\s+dias/.test(lo))return"Administracion quincenal";
+  var dm=lo.match(/cada\s*(\d+)\s*(?:horas?|h\b)/);if(dm&&parseInt(dm[1])>=48)return"Administrar cada "+dm[1]+" horas";
+  var dd=lo.match(/cada\s*(\d+)\s*dias?/);if(dd&&parseInt(dd[1])>7)return"Administrar cada "+dd[1]+" dias";
+  return"";
+}
+function detectFasting(line){var lo=norm(line);return/en\s+ayunas|antes\s+del?\s+desayuno/.test(lo)||/levotiroxina|eutirox|ferbisol|sulfato\s+ferroso/.test(lo);}
+function detectDayRestriction(line){var lo=norm(line);var exc=lo.match(/excepto\s+(?:los?\s+)?(.{3,50}?)(?:[.,;]|$)/i);if(exc)return"Excepto "+exc[1].trim();var men=lo.match(/menos\s+los?\s+(.{3,50}?)(?:[.,;]|$)/i);if(men)return"Excepto "+men[1].trim();return"";}
+function expandDayAbbrev(txt){var map={lx:"lunes",lu:"lunes",ma:"martes",mx:"miercoles",mi:"miercoles",ju:"jueves",vi:"viernes",sa:"sabado",do:"domingo"};return txt.replace(/\b(LX|LU|MA|MX|MI|JU|VI|SA|DO)\b/gi,function(m){return map[m.toLowerCase()]||m;});}
+function detectWeekdayNote(raw){var lo=norm(raw);var m=lo.match(/todos\s+los\s+(\w+(?:\s+y\s+\w+)*)/i);if(m){var days=expandDayAbbrev(m[0]);return days.charAt(0).toUpperCase()+days.slice(1);}return"";}
+function detectAnticoagNota(rawOrig){var lo=norm(rawOrig);if(!/\b(acenocumarol|sintrom|warfarina)\b/.test(lo))return"";var m=rawOrig.match(/segun\s+(.{3,60}?)(?:[.,;]|$)/i);if(m){var txt=m[1].trim().replace(/[.,;]+$/,"");return"Segun "+txt.charAt(0).toUpperCase()+txt.slice(1);}if(/\b(tao|inr|pauta\s+hematolog|pauta\s+anticoag)\b/i.test(rawOrig))return"Segun pauta TAO";return"";}
+function extractConditionalNotes(raw){
+  var notes=[];
+  var clean=raw
+    .replace(/\(([^)]{3,120})\)/g,function(m,inner){var lo=norm(inner);if(/no\s+dar|no\s+administrar|si\s+no|en\s+caso|precaucion|cuidado|evitar|advertencia|somnolencia/.test(lo)||inner.split(/\s+/).length>2){notes.push(inner.trim());return" ";}return m;})
+    .replace(/\bno\s+dar\s+en\s+caso\s+de\s+(.{3,80}?)(?=[.,;]|$)/gi,function(m,c){notes.push("No dar si: "+c.trim());return" ";})
+    .replace(/\ben\s+caso\s+de\s+(?:no\s+)?(.{3,60}?)(?=[.,;]|$)/gi,function(m,c){notes.push("En caso de: "+c.trim());return" ";})
+    .replace(/\s{2,}/g," ").trim();
+  return{clean:clean,condNotes:notes};
+}
+function detectSiPrecisa(raw){var lo=norm(raw);return/\bsi\s+precisa\b|\bsi\s+necesario\b|\bsi\s+dolor\b|\ba\s+demanda\b/.test(lo);}
+function extractCondition(line){var conds=[];var clean=line.replace(/\bsolo\s+si\s+(.{3,60}?)(?=[.,;]|$)/gi,function(m,c){conds.push("Solo si: "+c.trim());return" ";}).replace(/\bsegun\s+([\w\s]{1,40}?)(?=[,;.]|$)/gi,function(m,c){conds.push("Segun "+c.trim());return" ";}).replace(/\s{2,}/g," ").trim();return{clean:clean,condition:conds.length?conds.map(function(c){return c[0].toUpperCase()+c.slice(1);}).join(" / "):""};}
+function extractDuration(line){var notes=[];var clean=line.replace(/(\d+)\s*dias?[,.]?\s*(?:y\s+)?(?:luego|despues|posteriormente)\s+([^,;\n]{3,80}?)(?=[,;]|$)/gi,function(m,days,resto){notes.push(days+" dias, luego: "+resto.trim());return" ";}).replace(/\bx\s+(\d+)\s*dias?\b/gi,function(m,days){notes.push(days+" dias");return" ";}).replace(/\bhasta\s+([^,;\n]{3,60}?)(?=[,;]|$)/gi,function(m,fecha){notes.push("Hasta "+fecha.trim());return" ";}).replace(/\s{2,}/g," ").trim();return{clean:clean,durationNote:notes.join(" / ")};}
+function looksLikeDrug(str){
+  if(!str||str.trim().length<3)return false;
+  if(!/[A-Za-z]{3,}/.test(str))return false;
+  if(str.split(/\s+/).length>8)return false;
+  var lo=norm(str.trim());
+  if(/^(?:evitar|tomar|administrar|no\s+usar|vigilar|monitorizar|seguir|realizar|acudir|consultar|revisar|precaucion|comida|cena|desayuno|merienda|ayunas)/.test(lo))return false;
+  return true;
+}
+function isNoise(line){
+  if(line.trim().length<3)return true;
+  var lo=norm(line);
+  if(/^\s*(farmacos|medicamentos|prescripcion|otros)\s*$/i.test(line))return true;
+  if(/^(?:observaciones|obs\b|notas|aviso|advertencia|anotaciones)\b/i.test(lo))return true;
+  if(/^evitar\b|^no\s+usar\b|^precaucion\b/i.test(lo))return true;
+  if(line.length>200)return true;
+  return false;
+}
+function detectSection(line){
+  var lo=norm(line).replace(/[.:*_!\/()\[\]]/g," ").replace(/\s{2,}/g," ").trim();
+  if(/\b(suspender|suspendido)\b/.test(lo)&&lo.split(" ").length<=6)return"suspend_section";
+  if(/\b(tratamiento\s+modificado|cambios\s+realizados|cambios\s+durante|modificaciones\s+al\s+alta|durante\s+el\s+ingreso|cambios\s+en\s+el\s+tratamiento|medicacion\s+nueva|nueva\s+medicacion|modificar|alta)\b/.test(lo))return"changes_section";
+  if(/^(cambios|alta|modificar)$/.test(lo.trim()))return"changes_section";
+  if(/\b(anadir|agregar|tratamiento\s+nuevo|nuevo\s+tratamiento)\b/.test(lo))return"new_section";
+  if(/^(nuevos|iniciar|comenzar|anadir|agregar)$/.test(lo.trim()))return"new_section";
+  if(/\b(tratamiento\s+que\s+se\s+mantiene|tratamiento\s+domiciliario|tratamiento\s+al\s+alta|tratamiento\s+habitual|tratamiento\s+previo|tratamiento\s+actual|medicacion\s+habitual|medicacion\s+activa|tratamiento\s+cronico|mantener\s+previo|mantener\s+anterior|mantener\s+igual|resto\s+tratamiento|resto\s+previo)\b/.test(lo))return"maintain_section";
+  if(/^(mantener|continuar|seguir|sin\s+cambios)$/.test(lo.trim()))return"maintain_section";
+  if(/\b(otras\s+indicaciones|recomendaciones|observaciones|anotaciones)\b/.test(lo))return"other_section";
+  return null;
+}
+function hasActionVerb(line){
+  var lo=norm(line);
+  return /\b(?:se\s+)?(?:suspende|suspenden|elimina|eliminan|retira|retiran|suspension\s+de|suspender|sustituye|sustituyen|sustituir|inicia|inician|iniciar|anade|anaden|pauta|pautan|agrega|agregan|comienza|comienzan|mantiene|mantienen|mantener|modifica|modifican|ajusta|ajustan|reduce|reducen|aumenta|aumentan|sube|suben|subir|baja|bajan|bajar|disminuye|disminuyen|disminuir|incrementa|incrementan)\b/.test(lo);
+}
+function splitDrugList(str){return str.split(/\s+y\s+|[,;]/).map(function(s){return s.trim();}).filter(looksLikeDrug);}
+function extractDrugNames(str){return str.split(/\s+y\s+|[,;]/).map(function(s){return s.replace(/^(?:el\s+)?tratamiento\s+con\s+/i,"").replace(/^(?:la\s+)?medicacion\s+(?:de\s+|con\s+)?/i,"").replace(/\b(?:al\s+alta|por\s+sedacion)\b/gi,"").trim();}).filter(function(s){return s.length>1&&/[A-Za-z]{2,}/.test(s);});}
+function splitComboName(rawName){
+  var doseMatch=rawName.replace(/,/g,".").match(/\b(\d[\d.]*)\/(\d[\d.]*)(?:\/(\d[\d.]*))?\s*(mg|mcg|g|ml|ui|%)/i);
+  var doses=[],unit="",combined="";
+  if(doseMatch){doses=[doseMatch[1],doseMatch[2]];if(doseMatch[3])doses.push(doseMatch[3]);unit=doseMatch[4];combined=doses.join("/")+unit;}
+  var noDose=doseMatch?rawName.replace(doseMatch[0],"").trim():rawName;
+  var parts=noDose.split("/");if(parts.length<2)return null;
+  var cleaned=parts.map(function(p){return p.replace(/\b\d[\d.,]*\s*(?:mg|mcg|g|ml|%|ui)[^\s]*/gi,"").replace(/\s{2,}/g," ").trim();}).filter(function(p){return/[A-Za-z]{3,}/.test(p);});
+  if(cleaned.length<2)return null;
+  return{names:cleaned,doses:doses.map(function(d){return d+unit;}),combined:combined};
+}
+function extractComboDosage(rawText,nComponents){
+  var t=rawText.replace(/,/g,".").replace(/\s+/g," ");
+  var re3=/\b(\d[\d.]*)\s*\/\s*(\d[\d.]*)\s*\/\s*(\d[\d.]*)\s+(mg|mcg|g|ml|ui|%)\b/i;
+  var m3=t.match(re3);
+  if(m3&&nComponents>=3)return{parts:[m3[1],m3[2],m3[3]],unit:m3[4],dosage:m3[1]+"/"+m3[2]+"/"+m3[3]+m3[4]};
+  // Sin espacio también: 100/20/10mg
+  var re3b=/\b(\d[\d.]*)\s*\/\s*(\d[\d.]*)\s*\/\s*(\d[\d.]*)(mg|mcg|g|ml|ui|%)\b/i;
+  var m3b=t.match(re3b);
+  if(m3b&&nComponents>=3)return{parts:[m3b[1],m3b[2],m3b[3]],unit:m3b[4],dosage:m3b[1]+"/"+m3b[2]+"/"+m3b[3]+m3b[4]};
+  var re2=/\b(\d[\d.]*)\s*\/\s*(\d[\d.]*)\s+(mg|mcg|g|ml|ui|%)\b/i;
+  var m2=t.match(re2);
+  if(m2&&nComponents>=2)return{parts:[m2[1],m2[2]],unit:m2[3],dosage:m2[1]+"/"+m2[2]+m2[3]};
+  var re2c=/\b(\d[\d.]*)\s*\/\s*(\d[\d.]*)(mg|mcg|g|ml|ui|%)\b/i;
+  var m2c=t.match(re2c);
+  if(m2c&&nComponents>=2)return{parts:[m2c[1],m2c[2]],unit:m2c[3],dosage:m2c[1]+"/"+m2c[2]+m2c[3]};
+  // Doble con unidad en cada parte: 875mg/125mg
+  var re2b=/\b(\d[\d.]*)\s*(mg|mcg|g|ml|ui|%)\s*\/\s*(\d[\d.]*)\s*(mg|mcg|g|ml|ui|%)/i;
+  var m2b=t.match(re2b);
+  if(m2b&&nComponents>=2)return{parts:[m2b[1],m2b[3]],unit:m2b[2],dosage:m2b[1]+"/"+m2b[3]+m2b[2]};
+  return null;
+}
+function detectFormFromText(raw){
+  var lo=norm(raw);
+  if(/suposi|rectal/.test(lo))return"suppository";
+  if(/colirio|oftalm/.test(lo))return"eye";
+  if(/\bgotas\b/.test(lo)&&!/gotas\s*oral/.test(lo))return"drops";
+  if(/inhal|ellipta|turbuh|diskus|aerosol/.test(lo))return"inhaler";
+  if(/\biv\b|\bsc\b|\bim\b|jeringa|inyect|vial|insulina|subcutane|subcutanea|intramuscular/.test(lo))return"injection";
+  if(/parche|transdermico/.test(lo))return"patch";
+  if(/gel\b|crema|pomada|topico/.test(lo))return"topical";
+  if(/jarabe|solucion\s*oral|suspension\s*oral/.test(lo))return"syrup";
+  if(/sobre\b|sobres\b|granulado/.test(lo))return"sachet";
+  if(/capsula|capsul/.test(lo))return"capsule";
+  return null;
+}
+function isNonOralType(type){return NON_ORAL_TYPES.indexOf(type)>=0;}
+
+var NIOSH_ORAL=["metotrexato","ciclofosfamida","clorambucilo","melfalano","busulfano","mercaptopurina","tioguanina","capecitabina","temozolomida","hidroxiurea","lenalidomida","talidomida","pomalidomida","imatinib","dasatinib","erlotinib","gefitinib","lapatinib","sorafenib","sunitinib","pazopanib","nilotinib","bosutinib","ponatinib","ibrutinib","idelalisib","venetoclax","palbociclib","ribociclib","abemaciclib","olaparib","niraparib","rucaparib","talazoparib","vismodegib","sonidegib","alectinib","osimertinib","crizotinib","ceritinib","lorlatinib","brigatinib","afatinib","neratinib","enzalutamida","apalutamida","darolutamida","abiraterona","finasterida","dutasterida","micofenolato","tacrolimus","sirolimus","everolimus","temsirolimus","azatioprina","leflunomida","isotretinoina","acitretina","tretinoina","colchicina","cloroquina","hidroxicloroquina","estramustina","procarbazina","valganciclovir","ribavirina","clozapina"];
+function isNIOSH(brand,activeNames){var lo=norm((brand||"")+" "+(activeNames||[]).join(" "));return NIOSH_ORAL.some(function(n){return lo.includes(n);});}
+
+function buscarCIMAFichaTecnica(brand,activeNames){
+  var query=(activeNames&&activeNames.length&&activeNames[0]!=="DESCONOCIDO")?activeNames[0].replace(/\b\d[\d.,]*\s*(?:mg|mcg|g|ml|ui|%)[^\s]*/gi,"").trim():brand;
+  return fetch("https://cima.aemps.es/cima/rest/medicamentos?nombre="+encodeURIComponent(brand)+"&registros=3")
+  .then(function(r){return r.json();})
+  .then(function(data){
+    if(!data||!data.resultados||!data.resultados[0])throw new Error("no result");
+    var med=data.resultados[0];
+    var ff=(med.formaFarmaceutica&&med.formaFarmaceutica.nombre)||"";
+    var noTriturar=/liberacion\s*(prolongada|retardada|modificada|sostenida|controlada)|enterica|enterico|gastrorresistente|bucodispers|sublingual/i.test(ff);
+    if(noTriturar)return{apto:false,texto:"Forma farmaceutica "+ff+" no debe triturarse.",fuente:"Ficha Tecnica CIMA"};
+    return null;
+  })
+  .catch(function(){
+    return fetch("https://cima.aemps.es/cima/rest/medicamentos?practiv="+encodeURIComponent(query)+"&registros=3")
+    .then(function(r){return r.json();})
+    .then(function(data){
+      if(!data||!data.resultados||!data.resultados[0])throw new Error();
+      var ff=(data.resultados[0].formaFarmaceutica&&data.resultados[0].formaFarmaceutica.nombre)||"";
+      var noTriturar=/liberacion\s*(prolongada|retardada|modificada|sostenida|controlada)|enterica|enterico|gastrorresistente|bucodispers|sublingual/i.test(ff);
+      if(noTriturar)return{apto:false,texto:"Forma farmaceutica "+ff+" no debe triturarse.",fuente:"Ficha Tecnica CIMA"};
+      return null;
+    })
+    .catch(function(){return null;});
+  });
+}
+function consultarClaudeIA(brand,activeNames,dosage,formType){
+  var formDesc=formType?TYPE_ES[formType]||formType:"no especificada";
+  var prompt="Eres un farmaceutico clinico experto en administracion de medicamentos en pacientes con disfagia.\n\nMedicamento: "+brand+"\nPA: "+(activeNames||[]).join(", ")+"\nForma: "+formDesc+"\nDosis: "+(dosage||"no especificada")+"\n\nFuentes: 1.Deglufarm 2.Medisonda 3.FT AEMPS 4.SEFH 5.Literatura\n\nResponde SOLO JSON:\n{\"apto\":true|false|null,\"texto\":\"literal o null\",\"alternativas\":\"o null\",\"fuente_citada\":\"fuente\",\"fuente_encontrada\":true|false}";
+  return fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:600,messages:[{role:"user",content:prompt}]})})
+  .then(function(res){return res.json();})
+  .then(function(data){
+    var text=(data.content&&data.content.find(function(b){return b.type==="text";})||{}).text||"";
+    text=text.replace(/```json|```/g,"").trim();
+    try{var p=JSON.parse(text);if(!p.fuente_encontrada||!p.texto)return{apto:null,texto:null,alternativas:null,fuente:null,esIA:true,sinInfo:true};return{apto:p.apto,texto:p.texto,alternativas:p.alternativas||null,fuente:p.fuente_citada||"Literatura",esIA:true,sinInfo:false};}
+    catch(e){return{apto:null,texto:null,alternativas:null,fuente:null,esIA:true,sinInfo:true};}
+  })
+  .catch(function(){return{apto:null,texto:null,alternativas:null,fuente:null,esIA:true,sinInfo:true};});
+}
+function evaluarDisfagia(brand,activeNames,dosage,formType){
+  if(isNonOralType(formType))return Promise.resolve({tipo:"noOral",apto:true,texto:"No via oral.",fuente:"Criterio farmaceutico",esIA:false,niosh:false});
+  if(isNIOSH(brand,activeNames))return Promise.resolve({tipo:"niosh",apto:null,texto:null,fuente:"NIOSH 2024",esIA:false,niosh:true,sinInfo:false});
+  var cimaP=buscarCIMAFichaTecnica(brand,activeNames);
+  var cimaT=new Promise(function(resolve){setTimeout(function(){resolve(null);},20000);});
+  return Promise.race([cimaP,cimaT]).then(function(r){
+    if(r)return{tipo:"cima",apto:r.apto,texto:r.texto,fuente:"Ficha Tecnica CIMA",esIA:false,niosh:false,sinInfo:false};
+    return consultarClaudeIA(brand,activeNames,dosage,formType).then(function(r2){return{tipo:r2.sinInfo?"sinInfo":"ia",apto:r2.apto,texto:r2.texto,alternativas:r2.alternativas||null,fuente:r2.fuente,esIA:true,niosh:false,sinInfo:r2.sinInfo};});
+  }).catch(function(){return{tipo:"sinInfo",apto:null,texto:null,fuente:null,esIA:true,niosh:false,sinInfo:true};});
+}
+
+var LABS_HCE=["sandoz","kern pharma","kern","alter","normon","cinfa","stada","teva","mylan","ratiopharm","aurobindo","actavis","zentiva","apotex","bexal","pensa","hexal","qualigen","aristo","accord","krka","amneal","viatris","tillomed","farmasierra","almirall"];
+var LAB_RE_HCE=new RegExp("\\b(?:"+LABS_HCE.map(function(l){return l.replace(/ /g,"\\s+");}).join("|")+")(\\s+pharma)?\\b","gi");
+var PS_KW=["orina","panal","incontinencia","sonda","venda","bolsa","colostomia","urostomia","drenaje","cateter","gasa","aposito","absorbente","compresa","slip","pants","briefs","incopack","absorb inc","molicare","tena","hartmann"];
+var SUPLEM_KW=["nutilis","ensure","fortisip","resource","fresubin","fortimel","cubitan","diasip","nutren","novasource","optisource","survimed","diben","supportan","frebini","glucerna","meritene","isosource","clinutren","peptamen","nepro","batido"];
+var MARCAS_HCE={
+  "valsartan/hidroclorotiazida":["VALSARTAN","HIDROCLOROTIAZIDA"],
+  "valsartan hidroclorotiazida":["VALSARTAN","HIDROCLOROTIAZIDA"],
+  "valsartanhidroclorotiazida":["VALSARTAN","HIDROCLOROTIAZIDA"],
+  "trixeo aerosphere":["BECLOMETASONA","FORMOTEROL","GLICOPIRRONIO"],
+  "trixeo":["BECLOMETASONA","FORMOTEROL","GLICOPIRRONIO"],
+  "eutirox":["LEVOTIROXINA"],"eutiroid":["LEVOTIROXINA"],
+  "xalatan":["LATANOPROST"],"lumigan":["BIMATOPROST"],"travatan":["TRAVOPROST"],
+  "vitamina b12":["CIANOCOBALAMINA"],"b12":["CIANOCOBALAMINA"],
+  "hidroferol":["CALCIFEDIOL"],
+  "eliquis":["APIXABAN"],"xarelto":["RIVAROXABAN"],
+  "foster nexthaler":["BECLOMETASONA","FORMOTEROL"],
+  "foster":["BECLOMETASONA","FORMOTEROL"],
+  "atrovent":["IPRATROPIO"],
+  "escitalopram":["ESCITALOPRAM"]
+};
+var TIEMPO_HCE={h:"h",H:"h",d:"dias",D:"dias",s:"semanas",S:"semanas",m:"meses",M:"meses",a:"anos",A:"anos"};
+
+function esPS(line){var lo=norm(line);return PS_KW.some(function(k){return lo.includes(norm(k));});}
+function esSuplem(line){var lo=norm(line);return SUPLEM_KW.some(function(k){return lo.includes(k);});}
+function esHCE(line){
+  var lo=norm(line);
+  var tieneDosis=/\d+[,.]?\d*\s*(?:mg|g|mcg|ui|mg\/ml|mcg\/ml)/i.test(lo);
+  var tieneForma=/comprimido|capsula|sobre|solucion|suspension|jarabe|ampolla|gotas|parche|inyectable|vial|jeringa|sticks|aerosphere|colirio|frasco/i.test(lo);
+  var tienePosol=/\d+[.,]?\d*\s+cada\s+\d+\s*[hHdDsSmMaA]/.test(lo);
+  return tieneDosis&&tieneForma&&tienePosol;
+}
+function detectarFormaHCE(lo){
+  if(/susp\s*para\s*in[h]?|suspension\s*para\s*inh|aerosphere|nexthaler|polvo\s*inhalac|solucion\s*inhalac|env\s*a\s*presion/.test(lo))return{label:"inhalador",tipo:"inhaler"};
+  if(/colirio/.test(lo)||(/frasco/.test(lo)&&/mcg\/ml|mg\/ml/.test(lo)))return{label:"colirio",tipo:"eye"};
+  if(/comprimidos?\s*recubiertos?\s*(?:con\s*)?pelicula|comprim\s*recub/.test(lo))return{label:"comprimido recubierto",tipo:"tablet"};
+  if(/comprimidos?\s*gastrorresistentes?/.test(lo))return{label:"comprimido gastrorresistente",tipo:"tablet"};
+  if(/comprimidos?\s*lib(?:eracion)?\s*prolong(?:ada)?/.test(lo))return{label:"comprimido liberacion prolongada",tipo:"tablet"};
+  if(/comprimidos?\s*bucodispersables?/.test(lo))return{label:"comprimido bucodispersable",tipo:"tablet"};
+  if(/comprimidos?\s*efervescentes?/.test(lo))return{label:"comprimido efervescente",tipo:"tablet"};
+  if(/comprimidos?/.test(lo))return{label:"comprimido",tipo:"tablet"};
+  if(/capsulas?\s*blandas?/.test(lo))return{label:"capsula blanda",tipo:"capsule"};
+  if(/capsulas?\s*duras?/.test(lo))return{label:"capsula dura",tipo:"capsule"};
+  if(/capsulas?/.test(lo))return{label:"capsula",tipo:"capsule"};
+  if(/sobres?|sticks?/.test(lo))return{label:"sobre",tipo:"sachet"};
+  if(/solucion\s*oral|jarabe/.test(lo))return{label:"solucion oral",tipo:"syrup"};
+  if(/ampollas?\s*bebibles?/.test(lo))return{label:"ampolla bebible",tipo:"syrup"};
+  if(/parches?/.test(lo))return{label:"parche transdermico",tipo:"patch"};
+  if(/inyectable|viales?/.test(lo))return{label:"inyectable",tipo:"injection"};
+  if(/gotas?/.test(lo))return{label:"gotas",tipo:"drops"};
+  return null;
+}
+function preNorm(raw){
+  return raw
+    .replace(/\bHCTZ?\b/gi,"HIDROCLOROTIAZIDA")
+    .replace(/\bHTC\b/gi,"HIDROCLOROTIAZIDA")
+    .replace(/\/HCT\b/gi,"\/HIDROCLOROTIAZIDA")
+    .replace(/\bValsartan\/HIDROCLOROTIAZIDA\b/gi,"Valsartan/Hidroclorotiazida")
+    .replace(/\b(comp|com|cmp)\b/gi,"comprimido")
+    .replace(/\bse\s+(?:sube|baja|aumenta|disminuye|reduce)\s+a\b/gi,"")
+    .replace(/\bbucal\b(?=\s+\d|\s+mg|\s*$)/gi," ")
+    .replace(/\bpolvo\s*inhalac(?:ion)?\b/gi," ")
+    .replace(/\benv(?:ase)?\s*a\s*presion\b/gi," ")
+    .replace(/\b\d+\s*dosis\b/gi," ")
+    .replace(/\/\s*dos\b/gi," ")
+    .replace(/([A-Za-z])\s*\+\s*(?=[A-Za-z])/g,"$1/")
+    .replace(/\s{2,}/g," ").trim();
+}
+function parseHCELine(raw,status){
+  var line=preNorm(raw);
+  var lo=norm(line);
+  var comboEarlyRe=/^([A-Za-z][A-Za-z]*)\s*\/\s*([A-Za-z][A-Za-z]*)\s+(\d+[,.]?\d*)\s*(mg|mcg|g|ui)\s*\/\s*(\d+[,.]?\d*)\s*(mg|mcg|g|ui)/i;
+  var ce=line.match(comboEarlyRe);
+  if(ce){
+    var nameA=ce[1].trim(),nameB=ce[2].trim();
+    var d1=ce[3].replace(",","."),unit1=ce[4],d2=ce[5].replace(",","."),unit2=ce[6];
+    var dosage=d1+"/"+d2+unit2;
+    var brand=nameA.charAt(0).toUpperCase()+nameA.slice(1).toLowerCase()+"/"+nameB.charAt(0).toUpperCase()+nameB.slice(1).toLowerCase();
+    var paA=resolveActiveNames(nameA);var paB=resolveActiveNames(nameB);
+    var activeNames=[(paA[0]!=="DESCONOCIDO"?paA[0]:nameA.toUpperCase()),(paB[0]!=="DESCONOCIDO"?paB[0]:nameB.toUpperCase())];
+    var dbC=DB.find(function(d){return d.activeNames.length===2&&norm(d.activeNames[0]).replace(/\s*\d.*/,"")===norm(nameA)&&norm(d.activeNames[1]).replace(/\s*\d.*/,"")===norm(nameB);});
+    if(dbC){brand=dbC.brand;activeNames=dbC.activeNames.slice();}
+    var posM=line.match(/(\d+[.,]?\d*)\s+cada\s+(\d+)\s*([hHdDsSmMaA])\s*$/);
+    var doses=emptyDoses(),freqLabel="",longInterval="";
+    if(posM){
+      var posQty=parseFloat(posM[1].replace(",","."));var posNum=parseInt(posM[2]);var posUnit=posM[3];
+      var ut=TIEMPO_HCE[posUnit]||"h";
+      var esLargo=ut==="semanas"||ut==="meses"||ut==="anos"||(ut==="dias"&&posNum>7)||(ut==="h"&&posNum>=48);
+      if(esLargo){longInterval=ut==="semanas"?(posNum===1?"Administracion semanal":posNum===2?"Administracion quincenal":posNum===4?"Administracion mensual":"Administrar cada "+posNum+" semanas"):"Administrar cada "+posNum+" "+ut;}
+      else{var freqH=ut==="h"?posNum:posNum*24;doses=distributeDoses(posQty,freqH,norm(brand));if(posQty!==1)freqLabel=fmtQty(posQty)+"u, cada "+posNum+(ut==="h"?"h":" "+ut);}
+    } else {doses.morning="1";}
+    return{brand:brand,activeNames:activeNames,active:activeNamesToString(activeNames),dosage:dosage,type:"tablet",rawText:raw,category:"Oral",via:"",doses:doses,freqLabel:freqLabel,status:status,tip:"",customTip:longInterval,suspended:status==="suspend",dbRef:dbC||null,unrecognized:false,deglufarmInfo:null,deglufarmLoading:false,deglIncluir:true,cimaResolved:true,conflict:false,deglManualText:""};
+  }
+  var posM=line.match(/(\d+[.,]\d+|\d)\s+cada\s+(\d+)\s*([hHdDsSmMaA])\s*$/);
+  var posQty=1,posNum=24,posUnit="h";
+  if(posM){posQty=parseFloat(posM[1].replace(",","."));posNum=parseInt(posM[2]);posUnit=posM[3];line=line.slice(0,line.lastIndexOf(posM[0])).trim();lo=norm(line);}
+  var formaR=detectarFormaHCE(lo);
+  var s=lo;
+  s=s.replace(/\d+\s*(?:comprimidos?|capsulas?\s*(?:duras?|blandas?)?|sobres?|sticks?|ampollas?|frascos?|parches?|viales?|botellas?|envases?|blister|unidades?|inhalaciones?|dosis)/g," ");
+  s=s.replace(/\d+[,.]?\d*\s*ml/g," ");
+  s=s.replace(/\d+[,.]?\d*\s*(?:mcg|mg)\/ml/g," ");
+  s=s.replace(/comprimidos?\s*recubiertos?\s*(?:con\s*)?pelicula/g," ");
+  s=s.replace(/comprimidos?\s*gastrorresistentes?/g," ");
+  s=s.replace(/comprimidos?\s*lib(?:eracion)?\s*prolong(?:ada)?/g," ");
+  s=s.replace(/comprimidos?\s*bucodispersables?/g," ");
+  s=s.replace(/comprimidos?\s*efervescentes?/g," ");
+  s=s.replace(/comprim\s*recub/g," ").replace(/comprimidos?/g," ");
+  s=s.replace(/capsulas?\s*duras?/g," ").replace(/capsulas?\s*blandas?/g," ").replace(/capsulas?/g," ");
+  s=s.replace(/sobres?/g," ").replace(/sticks?/g," ");
+  s=s.replace(/suspension\s*para\s*inh(?:alacion)?/g," ").replace(/susp\s*para\s*in[h]?/g," ");
+  s=s.replace(/solucion\s*inhalac(?:ion)?/g," ").replace(/solucion\s*oral/g," ").replace(/suspension\s*oral/g," ");
+  s=s.replace(/suspension/g," ").replace(/solucion/g," ");
+  s=s.replace(/colirio\s*en\s*solucion/g," ").replace(/colirio/g," ");
+  s=s.replace(/gotas?\s*orales?/g," ").replace(/gotas?/g," ");
+  s=s.replace(/parches?\s*transdermicos?/g," ").replace(/parches?/g," ");
+  s=s.replace(/ampollas?\s*bebibles?/g," ").replace(/ampollas?/g," ");
+  s=s.replace(/aerosphere/g," ").replace(/nexthaler/g," ");
+  s=s.replace(/inhalaciones?/g," ").replace(/inhaladores?/g," ").replace(/inhalacion/g," ");
+  s=s.replace(/\binhal\b/g," ").replace(/\bjarabe\b/g," ").replace(/\binyectable\b/g," ");
+  s=s.replace(/\bviales?\b/g," ").replace(/\bfrasco\b/g," ");
+  s=s.replace(/\brecubiertos?\b/g," ").replace(/\brecub\b/g," ").replace(/\bpelicula\b/g," ");
+  s=s.replace(/\befervescentes?\b/g," ").replace(/\bgastrorresistentes?\b/g," ");
+  s=s.replace(/\bbucodispersables?\b/g," ").replace(/\bprolongada?\b/g," ");
+  s=s.replace(/\boral\b/g," ").replace(/\bbucal\b/g," ");
+  s=s.replace(/\/\s*ml\b/g," ").replace(/\/\s*dos\b/g," ");
+  s=s.replace(/\bpara\s*inh(?:alacion)?\b/g," ").replace(/\bsusp\b/g," ").replace(/\bpolvo\b/g," ");
+  s=s.replace(new RegExp("\\b(?:"+LABS_HCE.join("|")+")(\\s+pharma)?\\b","g")," ");
+  s=s.replace(/\befg\b/g," ");
+  var protectedSlash=s.match(/^([a-z]+)\/([a-z]+)\b/);
+  s=s.replace(/\d+[,.]?\d*(?:\/\d+[,.]?\d*){0,2}\s*(?:mg\/ml|mcg\/ml|mg|mcg|g|ui|%)/g," ");
+  if(protectedSlash&&!s.startsWith(protectedSlash[1]+"/"+protectedSlash[2])){s=protectedSlash[1]+"/"+protectedSlash[2]+" "+s.trim();}
+  s=s.replace(/(?:^|\s)\d+(?:\s|$)/g," ");
+  s=s.replace(/\s{2,}/g," ").trim();
+  var nombreLine=s;
+  var dosisM=norm(line).match(/\b(\d+[,.]?\d*(?:\/\d+[,.]?\d*){0,2}\s*(?:mg\/ml|mcg\/ml|mg|mcg|g|ui|%))/i);
+  var dosage=dosisM?dosisM[1].replace(/,/g,".").replace(/\s+/g,"").trim():"";
+  var ut=TIEMPO_HCE[posUnit]||"h";
+  var doses=emptyDoses(),freqLabel="",longInterval="";
+  var esLargo=ut==="semanas"||ut==="meses"||ut==="anos"||(ut==="dias"&&posNum>7)||(ut==="h"&&posNum>=48);
+  if(esLargo){
+    if(ut==="semanas"){if(posNum===1)longInterval="Administracion semanal";else if(posNum===2)longInterval="Administracion quincenal";else if(posNum===4)longInterval="Administracion mensual";else longInterval="Administrar cada "+posNum+" semanas";}
+    else if(ut==="meses"){longInterval=posNum===1?"Administracion mensual":"Administrar cada "+posNum+" meses";}
+    else{longInterval="Administrar cada "+posNum+" "+ut;}
+  }
+  else{var freqH=ut==="h"?posNum:posNum*24;doses=distributeDoses(posQty,freqH,nombreLine);if(posQty!==1)freqLabel=fmtQty(posQty)+"u, cada "+posNum+(ut==="h"?"h":" "+ut);}
+  var med=parseSingleMed(nombreLine+(dosage?" "+dosage:""),status);
+  med.rawText=raw;
+  if(dosage&&!med.dosage)med.dosage=dosage;
+  var rawLo=norm(preNorm(raw));
+  var mkKeys=Object.keys(MARCAS_HCE).sort(function(a,b){return b.length-a.length;});
+  for(var i=0;i<mkKeys.length;i++){
+    if(nombreLine.includes(mkKeys[i])||rawLo.includes(mkKeys[i])){
+      med.activeNames=MARCAS_HCE[mkKeys[i]].slice();med.active=activeNamesToString(med.activeNames);med.unrecognized=false;
+      var dbM=DB.find(function(d){var dpa=d.activeNames.map(function(a){return norm(a).replace(/\s*\d.*/,"");});var mpa=med.activeNames.map(function(a){return norm(a).replace(/\s*\d.*/,"");});return dpa.length===mpa.length&&dpa.every(function(p,idx){return p===mpa[idx];});});
+      if(dbM){med.brand=dbM.brand;}else{med.brand=med.activeNames.map(function(a){return a.charAt(0)+a.slice(1).toLowerCase().replace(/\s*\d.*/,"");}).join("/");}
+      break;
+    }
+  }
+  if(formaR){med.type=formaR.tipo;var cat=formaR.tipo==="inhaler"?"Inhalado":formaR.tipo==="injection"?"Inyectable":(formaR.tipo==="eye"||formaR.tipo==="drops"||formaR.tipo==="patch")?"Topico":"Oral";med.category=cat;med.via=defaultVia(cat,formaR.tipo);}
+  if(longInterval){med.doses=emptyDoses();med.freqLabel="";med.customTip=(med.customTip?med.customTip+" / ":"")+longInterval;}
+  else{med.doses=doses;med.freqLabel=freqLabel;}
+  return med;
+}
+function parseSuplLine(raw,status){
+  var posM=raw.match(/(\d+[.,]\d+|\d)\s+cada\s+(\d+)\s*([hHdDsSmMaA])\s*$/);
+  var posQty=1,posNum=12,posUnit="h";
+  if(posM){posQty=parseFloat(posM[1].replace(",","."));posNum=parseInt(posM[2]);posUnit=posM[3];}
+  var nombre=raw.replace(/\([^)]*\)/g," ").replace(/\befg\b/gi," ");
+  nombre=nombre.replace(/\b\d+\s*(?:botellas?|sobres?|sticks?|envases?|unidades?)\b.*/gi,"").trim();
+  if(posM)nombre=nombre.replace(posM[0],"").trim();
+  nombre=nombre.replace(LAB_RE_HCE," ").replace(/\s{2,}/g," ").trim();
+  var ut=TIEMPO_HCE[posUnit]||"h";
+  var doses=emptyDoses(),longInterval="";
+  var esLargo=ut==="semanas"||ut==="meses"||ut==="anos"||(ut==="dias"&&posNum>7)||(ut==="h"&&posNum>=48);
+  if(esLargo){longInterval="Administrar cada "+posNum+" "+ut;}
+  else{var freqH=ut==="h"?posNum:posNum*24;doses=distributeDoses(posQty,freqH,"");}
+  return{brand:nombre,activeNames:[nombre.toUpperCase()],active:nombre,dosage:"",type:"syrup",category:"Oral",via:"",rawText:raw,doses:esLargo?emptyDoses():doses,freqLabel:"",status:status,tip:"",customTip:"Suplemento nutricional"+(longInterval?" / "+longInterval:""),suspended:status==="suspend",dbRef:null,unrecognized:false,deglufarmInfo:null,deglufarmLoading:false,deglIncluir:false,cimaResolved:true,conflict:false,deglManualText:""};
+}
+function procesarHCE(raw,status){
+  if(esPS(raw))return[];
+  if(esSuplem(raw))return[parseSuplLine(raw,status)];
+  var lo=norm(raw);
+
+  // ── PA+PA DOSIS/DOSIS (ej: VALSARTAN+ HIDROCLOROTIAZIDA 80MG/12,5MG) ────
+  var paComboM=raw.match(/^([A-Za-z][A-Za-z\s]{2,25})\s*[+\/]\s*([A-Za-z][A-Za-z\s]{2,25})\s+(\d+[.,]?\d*)\s*(mg|mcg|g|ui)\s*[\/,]\s*(\d+[.,]?\d*)\s*(mg|mcg|g|ui)/i);
+  if(paComboM){
+    var nA=paComboM[1].trim(),nB=paComboM[2].trim();
+    var d1=paComboM[3].replace(",","."),u1=paComboM[4].toLowerCase();
+    var d2=paComboM[5].replace(",","."),u2=paComboM[6].toLowerCase();
+    var dosage=d1+"/"+d2+u2;
+    var paA=lookupBrandToPA(nA)||[nA.toUpperCase()];
+    var paB=lookupBrandToPA(nB)||[nB.toUpperCase()];
+    var activeNames=[paA[0]+" "+d1+u1, paB[0]+" "+d2+u2];
+    var brand=nA.charAt(0).toUpperCase()+nA.slice(1).toLowerCase()+"/"+nB.charAt(0).toUpperCase()+nB.slice(1).toLowerCase();
+    var dbC=DB.find(function(d){return d.activeNames.length===2&&norm(d.activeNames[0]).replace(/\s*\d.*/,"")===norm(paA[0]).replace(/\s*\d.*/,"")&&norm(d.activeNames[1]).replace(/\s*\d.*/,"")===norm(paB[0]).replace(/\s*\d.*/,"");});
+    if(dbC)brand=dbC.brand;
+    var posM=raw.match(/(\d+[.,]?\d*)\s+cada\s+(\d+)\s*([hHdDsSmMaA])/i);
+    var doses=emptyDoses(),longInterval="";
+    if(posM){var posQty=parseFloat(posM[1].replace(",","."));var posNum=parseInt(posM[2]);var ut=TIEMPO_HCE[posM[3]]||"h";var esLargo=ut==="semanas"||ut==="meses"||(ut==="dias"&&posNum>7)||(ut==="h"&&posNum>=48);if(esLargo){longInterval="Administrar cada "+posNum+" "+ut;}else{var freqH=ut==="h"?posNum:posNum*24;doses=distributeDoses(posQty,freqH,norm(brand));}}
+    else{doses.morning="1";}
+    return[{brand:brand,activeNames:activeNames,active:activeNamesToString(activeNames),dosage:dosage,type:"tablet",rawText:raw,category:"Oral",via:"",doses:doses,freqLabel:"",status:status,tip:"",customTip:longInterval,suspended:status==="suspend",dbRef:dbC||null,unrecognized:false,deglufarmInfo:null,deglufarmLoading:false,deglIncluir:true,cimaResolved:true,conflict:false,deglManualText:""}];
+  }
+  // ─────────────────────────────────────────────────────────────────────────
+
+  // ── Combo marca comercial: "Nombre D1/D2[/D3]unidad" ────────────────────
+  var comboM=raw.match(/^([A-Za-zÀ-ÿ][A-Za-zÀ-ÿ\-]*(?:\s+[A-Za-zÀ-ÿ][A-Za-zÀ-ÿ\-]*){0,4})\s+(\d+[.,]?\d*)\s*\/\s*(\d+[.,]?\d*)\s*(?:\/\s*(\d+[.,]?\d*)\s*)?(mg|mcg|g|ui)?\b/i);
+  if(comboM&&comboM[1]&&comboM[2]&&comboM[3]&&!/[A-Za-z]\s*\+\s*[A-Za-z]/.test(raw)){
+    var brandRaw=comboM[1].trim();
+    var d1=comboM[2].replace(",","."),d2=comboM[3].replace(",","."),d3=comboM[4]?comboM[4].replace(",","."):null,unit=comboM[5]?comboM[5].toLowerCase():"mg";
+    var dosage=d3?d1+"/"+d2+"/"+d3+unit:d1+"/"+d2+unit;
+    var dbC=matchDB(brandRaw)||matchDB(norm(brandRaw));
+    var paLookup=lookupBrandToPA(brandRaw);
+    var paList=dbC?dbC.activeNames.slice():paLookup?paLookup.slice():resolveActiveNames(brandRaw);
+    var brand=dbC?(dbC.brand.charAt(0).toUpperCase()+dbC.brand.slice(1)):(brandRaw.charAt(0).toUpperCase()+brandRaw.slice(1).toLowerCase());
+    var parts=d3?[d1,d2,d3]:[d1,d2];
+    var activeNames=paList.map(function(pa,idx){
+      var paClean=pa.replace(/\s*\d[\d.,]*\s*(?:mg|mcg|g|ml|ui|%)[^\s]*/gi,"").trim();
+      return paClean+(parts[idx]!==undefined?" "+parts[idx]+unit:"");
+    });
+    var type=dbC?dbC.type:"tablet";var category=dbC?dbC.category:"Oral";
+    var posM=raw.match(/(\d+[.,]?\d*)\s+cada\s+(\d+)\s*([hHdDsSmMaA])\s*$/);
+    var doses=emptyDoses(),longInterval="";
+    if(posM){
+      var posQty=parseFloat(posM[1].replace(",","."));var posNum=parseInt(posM[2]);var ut=TIEMPO_HCE[posM[3]]||"h";
+      var esLargo=ut==="semanas"||ut==="meses"||ut==="anos"||(ut==="dias"&&posNum>7)||(ut==="h"&&posNum>=48);
+      if(esLargo){longInterval=ut==="semanas"?(posNum===1?"Administracion semanal":posNum===2?"Administracion quincenal":posNum===4?"Administracion mensual":"Administrar cada "+posNum+" semanas"):"Administrar cada "+posNum+" "+ut;}
+      else{var freqH=ut==="h"?posNum:posNum*24;doses=distributeDoses(posQty,freqH,norm(brand));}
+    } else {doses.morning="1";}
+    var esSubirBajar=/\b(?:subir|bajar|sube|baja|aumentar|disminuir|reducir|incrementar)\b/.test(lo);
+    return[{brand:brand,activeNames:activeNames,active:activeNamesToString(activeNames),dosage:dosage,type:type,rawText:raw,category:category,via:defaultVia(category,type),doses:doses,freqLabel:"",status:esSubirBajar?"change":status,tip:"",customTip:longInterval,suspended:status==="suspend",dbRef:dbC||null,unrecognized:!dbC&&!paLookup,deglufarmInfo:null,deglufarmLoading:false,deglIncluir:true,cimaResolved:true,conflict:false,deglManualText:""}];
+  }
+  // ─────────────────────────────────────────────────────────────────────────
+
+  var esSubirBajar=/\b(?:subir|bajar|sube|baja|aumentar|disminuir|reducir|incrementar)\b/.test(lo)&&!/cada\s+\d+\s*[hHdDsSmM]/.test(lo);
+  var st=esSubirBajar?"change":status;
+  var rawN=preNorm(raw);
+  if(esHCE(rawN))return[parseHCELine(rawN,st)];
+  return null;
+}
+
+function detectActiveDuplicates(ml){var map=new Map();ml.forEach(function(m){if(m.status==="suspend")return;(m.activeNames||[]).forEach(function(an){var k=paKey(an);if(k.length<3)return;if(!map.has(k))map.set(k,[]);if(map.get(k).indexOf(m.uid)===-1)map.get(k).push(m.uid);});});var dups=new Set();map.forEach(function(uids){if(uids.length>1)uids.forEach(function(u){dups.add(u);});});return dups;}
+function detectSameAsSuspended(ml){var suspPAs=new Set();ml.forEach(function(m){if(m.status!=="suspend")return;(m.activeNames||[]).forEach(function(an){var k=paKey(an);if(k.length>2)suspPAs.add(k);});});var warn=new Set();suspPAs.forEach(function(spa){var actives=ml.filter(function(m){if(m.status==="suspend"||m.status==="new")return false;return(m.activeNames||[]).some(function(an){return paKey(an)===spa;});});var simples=actives.filter(function(m){return(m.activeNames||[]).length===1;});var combos=actives.filter(function(m){return(m.activeNames||[]).length>1;});simples.forEach(function(m){warn.add(m.uid);});if(simples.length>0)combos.forEach(function(m){warn.add(m.uid);});});return warn;}
+function getEquivKey(activeNames){var lo=(activeNames||[]).map(function(n){return norm(n);}).join(" ");for(var i=0;i<EQUIV_GROUPS.length;i++){for(var j=0;j<EQUIV_GROUPS[i].length;j++){if(lo.includes(EQUIV_GROUPS[i][j]))return i;}}return null;}
+
+// ── NUEVA FUNCIÓN: detectar PA en varias categorías de status ──
+function detectPAenVariasCategories(ml){
+  // También incluir meds marcados con paStatusConflict por deduplicateMeds
+  var paStatusMap=new Map();
+  ml.forEach(function(m){
+    (m.activeNames||[]).forEach(function(an){
+      var k=paKey(an);if(k.length<3)return;
+      if(!paStatusMap.has(k))paStatusMap.set(k,new Set());
+      paStatusMap.get(k).add(m.status);
+    });
+  });
+  var warn=new Set();
+  ml.forEach(function(m){
+    if(m.paStatusConflict){warn.add(m.uid);return;}
+    (m.activeNames||[]).forEach(function(an){
+      var k=paKey(an);
+      if(paStatusMap.has(k)&&paStatusMap.get(k).size>1)warn.add(m.uid);
+    });
+  });
+  return warn;
+}
+
+function detectDashPattern(line){
+  var SEG="(?:\\d+\\s*\\/\\s*\\d+|\\d+(?:[.,]\\d+)?)";
+  var re=new RegExp("\\b("+SEG+")-("+SEG+")-("+SEG+")(?:-("+SEG+"))?(?:-("+SEG+"))?\\b");
+  var m=line.match(re);if(!m)return null;
+  var vals=m.slice(1).filter(function(v){return v!==undefined;}).map(parseQty);
+  if(vals.some(function(v){return v===null||v>20;}))return null;
+  var d=emptyDoses();
+  if(vals.length===2){d.morning=fmtQty(vals[0]);d.night=fmtQty(vals[1]);}
+  else if(vals.length===3){d.morning=fmtQty(vals[0]);d.noon=fmtQty(vals[1]);d.night=fmtQty(vals[2]);}
+  else if(vals.length===4){d.morning=fmtQty(vals[0]);d.noon=fmtQty(vals[1]);d.afternoon=fmtQty(vals[2]);d.night=fmtQty(vals[3]);}
+  else{d.morning=fmtQty(vals[0]);d.noon=fmtQty(vals[1]);d.afternoon=fmtQty(vals[2]);d.night=fmtQty(vals[3]);d.sleep=fmtQty(vals[4]);}
+  Object.keys(d).forEach(function(k){if(d[k]==="0")d[k]="";});
+  return d;
+}
+function detectQtyInLine(line){
+  if(/\bmedio\s+(?:comprimidos?|pastillas?|capsulas?|sobres?)\b/i.test(line))return 0.5;
+  var m=line.match(/\b(\d+\s*\/\s*\d+|\d+(?:[.,]\d+)?)\s*(?:comprimidos?|comp\b|capsulas?|sobres\b|unidades?|pastillas?|gotas?|inhalaciones?)/i);
+  return m?parseQty(m[1]):null;
+}
+function detectSlotDoses(line){
+  var d=emptyDoses(),found=false,lo=norm(line);
+  var slotMap3={desayuno:"morning",manana:"morning",comida:"noon",mediodia:"noon",merienda:"afternoon",tarde:"afternoon",cena:"night",noche:"night",ayunas:"fasting",acostarse:"sleep",dormir:"sleep"};
+  var UNIT3="(?:inh[a-z]*|comp[a-z]*|caps[a-z]*|past[a-z]*|sobres?|mg|mcg|g|\\d+)?\\s*";
+  var SLOT3="(desayuno|manana|comida|mediodia|merienda|tarde|cena|noche|ayunas|acostarse|dormir)";
+  var reA=new RegExp("(\\d+(?:[.,]\\d+)?)\\s*"+UNIT3+"\\s*(?:en\\s+)?"+SLOT3+"\\s+y\\s+(?:en\\s+)?"+SLOT3,"i");
+  var ma=lo.match(reA);
+  if(ma){var qa=parseQty(ma[1]);var s1=slotMap3[ma[2]],s2=slotMap3[ma[3]];if(qa!==null&&qa<=20&&s1&&s2&&s1!==s2){d[s1]=fmtQty(qa);d[s2]=fmtQty(qa);found=true;return{doses:d,found:found};}}
+  var reB=new RegExp("(\\d+(?:[.,]\\d+)?)\\s*"+UNIT3+"\\s*(?:en\\s+)?"+SLOT3+"[,;]\\s*(\\d+(?:[.,]\\d+)?)\\s*"+UNIT3+"\\s*(?:en\\s+)?"+SLOT3,"i");
+  var mb=lo.match(reB);
+  if(mb){var q1=parseQty(mb[1]),q2=parseQty(mb[3]);var sa=slotMap3[mb[2]],sb=slotMap3[mb[4]];if(q1!==null&&q2!==null&&sa&&sb&&sa!==sb){d[sa]=fmtQty(q1);d[sb]=fmtQty(q2);found=true;return{doses:d,found:found};}}
+  if(/\b1\s+al\s+dia\b/i.test(lo)){d.morning="1";found=true;return{doses:d,found:found};}
+  var MEDIO=[
+    {re:/\bmedio\s*(?:comprimidos?|pastillas?|capsulas?|sobres?)?\s*(?:antes?\s+de\s+)?(?:al?\s+)?(?:acostarse|dormir)\b/i,slot:"sleep"},
+    {re:/\bmedio\s*(?:comprimidos?|pastillas?|capsulas?|sobres?)?\s*(?:por\s+la\s+)?noche\b/i,slot:"night"},
+    {re:/\bmedio\s*(?:comprimidos?|pastillas?|capsulas?|sobres?)?\s*(?:en\s+(?:la\s+)?)?cena\b/i,slot:"night"},
+    {re:/\bmedio\s*(?:comprimidos?|pastillas?|capsulas?|sobres?)?\s*(?:en\s+(?:el\s+)?)?desayuno\b/i,slot:"morning"},
+    {re:/\bmedio\s*(?:comprimidos?|pastillas?|capsulas?|sobres?)?\s*(?:por\s+la\s+)?manana\b/i,slot:"morning"},
+    {re:/\bmedio\s*(?:comprimidos?|pastillas?|capsulas?|sobres?)?\s*(?:en\s+(?:la\s+)?)?(?:comida|mediodia|almuerzo)\b/i,slot:"noon"},
+    {re:/\bmedio\s*(?:comprimidos?|pastillas?|capsulas?|sobres?)?\s*(?:en\s+(?:la\s+)?)?merienda\b/i,slot:"afternoon"}
+  ];
+  MEDIO.forEach(function(p){if(lo.match(p.re)&&!d[p.slot]){d[p.slot]="1/2";found=true;}});
+  var QP="(\\d+\\s*\\/\\s*\\d+|\\d+(?:[.,]\\d+)?)";
+  var PATS=[
+    {re:new RegExp(QP+"\\s*(?:comp(?:rimidos?)?|caps(?:ulas?)?|sobres?|pastillas?|inhalaciones?|gotas?)?\\s*en\\s+ayunas","i"),slot:"fasting"},
+    {re:new RegExp(QP+"\\s*(?:comp(?:rimidos?)?|caps(?:ulas?)?|sobres?|pastillas?|inhalaciones?|gotas?)?\\s*antes\\s+del?\\s+desayuno","i"),slot:"fasting"},
+    {re:new RegExp(QP+"\\s*(?:comp(?:rimidos?)?|caps(?:ulas?)?|sobres?|pastillas?|inhalaciones?|gotas?)?\\s*(?:en\\s+(?:el\\s+)?|al?\\s+)?desayuno","i"),slot:"morning"},
+    {re:new RegExp(QP+"\\s*(?:comp(?:rimidos?)?|caps(?:ulas?)?|sobres?|pastillas?|inhalaciones?|gotas?)?\\s*(?:por\\s+la\\s+|en\\s+(?:la\\s+)?|a\\s+la\\s+)?manana","i"),slot:"morning"},
+    {re:new RegExp(QP+"\\s*(?:comp(?:rimidos?)?|caps(?:ulas?)?|sobres?|pastillas?|inhalaciones?|gotas?)?\\s*(?:al?\\s+)?(?:mediodia|almuerzo)","i"),slot:"noon"},
+    {re:new RegExp(QP+"\\s*(?:comp(?:rimidos?)?|caps(?:ulas?)?|sobres?|pastillas?|inhalaciones?|gotas?)?\\s*(?:en\\s+(?:la\\s+)?)?comida","i"),slot:"noon"},
+    {re:new RegExp(QP+"\\s*(?:comp(?:rimidos?)?|caps(?:ulas?)?|sobres?|pastillas?|inhalaciones?|gotas?)?\\s*(?:en\\s+(?:la\\s+)?)?merienda","i"),slot:"afternoon"},
+    {re:new RegExp(QP+"\\s*(?:comp(?:rimidos?)?|caps(?:ulas?)?|sobres?|pastillas?|inhalaciones?|gotas?)?\\s*(?:por\\s+la\\s+|en\\s+(?:la\\s+)?|a\\s+la\\s+)?tarde","i"),slot:"afternoon"},
+    {re:new RegExp(QP+"\\s*(?:comp(?:rimidos?)?|caps(?:ulas?)?|sobres?|pastillas?|inhalaciones?|gotas?)?\\s*(?:en\\s+(?:la\\s+)?)?cena","i"),slot:"night"},
+    {re:new RegExp(QP+"\\s*(?:comp(?:rimidos?)?|caps(?:ulas?)?|sobres?|pastillas?|inhalaciones?|gotas?)?\\s*(?:por\\s+la\\s+|a\\s+la\\s+)?noche","i"),slot:"night"},
+    {re:new RegExp(QP+"\\s*(?:comp(?:rimidos?)?|caps(?:ulas?)?|sobres?|pastillas?|inhalaciones?|gotas?)?\\s*(?:al?\\s+)?(?:acostarse|dormir)","i"),slot:"sleep"},
+    {re:new RegExp(QP+"\\s*(?:comp(?:rimidos?)?|caps(?:ulas?)?|sobres?|pastillas?|inhalaciones?|gotas?)?\\s*antes\\s+de\\s+dormir","i"),slot:"sleep"}
+  ];
+  PATS.forEach(function(p){if(!d[p.slot]){var mm=lo.match(p.re);if(mm){var q=parseQty(mm[1]);if(q!==null&&q<=20){d[p.slot]=fmtQty(q);found=true;}}}});
+  if(!found){
+    var ONLY=[
+      {re:/\bpor\s+la\s+manana\b/i,slot:"morning"},{re:/\ben\s+el\s+desayuno\b/i,slot:"morning"},
+      {re:/\ba\s+la\s+manana\b/i,slot:"morning"},{re:/\ben\s+la\s+comida\b/i,slot:"noon"},
+      {re:/\bpor\s+la\s+tarde\b/i,slot:"afternoon"},{re:/\ben\s+la\s+merienda\b/i,slot:"afternoon"},
+      {re:/\bpor\s+la\s+noche\b/i,slot:"night"},{re:/\ba\s+la\s+noche\b/i,slot:"night"},
+      {re:/\ben\s+la\s+cena\b/i,slot:"night"},{re:/\bal?\s+(?:acostarse|dormir)\b/i,slot:"sleep"},
+      {re:/\bantes\s+de\s+dormir\b/i,slot:"sleep"},{re:/\ben\s+ayunas\b/i,slot:"fasting"}
+    ];
+    ONLY.forEach(function(p){if(lo.match(p.re)&&!d[p.slot]){d[p.slot]="1";found=true;}});
+  }
+  return{doses:d,found:found};
+}
+function detectFreqCadaX(line){
+  var m=line.match(/cada\s*([\d.,]+)\s*([hH](?:oras?)?|dias?)/i);
+  if(m)return{num:parseFloat(m[1].replace(",",".")),unit:/^d/i.test(m[2])?"d":"h"};
+  var s=line.match(/\/\s*(\d+)\s*h(?:oras?)?/i);
+  if(s)return{num:parseFloat(s[1]),unit:"h"};
+  return null;
+}
+function distributeDoses(qty,freqH,blo){
+  var d=emptyDoses(),q=fmtQty(qty);
+  if(NIGHT_MEDS.some(function(n){return blo.includes(n);})){d.night=q;return d;}
+  if(SLEEP_MEDS.some(function(n){return blo.includes(n);})){d.sleep=q;return d;}
+  if(FASTING_MEDS.some(function(n){return blo.includes(n);})){d.fasting=q;return d;}
+  if(freqH>=24){d.morning=q;return d;}
+  if(freqH>=12){d.morning=q;d.night=q;return d;}
+  if(freqH>=8){d.morning=q;d.noon=q;d.night=q;return d;}
+  d.morning=q;d.noon=q;d.afternoon=q;d.night=q;return d;
+}
+function brandKey(brand){var lo=norm(brand);var dosM=lo.match(/(\d[\d.,]*)\s*(?:mg|mcg|g\b|ml\b|ui\b)/);var suf=dosM?"_"+dosM[1]:"";return lo.replace(/\bcomprimidos?\b|\bgotas?\b|\bpediatrico\b|\bsobres?\b|\bcapsulas?\b|\binyectable\b|\bvial\b|\bsolucion\b|\bsuspension\b|\binhaladores?\b/gi,"").replace(/\b\d[\d.,]*\s*(?:mg|mcg|g|ml|ui|%)[^\s]*/gi,"").replace(/\s+/g,"").trim()+suf;}
+
+function tryParseLyricaMultiDose(raw,status){
+  var lo=norm(preNorm(raw));
+  var UNIT_PAT="(?:mg|inhalac(?:io|io?)nes?|inhalac?i?o?n?e?s?|inhal(?:acion)?|inh|comp?rimidos?|comp?)";
+  var SLOT_LIST="desayuno|comida|cena|merienda|mediodia|manana|tarde|noche|ayunas";
+  var nameMatch=lo.match(new RegExp("^([\\w][\\w\\s]*?)\\s+(?=\\d+\\s*(?:"+UNIT_PAT+"|(?:"+SLOT_LIST+"))\\b)","i"));
+  if(!nameMatch)return null;
+  var brandName=nameMatch[1].trim();
+  var rest=lo.slice(nameMatch[0].length).trim();
+  var blockRe=new RegExp("(\\d+)\\s*(?:"+UNIT_PAT+")?\\s*(?:en\\s+)?("+SLOT_LIST+")(?:\\s+y\\s+("+SLOT_LIST+"))?","gi");
+  var blocks=[],bm;
+  while((bm=blockRe.exec(rest))!==null){blocks.push({qty:bm[1],slot1:bm[2],slot2:bm[3]||null});}
+  if(blocks.length<2)return null;
+  var dose1=blocks[0].qty,slot1a=blocks[0].slot1,slot1b=blocks[0].slot2,dose2=blocks[1].qty,slot2=blocks[1].slot1;
+  var slotMap={desayuno:"morning",manana:"morning",comida:"noon",mediodia:"noon",merienda:"afternoon",tarde:"afternoon",cena:"night",noche:"night",ayunas:"fasting"};
+  var d1=emptyDoses();d1[slotMap[norm(slot1a)]]="1";if(slot1b)d1[slotMap[norm(slot1b)]]="1";
+  var d2=emptyDoses();d2[slotMap[norm(slot2)]]="1";
+  function makeMed(brand,dosage,doses){var db=matchDB(brand);var activeNames=db?db.activeNames.slice():resolveActiveNames(brand)||[brand.toUpperCase()];var type=db?db.type:"capsule";var category=db?db.category:"Oral";return{brand:db?db.brand:brand,activeNames:activeNames,active:activeNamesToString(activeNames),dosage:dosage+"mg",type:type,rawText:raw,category:category,via:"",doses:doses,freqLabel:"",status:status,tip:"",customTip:"",suspended:status==="suspend",dbRef:db||null,unrecognized:!db,deglufarmInfo:null,deglufarmLoading:false,deglIncluir:true,cimaResolved:!!db,conflict:false,deglManualText:""};} 
+  return[makeMed(brandName,dose1,d1),makeMed(brandName,dose2,d2)];
+}
+function tryParseFentaniloMulti(raw,status){
+  var lo=norm(raw);
+  var m=lo.match(/fentanilo[^\d]*(\d+)\s*mcg\s*\/?\s*h[^\d+]*\+\s*(\d+)\s*mcg\s*\/?\s*h/i);
+  if(!m)return null;
+  var d1=m[1],d2=m[2];
+  var freqM=raw.match(/cada\s*([\d]+)\s*h/i);
+  var freqLabel=freqM?"Cambiar cada "+freqM[1]+"h":"";
+  function makePatch(dosage){return{brand:"Fentanilo",activeNames:["FENTANILO"],active:"Fentanilo",dosage:dosage+"mcg/h",type:"patch",rawText:raw,category:"Topico",via:"Via transdermica",doses:emptyDoses(),freqLabel:freqLabel,status:status,tip:"Rotar zona aplicacion",customTip:freqLabel,suspended:status==="suspend",dbRef:null,unrecognized:false,deglufarmInfo:null,deglufarmLoading:false,deglIncluir:true,cimaResolved:true,conflict:false,deglManualText:""};} 
+  return[makePatch(d1),makePatch(d2)];
+}
+
+function parseSingleMed(raw,status){
+  var rawFull=raw; // guardar antes de cualquier limpieza
+  var line=cleanLinePrefix(stripMarkdown(raw.trim()));
+  line=line.replace(/^[,\s]+|[,\s]+$/g,"").trim();
+  var rawOrig=line;
+  var anticoagNota=detectAnticoagNota(rawOrig);
+  if(anticoagNota){line=line.replace(/,?\s*segun\s+.{3,60}?(?=[.,;]|$)/gi,"").replace(/\s{2,}/g," ").trim();}
+  var condExtract=extractConditionalNotes(line);line=condExtract.clean;var condNotes=condExtract.condNotes;
+  var siPrecisa=detectSiPrecisa(rawOrig);
+  var cronicaNote="";
+  if(/\bcronico\b/i.test(line)){cronicaNote="Tratamiento cronico";line=line.replace(/\bcronico\b/gi,"").replace(/\s{2,}/g," ").trim();}
+  var ec=extractCondition(line);line=ec.clean;
+  var ed=extractDuration(line);line=ed.clean;
+  var isFasting=detectFasting(line);
+  var detectedFormType=detectFormFromText(rawOrig);
+  var longInterval=detectLongInterval(rawOrig);
+  var dayRestr=detectDayRestriction(rawOrig);
+  var weekdayNote=detectWeekdayNote(rawOrig);
+  var doses=emptyDoses(),freqLabel="",doseQty=null;
+  var dash=detectDashPattern(line),slot=detectSlotDoses(line),freq=detectFreqCadaX(line),qty=detectQtyInLine(line);
+  if(dash&&Object.values(dash).some(function(v){return v!="";})){
+    doses=dash;
+    line=line.replace(/\b(?:\d+\s*\/\s*\d+|\d+(?:[.,]\d+)?)-(?:\d+\s*\/\s*\d+|\d+(?:[.,]\d+)?)-(?:\d+\s*\/\s*\d+|\d+(?:[.,]\d+)?)(?:-(?:\d+\s*\/\s*\d+|\d+(?:[.,]\d+)?))?(?:-(?:\d+\s*\/\s*\d+|\d+(?:[.,]\d+)?))?/,"").trim();
+  }else if(slot.found){doses=slot.doses;}
+  else if(freq){var q=qty!==null?qty:1;var freqH=freq.unit==="h"?freq.num:freq.num*24;doseQty=q;doses=distributeDoses(q,freqH,norm(line));freqLabel=fmtQty(q)+"u, cada "+freq.num+(freq.unit==="h"?"h":" dia(s)");}
+  else if(qty!==null){doseQty=qty;}
+  var nameRaw=line.replace(/cada\s*[\d.,]+\s*(?:[hH](?:oras?)?|dias?|mes(?:es)?|semanas?)\b[^,;\n]*/gi,"").replace(/\/\s*\d+\s*h(?:oras?)?/gi,"").replace(/\s{2,}/g," ").trim();
+  nameRaw=cleanMedName(nameRaw);
+  nameRaw=nameRaw.replace(/\b\d+\s*(?:comprimidos?|capsulas?|sobres?|pastillas?)\b/gi," ").replace(/\s{2,}/g," ").trim();
+  nameRaw=removePharmaFormFromName(nameRaw,detectedFormType);
+  nameRaw=cleanNameFromSlotRefs(nameRaw);
+  // Eliminar dosis combinadas del nombre (ej: "Trinomia 100/20/10 mg" → "Trinomia")
+  nameRaw=nameRaw.replace(/\b\d[\d.]*(?:\/\d[\d.]*){1,3}\s*(?:mg|mcg|g|ml|ui|%)\b/gi,"").replace(/\s{2,}/g," ").trim();
+  nameRaw=nameRaw.replace(/\b\d[\d.]*(?:\/\d[\d.]*){1,3}\b/gi,"").replace(/\s{2,}/g," ").trim();
+  nameRaw=nameRaw.replace(/^[,\s]+|[,\s]+$/g,"").replace(/\s*,\s*/g," ").trim();
+  var nameForLookup=nameRaw.replace(/\b\d[\d.]*(?:\/\d[\d.]*)+\s*(?:mg|mcg|g|ml|ui|%)/gi,"").replace(/\b\d[\d.,]*\s*(?:mg|mcg|g|ml|%|ui)[^,;\s]*/gi,"").replace(/\s{2,}/g," ").trim();
+  var nameClean2=nameRaw.replace(/\b\d[\d.,]*\s*(?:mg|mcg|g|ml|%|ui)[^,;\s]*/gi,"").replace(/:.*/,"").replace(/\s{2,}/g," ").trim();
+  var bToPaEarly=lookupBrandToPA(nameForLookup)||lookupBrandToPA(nameClean2)||lookupBrandToPA(nameRaw);
+  var db=null;
+  if(!bToPaEarly){db=matchDB(nameForLookup)||matchDB(nameClean2)||matchDB(nameForLookup.split("/")[0].trim());}
+  var brand,activeNames,dosage,type,category,via,unrecognized=false;
+  if(db){
+    brand=db.brand.charAt(0).toUpperCase()+db.brand.slice(1);type=detectedFormType||db.type;category=db.category;via=defaultVia(category,type);
+    if(db.activeNames.length>1){
+      var cd=extractComboDosage(rawFull,db.activeNames.length)||extractComboDosage(rawOrig,db.activeNames.length);
+      if(cd&&cd.parts.length>=2){
+        activeNames=db.activeNames.map(function(an,idx){return an+(cd.parts[idx]!==undefined?" "+cd.parts[idx]+cd.unit:"");});
+        dosage=cd.dosage;
+      }else{
+        activeNames=db.activeNames.slice();
+        dosage=extractDosage(rawFull)||db.dosage||"";
+      }
+    }else{
+      activeNames=db.activeNames.slice();
+      dosage=extractDosage(rawFull)||db.dosage||"";
+    }
+  }else{
+    var cleanBrand=nameForLookup||nameRaw;
+    brand=cleanBrand.charAt(0).toUpperCase()+cleanBrand.slice(1);dosage=extractDosage(rawOrig)||extractDosage(nameRaw)||"";type=detectedFormType||"tablet";
+    category=type==="injection"?"Inyectable":type==="inhaler"?"Inhalado":(type==="topical"||type==="patch")?"Topico":"Oral";
+    via=defaultVia(category,type);unrecognized=true;
+    if(bToPaEarly){activeNames=bToPaEarly.slice();unrecognized=false;}
+    else{
+      var combo=splitComboName(nameRaw);
+      if(combo&&combo.names.length>=2){activeNames=combo.names.map(function(p,idx){var pa=extractPAFromString(p)||p.toUpperCase();return combo.doses[idx]?pa+" "+combo.doses[idx]:pa;});if(combo.combined)dosage=combo.combined;}
+      else{
+        var plusParts=nameRaw.split(/\s*\+\s*/);
+        if(plusParts.length>=2&&plusParts.every(function(p){return/[A-Za-z]{3,}/.test(p);})){activeNames=plusParts.map(function(p){return extractPAFromString(p)||p.trim().toUpperCase();});if(!dosage){var dC=extractComboDosage(rawOrig,plusParts.length);if(dC)dosage=dC.dosage;}unrecognized=false;}
+        else{var resolved=resolveActiveNames(cleanBrand||nameRaw);activeNames=resolved;if(resolved.length&&resolved[0]!=="DESCONOCIDO")unrecognized=false;}
+      }
+    }
+    var loB=norm(cleanBrand||nameRaw).replace(/\s{2,}/g," ").trim();
+    var loB0=loB.replace(/\b\d[\d.,]*\s*(?:mg|mcg|g|ml|ui|%)[^\s]*/gi,"").replace(/\s+/g," ").trim();
+    var defEntry=MARCA_DOSIS_DEFAULT[loB]||MARCA_DOSIS_DEFAULT[loB0];
+    if(defEntry&&(!dosage||dosage==="")){activeNames=defEntry.activeNames.slice();dosage=defEntry.dosage||dosage;unrecognized=false;}
+    var loB2=norm(brand||cleanBrand).replace(/\s+/g," ").trim();
+    var fixedCombo=null;
+    Object.keys(COMBO_FIXED_DOSES).forEach(function(k){if(loB2.includes(k))fixedCombo=COMBO_FIXED_DOSES[k];});
+    if(fixedCombo&&fixedCombo.ratio){var singleDose=extractDosage(rawOrig);if(singleDose&&activeNames.length>=2){var inferred=fixedCombo.ratio(singleDose);if(inferred){activeNames=fixedCombo.pas.map(function(pa,idx){return pa+" "+inferred[idx];});dosage=inferred[0]+"/"+inferred[1];unrecognized=false;}}}
+  }
+  var blo0=norm(brand||"")+" "+norm((activeNames||[]).join(" "));
+  if(FASTING_MEDS.some(function(n){return blo0.includes(n);})){isFasting=true;var anyD=Object.values(doses).some(function(v){return v!="";});if(anyD&&!doses.fasting){var qf=doses.morning||doses.noon||doses.night||doses.sleep||doses.afternoon||"1";doses=emptyDoses();doses.fasting=qf;}}
+  var hasExplicitQty=doseQty!==null||dash!==null||slot.found||freq!==null;
+  if(!Object.values(doses).some(function(v){return v!="";})){
+    if(hasExplicitQty&&!ec.condition&&!siPrecisa){
+      var dq=doseQty||1,blo=norm(brand)+" "+norm(activeNames.join(" "));
+      if(isFasting){doses.fasting=fmtQty(dq);}
+      else if(NIGHT_MEDS.some(function(n){return blo.includes(n);})){doses.night=fmtQty(dq);}
+      else if(SLEEP_MEDS.some(function(n){return blo.includes(n);})){doses.sleep=fmtQty(dq);}
+      else if(FASTING_MEDS.some(function(n){return blo.includes(n);})){doses.fasting=fmtQty(dq);}
+      else{doses.morning=fmtQty(dq);}
+    }
+  }
+  var autoTip="";
+  if(db&&db.tips&&db.tips[0]&&!tipContradictsText(db.tips[0],rawOrig))autoTip=db.tips[0];
+  var blo2=norm(brand)+" "+norm(activeNames.join(" "));
+  if(NIGHT_MEDS.some(function(n){return blo2.includes(n);}))autoTip="Tomar por la noche";
+  if(FASTING_MEDS.some(function(n){return blo2.includes(n);}))autoTip="Tomar en ayunas";
+  if(type==="injection")autoTip="Rotar zonas de inyeccion";
+  var customParts=[];
+  if(anticoagNota)customParts.push(anticoagNota);
+  if(condNotes.length)customParts=customParts.concat(condNotes);
+  if(cronicaNote)customParts.push(cronicaNote);
+  if(ec.condition)customParts.push(ec.condition);
+  if(ed.durationNote)customParts.push(ed.durationNote);
+  if(longInterval)customParts.push(longInterval);
+  if(dayRestr)customParts.push(dayRestr);
+  if(weekdayNote&&!dayRestr)customParts.push(weekdayNote);
+  if(siPrecisa)customParts.push("Si precisa");
+  if(MULTI_DOSE_BRANDS.indexOf(norm(brand))>-1&&!dosage)customParts.unshift("Confirmar dosis con el paciente");
+  return{brand:brand,activeNames:activeNames,active:activeNamesToString(activeNames),dosage:dosage,type:type,rawText:rawOrig,category:category,via:via,doses:doses,freqLabel:freqLabel,status:status,tip:autoTip,customTip:customParts.join(" / "),suspended:status==="suspend",dbRef:db||null,unrecognized:unrecognized,deglufarmInfo:null,deglufarmLoading:false,deglIncluir:true,cimaResolved:!!db,conflict:false,deglManualText:""};
+}
+
+function parseChangeLine(line){
+  var l=stripMarkdown(line).replace(/\([^)]*\)/g," ").replace(/\s{2,}/g," ").trim();
+  var lo=norm(l);
+  var results=[];
+  var verboCambio=/\b(?:subir|bajar|sube|baja|aumentar|aumenta|disminuir|disminuye|reducir|reduce|incrementar|incrementa)\b/.test(lo);
+  if(verboCambio){
+    var lc=l.replace(/^\s*(?:se\s+)?(?:subir?|bajar?|aumentar?|disminuir?|reducir?|incrementar?)\s+/i,"")
+             .replace(/\bse\s+(?:sube|baja|aumenta|disminuye|reduce|incrementa)\s+(?:a\s+)?/gi,"")
+             .replace(/\s+(?:a|de|hasta)\s+(?=\d)/i," ")
+             .replace(/\b(com|cmp)\b/gi,"comprimido")
+             .replace(/\s{2,}/g," ").trim();
+    var res2=parseSingleMed(lc,"change");
+    if(res2&&res2.brand&&res2.brand.length>1){results.push(res2);return results;}
+  }
+  var sm=l.match(/(?:se\s+)?sustituye\s+(.+?)\s+por\s+(.+?)(?:[.,;]|$)/i);
+  if(!sm)sm=l.match(/sustituir\s+(.+?)\s+por\s+(.+?)(?:[.,;]|$)/i);
+  if(sm){
+    var xS=sm[1].trim(),yS=sm[2].trim();
+    var nk=function(s){return norm(s).replace(/\b\d[\d.,]*\s*(?:mg|mcg|g|ml|ui|%)[^\s]*/gi,"").replace(/\s+/g,"").trim();};
+    if(nk(xS)===nk(yS)){splitDrugList(yS).forEach(function(d){results.push(parseSingleMed(d,"change"));});return results;}
+    splitDrugList(xS).forEach(function(d){results.push(parseSingleMed(d,"suspend"));});
+    splitDrugList(yS).forEach(function(d){results.push(parseSingleMed(d,"new"));});
+    return results;
+  }
+  var sp=l.match(/(?:(?:se\s+)?(?:suspende|suspenden|elimina|eliminan|retira|retiran)|suspension\s+de|suspender)\s+(.+?)(?:\s*[.(]|$)/i);
+  if(sp){extractDrugNames(sp[1]).forEach(function(d){if(d.length>1)results.push(parseSingleMed(d,"suspend"));});return results.length?results:null;}
+  var mt=l.match(/(?:se\s+)?mantiene\s+(?:el\s+)?(?:tratamiento\s+con\s+)?(.+?)(?:[.,;]|$)/i);
+  if(!mt)mt=l.match(/^mantener\s+(.+?)(?:[.,;]|$)/i);
+  if(mt){var res=[];splitDrugList(mt[1]).forEach(function(d){res.push(parseSingleMed(d.trim(),"maintain"));});return res;}
+  var si=l.match(/(?:se\s+)?(?:inicia|inician|iniciar|anade|anaden|pauta|pautan|agrega|agregan|comienza|comienzan)\s+(.+?)(?:[.,;]|$)/i);
+  if(si){splitDrugList(si[1]).forEach(function(d){results.push(parseSingleMed(d,"new"));});return results;}
+  return null;
+}
+function parseOtherLine(line){
+  var l=stripMarkdown(preNorm(line)).replace(/\([^)]*\)/g," ").replace(/\s{2,}/g," ").trim();
+  var mt=l.match(/(?:se\s+)?mantiene\s+(?:el\s+)?(?:tratamiento\s+con\s+)?(.+?)(?:[.,;]|$)/i);
+  if(!mt)mt=l.match(/mantener\s+(?:el\s+)?(?:tratamiento\s+con\s+)?(.+?)(?:[.,;]|$)/i);
+  if(mt){var res=[];splitDrugList(mt[1]).forEach(function(d){res.push(parseSingleMed(d.trim(),"maintain"));});return res;}
+  var cm=l.match(/continuar\s+(?:con\s+)?(.+?)(?:[.,;]|$)/i);
+  if(cm)return[parseSingleMed(cm[1].trim(),"maintain")];
+  return null;
+}
+function parseDirectCommand(line){
+  var l=stripMarkdown(preNorm(line)).replace(/\([^)]*\)/g," ").replace(/\s{2,}/g," ").trim();
+  var sp=l.match(/^(?:suspender|suspension\s+de)\s+(.+?)(?:[.,;]|$)/i);
+  if(sp){var r1=[];extractDrugNames(sp[1]).forEach(function(d){if(d.length>1)r1.push(parseSingleMed(d,"suspend"));});return r1.length?r1:null;}
+  var mt=l.match(/^mantener\s+(.+?)(?:[.,;]|$)/i);
+  if(mt){var r2=[];splitDrugList(mt[1]).forEach(function(d){r2.push(parseSingleMed(d,"maintain"));});return r2.length?r2:null;}
+  var ini=l.match(/^iniciar\s+(.+?)(?:[.,;]|$)/i);
+  if(ini){var r3=[];splitDrugList(ini[1]).forEach(function(d){r3.push(parseSingleMed(d,"new"));});return r3.length?r3:null;}
+  return null;
+}
+
+function deduplicateMeds(active,susp){
+  var all=active.concat(susp.map(function(m){return Object.assign({},m,{status:"suspend"});}));
+  // Detectar PAs que aparecen en más de un status ANTES de deduplicar
+  var paStatusMap=new Map();
+  all.forEach(function(m){
+    (m.activeNames||[]).forEach(function(an){
+      var k=paKey(an);if(k.length<3)return;
+      if(!paStatusMap.has(k))paStatusMap.set(k,new Set());
+      paStatusMap.get(k).add(m.status);
+    });
+  });
+  var paConflict=new Set();
+  paStatusMap.forEach(function(statuses,k){if(statuses.size>1)paConflict.add(k);});
+
+  var seen=new Map();
+  all.forEach(function(m){
+    var key=brandKey(m.brand)+(m.dosage?"_"+m.dosage.replace(/\s+/g,""):"");
+    var ex=seen.get(key);
+    if(!ex){seen.set(key,m);}
+    else{
+      var mP=STATUS_PRIO[m.status],exP=STATUS_PRIO[ex.status];
+      var isConflict=(m.status==="suspend")!==(ex.status==="suspend");
+      if(m.status==="suspend"&&ex.status!=="suspend"){seen.set(key,Object.assign({},m,{conflict:true}));}
+      else if(ex.status==="suspend"&&m.status!=="suspend"){seen.set(key,Object.assign({},ex,{conflict:true}));}
+      else if(mP<exP){seen.set(key,Object.assign({},m,{conflict:isConflict}));}
+      else if(mP!==exP){seen.set(key,Object.assign({},ex,{conflict:isConflict}));}
+    }
+  });
+  // Propagar conflicto de PA a los meds deduplicados
+  seen.forEach(function(m,key){
+    var hasConflict=(m.activeNames||[]).some(function(an){return paConflict.has(paKey(an));});
+    if(hasConflict)seen.set(key,Object.assign({},m,{paStatusConflict:true}));
+  });
+  var suspBrandKeys=new Set();
+  Array.from(seen.values()).forEach(function(m){if(m.status==="suspend"){suspBrandKeys.add(brandKey(m.brand)+(m.dosage?"_"+m.dosage.replace(/\s+/g,""):""));}});
+  if(suspBrandKeys.size>0){seen.forEach(function(m,key){if(m.status!=="suspend"){if(suspBrandKeys.has(key))seen.set(key,Object.assign({},m,{status:"suspend",conflict:true}));}});}
+  var result=Array.from(seen.values());
+  return{active:result.filter(function(m){return m.status!=="suspend";}),susp:result.filter(function(m){return m.status==="suspend";})};
+}
+
+function parseImportBlock(text){
+  var active=[],susp=[],mode="maintain",sectionMode="normal";
+  text.split(/\n/).map(function(l){return l.replace(/\r/,"").trim();}).filter(Boolean).forEach(function(line){
+    line=stripMarkdown(line);
+    var cleanedLine=cleanLinePrefix(line);
+    if(!cleanedLine||cleanedLine.length<2)return;
+
+    // ── Detección temprana de combos con dosis N/N o N/N/N ──────────────────
+    // Regex simple: nombre (palabras), espacio, N/N/N o N/N, espacio opcional, unidad
+    var _cl=cleanedLine;
+    var _cm=_cl.match(/^((?:[A-Za-z\xC0-\xFF]+\s*){1,5})\s*(\d+[.,]?\d*)\/(\d+[.,]?\d*)(?:\/(\d+[.,]?\d*))?\s*(mg|mcg|g|ui)?\b/i);
+    if(_cm&&_cm[1]&&_cm[2]&&_cm[3]){
+      try{
+      var ceB=_cm[1].trim();
+      var ceD1=_cm[2].replace(",","."),ceD2=_cm[3].replace(",","."),ceD3=_cm[4]?_cm[4].replace(",","."):null,ceU=_cm[5].toLowerCase();
+      var ceDosage=ceD3?ceD1+"/"+ceD2+"/"+ceD3+ceU:ceD1+"/"+ceD2+ceU;
+      var ceDB=matchDB(ceB);
+      var cePAs=ceDB?ceDB.activeNames.slice():(lookupBrandToPA(ceB)||resolveActiveNames(ceB));
+      var ceBrand=ceDB?(ceDB.brand.charAt(0).toUpperCase()+ceDB.brand.slice(1)):(ceB.charAt(0).toUpperCase()+ceB.slice(1).toLowerCase());
+      var ceParts=ceD3?[ceD1,ceD2,ceD3]:[ceD1,ceD2];
+      var ceANs=cePAs.map(function(pa,idx){
+        if(!pa||typeof pa!=="string")return"DESCONOCIDO";
+        var paC=pa.replace(/\s*\d[\d.,]*\s*(?:mg|mcg|g|ml|ui|%)[^\s]*/gi,"").trim();
+        return paC+(ceParts[idx]!==undefined?" "+ceParts[idx]+ceU:"");
+      });
+      var cePosM2=_cl.match(/(\d+[.,]?\d*)\s+cada\s+(\d+)\s*([hHdDsSmMaA])/i);
+      var ceDoses=emptyDoses(),ceLong="";
+      if(cePosM2){var cePQ=parseFloat(cePosM2[1].replace(",","."));var cePN=parseInt(cePosM2[2]);var ceUT=TIEMPO_HCE[cePosM2[3]]||"h";var ceLargo=ceUT==="semanas"||ceUT==="meses"||(ceUT==="dias"&&cePN>7)||(ceUT==="h"&&cePN>=48);if(ceLargo){ceLong=ceUT==="semanas"?(cePN===1?"Administracion semanal":cePN===2?"Administracion quincenal":cePN===4?"Administracion mensual":"Administrar cada "+cePN+" semanas"):"Administrar cada "+cePN+" "+ceUT;}else{var ceFH=ceUT==="h"?cePN:cePN*24;ceDoses=distributeDoses(cePQ,ceFH,norm(ceBrand));}}
+      else{ceDoses.morning="1";}
+      var ceMed=mk({brand:ceBrand,activeNames:ceANs,active:activeNamesToString(ceANs),dosage:ceDosage,type:ceDB?ceDB.type:"tablet",rawText:_cl,category:ceDB?ceDB.category:"Oral",via:defaultVia(ceDB?ceDB.category:"Oral",ceDB?ceDB.type:"tablet"),doses:ceDoses,freqLabel:"",status:mode,tip:"",customTip:ceLong,suspended:mode==="suspend",dbRef:ceDB||null,unrecognized:false,deglufarmInfo:null,deglufarmLoading:false,deglIncluir:true,cimaResolved:true,conflict:false,deglManualText:""});
+      if(mode==="suspend")susp.push(ceMed);else active.push(ceMed);
+      return;
+      }catch(e){console.error("COMBO ERR:",e.message);}
+    }
+    // ────────────────────────────────────────────────────────────────────────
+    var hceResult=procesarHCE(cleanedLine,mode);
+    if(hceResult!==null){
+      hceResult.forEach(function(p){if(!p||!p.brand||p.brand.length<2)return;if(p.status==="suspend")susp.push(p);else active.push(p);});
+      return;
+    }
+    var sublines=cleanedLine.split(/\s+-\s+/);
+    if(sublines.length>1){
+      sublines.forEach(function(sub){
+        sub=sub.trim().replace(/^[,\s]+|[,\s]+$/g,"").trim();
+        if(!sub||sub.length<2)return;
+        var lyrica=tryParseLyricaMultiDose(sub,mode);if(lyrica){lyrica.forEach(function(p){active.push(p);});return;}
+        var fent=tryParseFentaniloMulti(sub,mode);if(fent){fent.forEach(function(p){if(p.status==="suspend")susp.push(p);else active.push(p);});return;}
+        var entries2=[parseSingleMed(sub,mode)];
+        entries2.forEach(function(p){
+          if(!p.brand||p.brand.length<3)return;if(!looksLikeDrug(p.brand))return;if(!isRealDrug(p.brand))return;
+          var blo=norm(p.brand).trim();
+          if(/^(ajustar|segun|mantener|iniciar|suspender|evitar|no\s+usar|administrar|vigilar|controlar|revisar|continuar|reducir|aumentar|cambiar|glucemias)/.test(blo))return;
+          if(p.status==="suspend")susp.push(p);else active.push(p);
+        });
+      });
+      return;
+    }
+    var ih=cleanedLine.match(/^(anadir|agregar|nuevos|iniciar|suspender|modificar|cambiar|mantener\s+previo|mantener\s+anterior|mantener\s+igual|resto\s+tratamiento)\s*[:\-\u2013]\s*(.+)/i);
+    if(ih){var hdr=norm(ih[1]).trim(),rest=ih[2].trim();if(/anadir|agregar|nuevos|iniciar/.test(hdr)){sectionMode="new";mode="new";}else if(/suspender/.test(hdr)){sectionMode="suspend";mode="suspend";}else if(/modificar|cambiar/.test(hdr)){sectionMode="changes";mode="change";}else if(/mantener|resto/.test(hdr)){sectionMode="maintain";mode="maintain";}if(rest.length>2){cleanedLine=rest;}else return;}
+    var sec=detectSection(cleanedLine);
+    if(sec){if(sec==="new_section"){sectionMode="new";mode="new";}else if(sec==="changes_section"){sectionMode="changes";mode="change";}else if(sec==="suspend_section"){sectionMode="suspend";mode="suspend";}else if(sec==="maintain_section"){sectionMode="maintain";mode="maintain";}else if(sec==="other_section"){sectionMode="other";mode="maintain";}return;}
+    if(isNoise(cleanedLine))return;
+    if(isClinicInstruction(cleanedLine))return;
+    var lyricaM=tryParseLyricaMultiDose(cleanedLine,mode);if(lyricaM){lyricaM.forEach(function(p){active.push(p);});return;}
+    var fentM=tryParseFentaniloMulti(cleanedLine,mode);if(fentM){fentM.forEach(function(p){if(p.status==="suspend")susp.push(p);else active.push(p);});return;}
+    var entries=[];
+    if(hasActionVerb(cleanedLine)){var direct=parseDirectCommand(cleanedLine);if(direct){entries=direct;}else{var r=parseChangeLine(cleanedLine)||parseOtherLine(cleanedLine);entries=(r&&r.length>0)?r:[parseSingleMed(cleanedLine,mode)];}}
+    else if(sectionMode==="changes"){var lyricaC=tryParseLyricaMultiDose(cleanedLine,mode);if(lyricaC){lyricaC.forEach(function(p){active.push(p);});return;}var r2=parseChangeLine(cleanedLine);entries=r2||[parseSingleMed(cleanedLine,mode)];}
+    else if(sectionMode==="other"){var r3=parseOtherLine(cleanedLine);entries=r3||[parseSingleMed(cleanedLine,mode)];}
+    else if(sectionMode==="suspend"){entries=[parseSingleMed(cleanedLine,"suspend")];}
+    else{entries=[parseSingleMed(cleanedLine,mode)];}
+    entries.forEach(function(p){
+      if(!p.brand||p.brand.length<3)return;if(!looksLikeDrug(p.brand))return;if(!isRealDrug(p.brand))return;
+      var blo=norm(p.brand).trim();
+      if(/^(ajustar|segun|mantener|iniciar|suspender|evitar|no\s+usar|administrar|vigilar|controlar|revisar|continuar|reducir|aumentar|cambiar|glucemias)/.test(blo))return;
+      if(p.status==="suspend")susp.push(p);else active.push(p);
+    });
+  });
+  var dd=deduplicateMeds(active,susp);return{active:dd.active,susp:dd.susp};
+}
+
+function buildFinalMedsForMap(medsList){var seen=new Map();medsList.forEach(function(m){var key=brandKey(m.brand)+(m.dosage?"_"+m.dosage.replace(/\s+/g,""):"");var ex=seen.get(key);if(!ex){seen.set(key,m);}else if(m.status==="suspend"&&ex.status!=="suspend"){seen.set(key,m);}});return Array.from(seen.values()).sort(function(a,b){return STATUS_DISP[a.status]-STATUS_DISP[b.status];});}
+
+var UID=700;function mk(p){return Object.assign({},p,{uid:UID++});}
+
+function parseCIMAResult(med,resultados,query){
+  var pas=(med.principiosActivos||[]).map(function(p){
+    // Limpiar dosis del nombre del PA — CIMA las incluye a veces
+    var nombre=p.nombre.toUpperCase().replace(/\b\d[\d.,]*\s*(?:mg|mcg|g|ml|ui|%)[^\s]*/gi,"").replace(/\s{2,}/g," ").trim();
+    return nombre;
+  }).filter(function(p){return p.length>1;});
+  var pasC=pas.map(function(p){return p.charAt(0)+p.slice(1).toLowerCase();}).join(" / ");
+  // Extraer dosis combinada de CIMA si la hay
+  var dosageCIMA="";
+  if(med.principiosActivos&&med.principiosActivos.length>1){
+    var doses=med.principiosActivos.map(function(p){var m=(p.dosis||"").match(/(\d[\d.,]*)\s*(mg|mcg|g|ml|ui|%)/i);return m?m[1]:null;}).filter(Boolean);
+    if(doses.length===med.principiosActivos.length){
+      var unit=(med.principiosActivos[0].dosis||"").match(/\d[\d.,]*\s*(mg|mcg|g|ml|ui|%)/i);
+      dosageCIMA=doses.join("/")+((unit&&unit[1])||"mg");
+    }
+  }
+  var ff=((med.formaFarmaceutica&&med.formaFarmaceutica.nombre)||"").toLowerCase();
+  var viaStr=(med.viasAdministracion||[]).map(function(v){return(v.nombre||"").toLowerCase();}).join(" ");
+  var type="tablet";
+  if(/inhal|pulv|aerosol/.test(ff+viaStr))type="inhaler";
+  else if(/parenter|inyect|intravenosa|subcutane/.test(viaStr))type="injection";
+  else if(/parche|transderm/.test(ff+viaStr))type="patch";
+  else if(/gel|crema|pomada/.test(viaStr))type="topical";
+  else if(/jarabe|suspension oral/.test(ff))type="syrup";
+  else if(/sobre|granulado/.test(ff))type="sachet";
+  else if(/capsula/.test(ff))type="capsule";
+  var category=type==="inhaler"?"Inhalado":type==="injection"?"Inyectable":(type==="topical"||type==="patch")?"Topico":"Oral";
+  var via="";if(type==="injection")via="Subcutanea (SC)";else if(type==="inhaler")via="Via inhalatoria";else if(type==="patch")via="Via transdermica";
+  return{brand:med.nombre||query,activeNames:pas.length?pas:[query.toUpperCase()],active:pasC||query,type:type,category:category,dosage:dosageCIMA,via:via,multiplePresent:resultados.length>1};
+}
+function resolveWithClaude(query){
+  var prompt='Farmaceutico espanol. Para "'+query+'", responde SOLO JSON: {"activeNames":["PA"],"type":"tablet","category":"Oral","via":"","multiplePresent":false}';
+  return fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:250,messages:[{role:"user",content:prompt}]})})
+  .then(function(res){return res.json();})
+  .then(function(data){var text=(data.content&&data.content.find(function(b){return b.type==="text";})||{}).text||"";text=text.replace(/```json|```/g,"").trim();try{var p=JSON.parse(text);var pas=p.activeNames&&p.activeNames.length?p.activeNames:resolveActiveNames(query);var cat=p.category||(p.type==="inhaler"?"Inhalado":p.type==="injection"?"Inyectable":"Oral");return{brand:query,activeNames:pas,active:pas.map(function(x){return x.charAt(0)+x.slice(1).toLowerCase();}).join(" / "),type:p.type||"tablet",category:cat,dosage:"",via:p.via?p.via.toLowerCase():"",multiplePresent:false};}catch(e){var fb=resolveActiveNames(query);return{brand:query,activeNames:fb,active:fb.map(function(x){return x.charAt(0)+x.slice(1).toLowerCase();}).join(" / "),type:"tablet",category:"Oral",dosage:"",via:"",multiplePresent:false};}})
+  .catch(function(){var fb=resolveActiveNames(query);return{brand:query,activeNames:fb,active:fb.map(function(x){return x.charAt(0)+x.slice(1).toLowerCase();}).join(" / "),type:"tablet",category:"Oral",dosage:"",via:"",multiplePresent:false};});
+}
+function searchCIMA(query){
+  return fetch("https://cima.aemps.es/cima/rest/medicamentos?nombre="+encodeURIComponent(query.trim())+"&registros=5")
+  .then(function(res){if(!res.ok)throw new Error("cors");return res.json();})
+  .then(function(data){if(data&&data.resultados&&data.resultados[0])return parseCIMAResult(data.resultados[0],data.resultados,query);throw new Error("empty");})
+  .catch(function(){return fetch("https://cima.aemps.es/cima/rest/medicamentos?practiv="+encodeURIComponent(query.replace(/\b\d[\d.,]*\s*(?:mg|mcg|g|ml|ui|%)[^\s]*/gi,"").trim())+"&registros=5").then(function(res){if(!res.ok)throw new Error();return res.json();}).then(function(data){if(!data||!data.resultados||!data.resultados[0])throw new Error();var rs=data.resultados,loQ=norm(query).replace(/\b\d[\d.,]*\s*(?:mg|mcg|g|ml|ui|%)[^\s]*/gi,"").replace(/\s+/g,"").trim();var best=rs[0],bs=999;rs.forEach(function(r){var d=levenshtein(loQ.slice(0,12),norm(r.nombre||"").replace(/\s+/g,"").slice(0,12));if(d<bs){bs=d;best=r;}});return parseCIMAResult(best,rs,query);}).catch(function(){return resolveWithClaude(query);});});
+}
+
+function buildHTML(meds,pName,pharmacist,doctor,hospital,disfagia,inclDisfagia,servicio,alergias){
+  var today=new Date().toLocaleDateString("es-ES",{day:"2-digit",month:"long",year:"numeric"});
+  var hosp=hospital||{name:"Hospital de Guadalajara",dept:"Serv. Farmacia. Hoja de Tratamiento Domiciliario",tel:"Tel: 949 209 221"};
+  var showDegl=disfagia&&inclDisfagia;
+  var allMeds=buildFinalMedsForMap(meds);
+  var slotHdr="";SLOTS.forEach(function(s){slotHdr+='<th style="padding:6px 4px;text-align:center;border-left:1px solid rgba(255,255,255,0.2);min-width:55px;font-size:10px;">'+s.emoji+'<br/><b>'+s.label+'</b><br/><span style="font-size:8px;">'+s.sub+'</span></th>';});
+  var deglHdr=showDegl?'<th style="padding:6px 8px;text-align:center;border-left:1px solid rgba(255,255,255,0.2);min-width:130px;">Disfagia</th>':"";
+  var rows="";
+  allMeds.forEach(function(m,mi){
+    var st=STATUS_META[m.status]||STATUS_META.maintain,col=BOX_COL[m.type]||"#1a56db";
+    var isSusp=m.status==="suspend",rowBg=isSusp?"#fef2f2":mi%2===0?"white":"#f8faff";
+    var suspStyle=isSusp?'background:'+rowBg+';border-bottom:2px solid #fecaca;background-image:linear-gradient(transparent calc(50% - 1.5px),#dc2626 calc(50% - 1.5px),#dc2626 calc(50% + 1.5px),transparent calc(50% + 1.5px));':'background:'+rowBg+';border-bottom:1px solid #e2e8f0;';
+    var cells="";
+    SLOTS.forEach(function(sl){if(isSusp){cells+='<td style="border-left:1px solid #fecaca;background:#fef2f2;"></td>';}else{var v=m.doses[sl.key]||"";cells+=v?'<td style="padding:5px 3px;text-align:center;border-left:1px solid #f0f4ff;vertical-align:middle;"><b style="font-size:14px;color:'+col+'">'+medIconStr(m.type,m.category,16)+' '+v+'</b></td>':'<td style="padding:5px 3px;text-align:center;border-left:1px solid #f0f4ff;color:#e2e8f0;">-</td>';}});
+    var actsHtml=(m.activeNames||[]).map(function(n){var dM=n.match(/^(.+?)\s+(\d[\d.,]*\s*(?:mg|mcg|g|ml|ui|%)[^\s]*)$/i);var paN=dM?(dM[1].charAt(0)+dM[1].slice(1).toLowerCase()):(n.charAt(0)+n.slice(1).toLowerCase());var paD=dM?(" "+dM[2]):"";return'<div style="font-size:10px;color:#64748b;font-style:italic;'+(isSusp?'text-decoration:line-through;':'')+'">'+paN+paD+'</div>';}).join('');
+    var isNonOral=NON_ORAL.includes(m.category);var viaLine=isNonOral&&m.via?'<div style="font-size:10px;color:#0891b2;font-weight:600;">'+m.via+'</div>':"";
+    var tipParts=[];if(m.tip)tipParts.push('&#9888;&#65039; '+m.tip);if(m.customTip)tipParts.push(m.customTip);if(m.freqLabel)tipParts.push('&#128257; '+m.freqLabel);
+    var tip=isSusp?'<b style="color:#dc2626">&#9940; SUSPENDIDO</b>':tipParts.join('<br/>');
+    var dgCell="";
+    if(showDegl){
+      if(!m.deglIncluir){dgCell='<td style="padding:5px 7px;border-left:1px solid #f0f4ff;background:#f8faff;"></td>';}
+      else{
+        var info=m.deglufarmInfo;var manualText=m.deglManualText&&m.deglManualText.trim();var dgContent="";var dgBg="#f8faff";
+        if(manualText){dgContent='<div style="font-weight:800;color:#065f46;font-size:9px;">APTO</div><div style="font-size:9px;margin-top:2px;line-height:1.4;">'+manualText+'</div>';dgBg="#d1fae5";}
+        else if(info&&(info.tipo==="noOral"||info.niosh||info.sinInfo||info.apto===false)){dgContent='';dgBg="#f8faff";}
+        else if(info&&info.apto===true&&info.texto){dgContent='<div style="font-weight:800;color:#065f46;font-size:9px;">APTO</div><div style="font-size:9px;margin-top:2px;line-height:1.4;">'+info.texto+'</div>';dgBg="#d1fae5";}
+        else{dgContent='';dgBg="#f8faff";}
+        dgCell='<td style="padding:5px 7px;border-left:1px solid #f0f4ff;font-size:9px;vertical-align:middle;background:'+dgBg+';">'+dgContent+'</td>';
+      }
+    }
+    rows+='<tr style="'+suspStyle+'"><td style="padding:8px;border-left:6px solid '+st.border+';vertical-align:middle;"><div style="margin-bottom:2px;"><span style="font-size:12px;font-weight:900;color:'+st.color+';">'+st.symbol+'</span><span style="font-size:7px;background:'+st.bg+';color:'+st.color+';border-radius:3px;padding:1px 5px;font-weight:900;margin-left:3px;">'+st.label+'</span></div><div style="font-weight:900;font-size:14px;text-transform:uppercase;'+(isSusp?'text-decoration:line-through;color:#9ca3af;':'')+'">'+m.brand+(m.dosage?' <span style="color:'+col+';font-size:12px;">'+m.dosage+'</span>':'')+'</div>'+actsHtml+viaLine+'</td>'+cells+'<td style="padding:5px 7px;font-size:10px;color:#475569;border-left:1px solid #f0f4ff;">'+tip+'</td>'+dgCell+'</tr>';
+  });
+  var logoTag='<img src="'+LOGO_URL+'" alt="Logo" style="height:48px;width:auto;object-fit:contain;margin-right:12px;"/>';
+  var foot=showDegl?'<p style="margin-top:8px;font-size:9px;color:#92400e;">Evaluacion disfagia basada en fuentes verificadas.</p>':"";
+  var disclaimer='<div style="margin-top:16px;border-top:1px solid #e2e8f0;padding-top:10px;font-size:10px;color:#475569;font-style:italic;">Esta hoja le ayuda a recordar como tomar sus medicamentos. Si tiene alguna duda, consulte a su medico o farmaceutico.</div>';
+  return'<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"/><title>Mapa Medicacion'+(pName?' - '+pName:'')+'</title><style>body{font-family:Arial,sans-serif;background:white;padding:14px;font-size:11px;}@page{size:A4 landscape;margin:10mm;}@media print{body{padding:0;}tr,td{-webkit-print-color-adjust:exact;print-color-adjust:exact;}thead{display:table-header-group;}tr{page-break-inside:avoid;}}</style></head><body><div style="display:flex;justify-content:space-between;align-items:center;border-bottom:3px solid #1a56db;padding-bottom:8px;margin-bottom:10px;"><div style="display:flex;align-items:center;">'+logoTag+'<div><div style="font-size:16px;font-weight:900;color:#1e40af;">Mapa Horario de Medicacion'+(showDegl?' - Protocolo Disfagia':'')+'</div><div style="font-weight:700;color:#1e40af;">'+hosp.name+'</div><div style="color:#475569;">'+hosp.dept+' - '+hosp.tel+'</div></div></div><div style="text-align:right;color:#475569;">'+(pName?'<div style="font-weight:700;font-size:13px;color:#1e293b;">Paciente: '+pName+'</div>':'')+(servicio?'<div>Servicio: <b>'+servicio+'</b></div>':'')+(doctor?'<div>Medico: <b>'+doctor+'</b></div>':'')+(pharmacist?'<div>Farmaceutico/a: <b>'+pharmacist+'</b></div>':'')+(alergias?'<div style="margin-top:4px;background:#fee2e2;border:2px solid #dc2626;border-radius:5px;padding:3px 8px;color:#991b1b;font-weight:900;font-size:11px;text-transform:uppercase;">&#9888; ALERGIAS: '+alergias.toUpperCase()+'</div>':'')+'<div>'+today+'</div></div></div><table style="width:100%;border-collapse:collapse;font-size:10px;"><thead><tr style="background:#1a56db;color:white;"><th style="padding:7px 8px;text-align:left;width:22%;">Medicamento</th>'+slotHdr+'<th style="padding:7px 6px;text-align:left;width:13%;border-left:1px solid rgba(255,255,255,0.2);">Instrucciones</th>'+deglHdr+'</tr></thead><tbody>'+rows+'</tbody></table><script>window.onload=function(){window.print();};<\/script>'+foot+disclaimer+'</body></html>';
+}
+function downloadHTML(meds,pName,pharmacist,doctor,hospital,disfagia,inclDisfagia,servicio,alergias){var html=buildHTML(meds,pName,pharmacist,doctor,hospital,disfagia,inclDisfagia,servicio,alergias);var filename="mapa_medicacion"+(pName?"_"+pName.replace(/\s+/g,"_"):"")+".html";var blob=new Blob([html],{type:"text/html;charset=utf-8"});var url=URL.createObjectURL(blob);var a=document.createElement("a");a.href=url;a.download=filename;document.body.appendChild(a);a.click();document.body.removeChild(a);setTimeout(function(){URL.revokeObjectURL(url);},1000);}
+
+var INP={width:"100%",padding:"7px 9px",borderRadius:8,border:"1.5px solid #dbeafe",fontSize:12,boxSizing:"border-box",display:"block"};
+var LBL={display:"block",fontSize:11,fontWeight:600,color:"#475569",marginBottom:3};
+
+function AddManualModal(props){
+  var onAdd=props.onAdd,onClose=props.onClose;
+  var [brand,setBrand]=React.useState("");var [activeInput,setActiveInput]=React.useState("");var [type,setType]=React.useState("tablet");var [category,setCategory]=React.useState("Oral");var [dosage,setDosage]=React.useState("");var [loading,setLoading]=React.useState(false);
+  return React.createElement("div",{style:{position:"fixed",inset:0,background:"rgba(0,0,0,0.5)",zIndex:200,display:"flex",alignItems:"center",justifyContent:"center"}},
+    React.createElement("div",{style:{background:"white",borderRadius:14,padding:22,width:340,boxShadow:"0 12px 40px rgba(0,0,0,0.3)"}},
+      React.createElement("div",{style:{fontWeight:800,color:"#1e40af",fontSize:14,marginBottom:14}},"Añadir medicamento"),
+      React.createElement("label",{style:LBL},"Nombre comercial *"),
+      React.createElement("div",{style:{display:"flex",gap:6,marginBottom:10}},
+        React.createElement("input",{value:brand,onChange:function(e){setBrand(e.target.value);},placeholder:"Ej: Nitrofix",style:Object.assign({},INP,{flex:1,marginBottom:0})}),
+        React.createElement("button",{onClick:function(){if(!brand.trim())return;setLoading(true);searchCIMA(brand).then(function(r){if(r){setActiveInput(r.active);setType(r.type);setCategory(r.category||"Oral");}setLoading(false);});},disabled:loading,style:{padding:"7px 10px",background:"#1a56db",color:"white",border:"none",borderRadius:8,fontWeight:700,cursor:"pointer",fontSize:10}},loading?"...":"CIMA")
+      ),
+
+      React.createElement("label",{style:LBL},"Principio(s) activo(s)"),
+      React.createElement("input",{value:activeInput,onChange:function(e){setActiveInput(e.target.value);},style:Object.assign({},INP,{marginBottom:10})}),
+      React.createElement("label",{style:LBL},"Dosis unitaria"),
+      React.createElement("input",{value:dosage,onChange:function(e){setDosage(e.target.value);},style:Object.assign({},INP,{marginBottom:10})}),
+      React.createElement("div",{style:{display:"flex",gap:8,marginBottom:14}},
+        React.createElement("div",{style:{flex:1}},React.createElement("label",{style:LBL},"Forma"),React.createElement("select",{value:type,onChange:function(e){setType(e.target.value);},style:INP},ALL_TYPES.map(function(k){return React.createElement("option",{key:k,value:k},getEmoji(k)+" "+TYPE_ES[k]);}))),
+        React.createElement("div",{style:{flex:1}},React.createElement("label",{style:LBL},"Via"),React.createElement("select",{value:category,onChange:function(e){setCategory(e.target.value);},style:INP},["Oral","Inhalado","Inyectable","Topico","Otro"].map(function(c){return React.createElement("option",{key:c},c);})))
+      ),
+      React.createElement("div",{style:{display:"flex",gap:8}},
+        React.createElement("button",{onClick:onClose,style:{flex:1,padding:"8px",borderRadius:8,border:"1.5px solid #e2e8f0",background:"white",color:"#64748b",fontWeight:700,cursor:"pointer"}},"Cancelar"),
+        React.createElement("button",{onClick:function(){if(!brand.trim())return;var v=defaultVia(category,type);var an=activeInput.trim()?activeInput.trim().split(/\s*\/\s*/).map(function(p){return p.trim().toUpperCase();}):[brand.trim().toUpperCase()];onAdd({brand:brand.trim(),activeNames:an,active:activeInput.trim()||brand.trim(),dosage:dosage,type:type,category:category,via:v,doses:emptyDoses(),freqLabel:"",status:"maintain",tip:"",customTip:"",suspended:false,dbRef:null,deglufarmInfo:null,deglufarmLoading:false,deglIncluir:true,cimaResolved:true,conflict:false,unrecognized:false,deglManualText:""});onClose();},style:{flex:1,padding:"8px",borderRadius:8,border:"none",background:"#1a56db",color:"white",fontWeight:800,cursor:"pointer"}},"Añadir")
+      )
+    )
+  );
+}
+
+function DeglufarmCell(props){
+  var m=props.m;var info=m.deglufarmInfo;var isNonOral=isNonOralType(m.type);
+  if(m.deglManualText&&m.deglManualText.trim()){return React.createElement("div",{style:{background:"#d1fae5",border:"1px solid #a7f3d0",borderRadius:7,padding:"5px 7px"}},React.createElement("div",{style:{fontWeight:800,fontSize:10,color:"#065f46",marginBottom:2}},"\u2705 APTO \u2014 Deglufarm (manual)"),React.createElement("div",{style:{fontSize:10,color:"#374151",lineHeight:1.4}},m.deglManualText.trim()),React.createElement("div",{style:{fontSize:8,color:"#9ca3af",marginTop:2,fontStyle:"italic"}},"Fuente: Deglufarm (manual)"));}
+  if(isNonOral){return React.createElement("div",{style:{background:"#d1fae5",border:"1px solid #a7f3d0",borderRadius:7,padding:"5px 7px"}},React.createElement("div",{style:{fontWeight:800,fontSize:10,color:"#065f46"}},"\u2705 No via oral \u2014 no procede"),React.createElement("div",{style:{fontSize:8,color:"#9ca3af",marginTop:2,fontStyle:"italic"}},"Criterio farmaceutico"));}
+  if(m.deglufarmLoading){return React.createElement("div",{style:{textAlign:"center",color:"#94a3b8",fontSize:10,padding:"8px 4px"}},"\uD83D\uDD0D Consultando fuentes...");}
+  if(!info)return React.createElement("div",{style:{textAlign:"center",color:"#94a3b8",fontSize:10,padding:4}},"Sin datos");
+  if(info.niosh){return React.createElement("div",{style:{background:"#fff1f2",border:"2px solid #dc2626",borderRadius:7,padding:"5px 7px"}},React.createElement("div",{style:{fontWeight:900,fontSize:10,color:"#991b1b",marginBottom:2}},"\u2623\uFE0F MEDICAMENTO PELIGROSO"),React.createElement("div",{style:{fontSize:9,color:"#7f1d1d"}},"NIOSH 2024. No manipular sin proteccion (USP 800)."),React.createElement("div",{style:{fontSize:8,color:"#9ca3af",marginTop:3,fontStyle:"italic"}},"Fuente: NIOSH 2024 (CDC)"));}
+  if(info.tipo==="noOral"){return React.createElement("div",{style:{background:"#d1fae5",border:"1px solid #a7f3d0",borderRadius:7,padding:"5px 7px"}},React.createElement("div",{style:{fontWeight:800,fontSize:10,color:"#065f46"}},"\u2705 No via oral \u2014 no procede"));}
+  if(info.sinInfo||info.tipo==="sinInfo"){return React.createElement("div",{style:{background:"#f8fafc",border:"1px solid #e2e8f0",borderRadius:7,padding:"5px 7px"}},React.createElement("div",{style:{fontWeight:700,fontSize:10,color:"#64748b",marginBottom:2}},"\u26A0\uFE0F Sin informacion verificable"),React.createElement("div",{style:{fontSize:9,color:"#64748b"}},"Requiere comprobacion manual."));}
+  var aptoBadge=info.apto===true?"\u2705 APTO":info.apto===false?"\u274C NO APTO":"\u26A0\uFE0F Sin clasificacion";
+  var aptoColor=info.apto===true?"#065f46":info.apto===false?"#991b1b":"#475569";
+  var aptoBg=info.apto===true?"#d1fae5":info.apto===false?"#fee2e2":"#f1f5f9";
+  var aptoBorder=info.apto===true?"#a7f3d0":info.apto===false?"#fecaca":"#e2e8f0";
+  var fuenteLabel=info.esIA?"\uD83E\uDD16 IA. Fuente: "+(info.fuente||"Literatura")+" \u2014 Comprobar":"Fuente: "+(info.fuente||"Desconocida");
+  return React.createElement("div",{style:{background:aptoBg,border:"1px solid "+aptoBorder,borderRadius:7,padding:"5px 7px"}},
+    React.createElement("div",{style:{fontWeight:800,fontSize:10,color:aptoColor,marginBottom:2}},aptoBadge),
+    info.texto&&React.createElement("div",{style:{fontSize:10,color:"#374151",lineHeight:1.4,marginBottom:3}},info.texto),
+    info.alternativas&&React.createElement("div",{style:{fontSize:9,color:"#059669",fontWeight:600,marginBottom:2}},"Alternativa: "+info.alternativas),
+    React.createElement("div",{style:{fontSize:8,color:info.esIA?"#f59e0b":"#9ca3af",marginTop:2,fontStyle:"italic",fontWeight:info.esIA?600:400}},fuenteLabel)
+  );
+}
+
+export default function App(){
+  var [meds,setMeds]=React.useState([]);
+  var [search,setSearch]=React.useState("");
+  var [importTxt,setImportTxt]=React.useState("");
+  var [pName,setPName]=React.useState("");
+  var [pharmacist,setPharmacist]=React.useState("");
+  var [doctor,setDoctor]=React.useState("");
+  var hospital={name:"Hospital de Guadalajara",dept:"Serv. Farmacia. Hoja de Tratamiento Domiciliario",tel:"Tel: 949 209 221"};
+  var [tab,setTab]=React.useState("import");
+  var [showModal,setShowModal]=React.useState(false);
+  var [importMsg,setImportMsg]=React.useState("");
+  var [disfagia,setDisfagia]=React.useState(false);
+  var [inclDisfagia,setInclDisfagia]=React.useState(true);
+  var [servicio,setServicio]=React.useState("");
+  var [alergias,setAlergias]=React.useState("");
+  var deglLoadedRef=React.useRef(new Set());
+  var filtered=search.length>1?DB.filter(function(d){return d.brand.toLowerCase().includes(search.toLowerCase())||d.activeNames.some(function(a){return a.toLowerCase().includes(search.toLowerCase());});}):[];
+
+  React.useEffect(function(){
+    if(!disfagia)return;
+    meds.forEach(function(m){
+      if(m.deglufarmInfo||m.deglufarmLoading||deglLoadedRef.current.has(m.uid))return;
+      if(m.deglManualText&&m.deglManualText.trim()){deglLoadedRef.current.add(m.uid);return;}
+      deglLoadedRef.current.add(m.uid);
+      setMeds(function(p){return p.map(function(x){return x.uid===m.uid?Object.assign({},x,{deglufarmLoading:true}):x;});});
+      evaluarDisfagia(m.brand,m.activeNames,m.dosage,m.type).then(function(res){
+        setMeds(function(p){return p.map(function(x){return x.uid===m.uid?Object.assign({},x,{deglufarmInfo:res,deglufarmLoading:false}):x;});});
+      });
+    });
+  },[disfagia,meds.length]);
+
+  var sortedMeds=React.useMemo(function(){return[].concat(meds).sort(function(a,b){return STATUS_DISP[a.status]-STATUS_DISP[b.status];});},[meds]);
+  var activeDups=React.useMemo(function(){return detectActiveDuplicates(meds);},[meds]);
+  var sameAsSusp=React.useMemo(function(){return detectSameAsSuspended(meds);},[meds]);
+  var equivDups=React.useMemo(function(){var em=new Map();meds.forEach(function(m){if(m.status==="suspend")return;var k=getEquivKey(m.activeNames||[]);if(k===null)return;if(!em.has(k))em.set(k,[]);if(em.get(k).indexOf(m.uid)===-1)em.get(k).push(m.uid);});var d=new Set();em.forEach(function(uids){if(uids.length>1)uids.forEach(function(u){d.add(u);});});return d;},[meds]);
+  // ── NUEVA: PA en varias categorías ──
+  var paVarias=React.useMemo(function(){return detectPAenVariasCategories(meds);},[meds]);
+
+  var addMed=function(p){if(meds.find(function(m){return norm(m.brand)===norm(p.brand)&&m.dosage===p.dosage;}))return;setMeds(function(prev){return[].concat(prev,[mk(p)]);});setSearch("");};
+  var addFromDB=function(db){addMed({brand:db.brand,activeNames:db.activeNames,active:activeNamesToString(db.activeNames),dosage:db.dosage||"",type:db.type,rawText:db.brand+" "+(db.activeNames||[]).join(" "),category:db.category,via:defaultVia(db.category,db.type),doses:emptyDoses(),freqLabel:"",status:"maintain",tip:db.tips[0]||"",customTip:"",suspended:false,dbRef:db,deglufarmInfo:null,deglufarmLoading:false,deglIncluir:true,cimaResolved:true,conflict:false,unrecognized:false,deglManualText:""});};
+
+  var doImport=function(){
+    var parsed=parseImportBlock(importTxt);
+    var allParsed=[].concat(parsed.active,parsed.susp.map(function(s){return Object.assign({},s,{status:"suspend"});}));
+    var added=0,updated=0,newMeds=[];
+    setMeds(function(p){var result=[].concat(p);allParsed.forEach(function(np){var key=brandKey(np.brand)+(np.dosage?"_"+np.dosage.replace(/\s+/g,""):"");var idx=result.findIndex(function(x){return (brandKey(x.brand)+(x.dosage?"_"+x.dosage.replace(/\s+/g,""):""))===key;});if(idx>=0){result[idx]=Object.assign({},result[idx],np,{uid:result[idx].uid});updated++;}else{var m=mk(np);result.push(m);newMeds.push(m);added++;}});return result;});
+    setImportMsg("Añadidos: "+added+(updated>0?", actualizados: "+updated:"")+" · Consultando CIMA...");
+    if(newMeds.length>0){
+      Promise.all(newMeds.map(function(m){return searchCIMA(m.brand).then(function(r){setMeds(function(p){return p.map(function(x){if(x.uid!==m.uid)return x;if(!r)return Object.assign({},x,{cimaResolved:true});var nct=x.customTip;if(r.multiplePresent&&!x.dosage)nct=(nct?nct+" / ":"")+"Confirmar dosis";return Object.assign({},x,{activeNames:r.activeNames&&r.activeNames.length?r.activeNames:x.activeNames,active:r.active||x.active,type:x.type||r.type,category:x.category||r.category,via:x.via||r.via,customTip:nct,cimaResolved:true,unrecognized:false});});});}).catch(function(){setMeds(function(p){return p.map(function(x){return x.uid===m.uid?Object.assign({},x,{cimaResolved:true}):x;});});});}))
+      .then(function(){setImportMsg("Añadidos: "+added+(updated>0?", actualizados: "+updated:"")+" · CIMA completado");setTimeout(function(){setImportMsg("");},3000);})
+      .catch(function(){setTimeout(function(){setImportMsg("");},3000);});
+    }else{setTimeout(function(){setImportMsg("");},3000);}
+  };
+
+  var rmMed=function(uid){setMeds(function(p){return p.filter(function(m){return m.uid!==uid;});});};
+  var setDoseF=function(uid,slot,val){setMeds(function(p){return p.map(function(m){if(m.uid!==uid)return m;var nd=Object.assign({},m.doses);nd[slot]=val;return Object.assign({},m,{doses:nd});});});};
+  var setTipF=function(uid,val){setMeds(function(p){return p.map(function(m){return m.uid===uid?Object.assign({},m,{tip:val}):m;});});};
+  var setCTipF=function(uid,val){setMeds(function(p){return p.map(function(m){return m.uid===uid?Object.assign({},m,{customTip:val}):m;});});};
+  var setStatusF=function(uid,val){setMeds(function(p){return p.map(function(m){return m.uid===uid?Object.assign({},m,{status:val,conflict:false}):m;});});};
+  var setBrandF=function(uid,val){setMeds(function(p){return p.map(function(m){return m.uid===uid?Object.assign({},m,{brand:val}):m;});});};
+  var setActiveNamesF=function(uid,val){setMeds(function(p){return p.map(function(m){if(m.uid!==uid)return m;var an=val.split(/\s*\/\s*/).map(function(s){return s.trim().toUpperCase();}).filter(Boolean);return Object.assign({},m,{activeNames:an,active:activeNamesToString(an)});});});};
+  var setMedTypeF=function(uid,val){setMeds(function(p){return p.map(function(m){if(m.uid!==uid)return m;var cat=val==="inhaler"?"Inhalado":val==="injection"?"Inyectable":(val==="topical"||val==="patch")?"Topico":"Oral";return Object.assign({},m,{type:val,category:cat,via:defaultVia(cat,val)});});});};
+  var setViaF=function(uid,val){setMeds(function(p){return p.map(function(m){return m.uid===uid?Object.assign({},m,{via:val}):m;});});};
+  var setDeglIncluirF=function(uid,val){setMeds(function(p){return p.map(function(m){return m.uid===uid?Object.assign({},m,{deglIncluir:val}):m;});});};
+  var setDeglManualTextF=function(uid,val){setMeds(function(p){return p.map(function(m){if(m.uid!==uid)return m;return Object.assign({},m,{deglManualText:val,deglufarmInfo:val.trim()?null:m.deglufarmInfo});});});deglLoadedRef.current.delete(uid);};
+  var toggleAllDegl=function(val){setMeds(function(p){return p.map(function(m){return Object.assign({},m,{deglIncluir:val});});});};
+  var enrichWithCIMA=function(uid){var m=meds.find(function(x){return x.uid===uid;});if(!m)return;setMeds(function(p){return p.map(function(x){return x.uid===uid?Object.assign({},x,{cimaLoading:true}):x;});});searchCIMA(m.brand).then(function(r){setMeds(function(p){return p.map(function(x){if(x.uid!==uid)return x;var nct=x.customTip;if(r&&r.multiplePresent&&!x.dosage)nct=(nct?nct+" / ":"")+"Confirmar dosis";return Object.assign({},x,r?{activeNames:r.activeNames&&r.activeNames.length?r.activeNames:x.activeNames,active:r.active||x.active,type:x.type||r.type,category:x.category||r.category,via:x.via||r.via,customTip:nct,unrecognized:false}:{},{cimaLoading:false,cimaResolved:true});});});});};
+
+  var preview=React.useMemo(function(){
+    try{return importTxt.length>2?parseImportBlock(importTxt):{active:[],susp:[]}}catch(e){return{active:[],susp:[]};}
+  },[importTxt]);
+
+  return React.createElement("div",{style:{fontFamily:"'Segoe UI',Arial,sans-serif",background:"#f0f4ff",minHeight:"100vh"}},
+    showModal&&React.createElement(AddManualModal,{onAdd:function(p){addMed(Object.assign({},p,{status:"maintain"}));},onClose:function(){setShowModal(false);}}),
+    React.createElement("div",{style:{background:"linear-gradient(135deg,#1a56db,#1e40af)",color:"white",padding:"12px 20px",display:"flex",alignItems:"center",gap:12,flexWrap:"wrap"}},
+      React.createElement(LogoImg,{height:52}),
+      React.createElement("div",{style:{flex:1}},React.createElement("div",{style:{fontSize:16,fontWeight:800}},"Mapa Horario de Medicacion"),React.createElement("div",{style:{fontSize:10,opacity:0.8}},"Hospital de Guadalajara - Serv. Farmacia")),
+      React.createElement("button",{onClick:function(){downloadHTML(meds,pName,pharmacist,doctor,hospital,disfagia,inclDisfagia,servicio,alergias);},style:{padding:"8px 16px",background:"#059669",color:"white",border:"none",borderRadius:10,fontWeight:800,fontSize:12,cursor:"pointer"}},"Descargar HTML"),
+      React.createElement("button",{onClick:function(){setMeds([]);setPName("");setDoctor("");setPharmacist("");setServicio("");setAlergias("");setImportTxt("");setDisfagia(false);deglLoadedRef.current=new Set();},style:{padding:"8px 16px",background:"#f1f5f9",color:"#475569",border:"1.5px solid #cbd5e1",borderRadius:10,fontWeight:800,fontSize:12,cursor:"pointer"}},"Nuevo Paciente")
+    ),
+    React.createElement("div",{style:{background:"#f0f4ff",borderBottom:"1px solid #dbeafe",padding:"5px 20px",fontSize:10,color:"#64748b",fontStyle:"italic",textAlign:"center"}},
+      "Ante cualquier incidencia, sugerencia o posible mejora, contactar con ",
+      React.createElement("a",{href:"mailto:saracorralesk@gmail.com",style:{color:"#1a56db",fontWeight:700}},"saracorralesk@gmail.com")
+    ),
+    React.createElement("div",{style:{background:disfagia?"#fef3c7":"#f8faff",borderBottom:"2px solid "+(disfagia?"#f59e0b":"#dbeafe"),padding:"10px 20px",display:"flex",alignItems:"center",gap:16,flexWrap:"wrap"}},
+      React.createElement("span",{style:{fontWeight:800,fontSize:13,color:disfagia?"#92400e":"#475569"}},"Paciente con disfagia?"),
+      React.createElement("button",{onClick:function(){setDisfagia(function(v){return!v;});deglLoadedRef.current=new Set();},style:{padding:"7px 20px",borderRadius:20,border:"2px solid "+(disfagia?"#f59e0b":"#94a3b8"),background:disfagia?"#f59e0b":"white",color:disfagia?"white":"#64748b",fontWeight:900,fontSize:13,cursor:"pointer"}},disfagia?"SI":"NO"),
+      disfagia&&React.createElement("label",{style:{display:"flex",alignItems:"center",gap:6,fontSize:12,color:"#92400e",fontWeight:700,cursor:"pointer"}},React.createElement("input",{type:"checkbox",checked:inclDisfagia,onChange:function(e){setInclDisfagia(e.target.checked);toggleAllDegl(e.target.checked);},style:{width:16,height:16}}),"Incluir columna disfagia en informe")
+    ),
+    disfagia&&React.createElement("div",{style:{background:"#fffbeb",borderBottom:"1px solid #fde68a",padding:"7px 20px",fontSize:11,color:"#78350f"}},"Evaluacion disfagia: NIOSH 2024, Ficha Tecnica CIMA, Literatura. IA debe confirmarse."),
+    disfagia&&meds.length>0&&React.createElement("div",{style:{background:"white",borderBottom:"2px solid #fde68a",padding:"10px 20px"}},
+      React.createElement("div",{style:{fontWeight:800,fontSize:12,color:"#92400e",marginBottom:8}},"Panel disfagia"),
+      React.createElement("div",{style:{display:"flex",flexWrap:"wrap",gap:8}},
+        sortedMeds.filter(function(m){return m.status!=="suspend";}).map(function(m){
+          var info=m.deglufarmInfo;var isNO=isNonOralType(m.type);var manualOk=m.deglManualText&&m.deglManualText.trim();
+          var bg=isNO||manualOk?"#d1fae5":info&&!info.esIA&&info.apto===true?"#d1fae5":info&&!info.esIA&&info.apto===false?"#fee2e2":"#f8faff";
+          var brd=isNO||manualOk?"#a7f3d0":info&&!info.esIA&&info.apto===true?"#a7f3d0":info&&!info.esIA&&info.apto===false?"#fecaca":"#e2e8f0";
+          return React.createElement("div",{key:m.uid,style:{background:isNO?"#f0fdf4":m.deglIncluir?bg:"#f1f5f9",border:"1.5px solid "+(isNO?"#86efac":m.deglIncluir?brd:"#cbd5e1"),borderRadius:8,padding:"7px 10px",minWidth:200,maxWidth:300,opacity:(!isNO&&!m.deglIncluir)?0.55:1}},
+            React.createElement("div",{style:{display:"flex",alignItems:"center",gap:6,marginBottom:4}},
+              React.createElement("input",{type:"checkbox",checked:!!m.deglIncluir,disabled:isNO,onChange:function(e){setDeglIncluirF(m.uid,e.target.checked);},style:{width:14,height:14,cursor:isNO?"not-allowed":"pointer"}}),
+              React.createElement(MedIcon,{type:m.type,category:m.category,size:16}),
+              React.createElement("span",{style:{fontWeight:800,fontSize:11}},m.brand+(m.dosage?" "+m.dosage:""))
+            ),
+            isNO?React.createElement("div",{style:{fontSize:9,color:"#065f46",fontWeight:600}},"\u2705 No via oral, no procede"):
+            React.createElement("div",null,
+              React.createElement("textarea",{placeholder:"Pegar texto literal de Deglufarm aqui...",value:m.deglManualText||"",onChange:function(e){setDeglManualTextF(m.uid,e.target.value);},style:{width:"100%",fontSize:9,padding:"4px 6px",borderRadius:5,border:"1px solid #e2e8f0",resize:"vertical",minHeight:40,boxSizing:"border-box",marginBottom:4}}),
+              m.deglufarmLoading?React.createElement("div",{style:{fontSize:9,color:"#94a3b8"}},"Consultando..."):React.createElement(DeglufarmCell,{m:m})
+            )
+          );
+        })
+      )
+    ),
+    React.createElement("div",{style:{background:"white",borderBottom:"2px solid #dbeafe",padding:"12px 16px"}},
+      React.createElement("div",{style:{display:"flex",gap:6,marginBottom:10,alignItems:"center",flexWrap:"wrap"}},
+        [["import","Importar"],["search","Buscar/Añadir"]].map(function(item){return React.createElement("button",{key:item[0],onClick:function(){setTab(item[0]);},style:{padding:"6px 14px",borderRadius:8,border:"none",cursor:"pointer",fontSize:11,fontWeight:700,background:tab===item[0]?"#1a56db":"#f0f4ff",color:tab===item[0]?"white":"#64748b"}},item[1]);}),
+        React.createElement("div",{style:{flex:1,display:"flex",gap:8,justifyContent:"flex-end",alignItems:"center",flexWrap:"wrap"}},
+          React.createElement("input",{placeholder:"Paciente",value:pName,onChange:function(e){setPName(e.target.value);},style:Object.assign({},INP,{width:125,marginBottom:0})}),
+          React.createElement("input",{placeholder:"Alergias",value:alergias,onChange:function(e){setAlergias(e.target.value);},style:Object.assign({},INP,{width:160,marginBottom:0,borderColor:"#fca5a5",color:"#dc2626",fontWeight:700})}),
+          React.createElement("input",{placeholder:"Servicio",value:servicio,onChange:function(e){setServicio(e.target.value);},style:Object.assign({},INP,{width:125,marginBottom:0})}),
+          React.createElement("input",{placeholder:"Medico responsable",value:doctor,onChange:function(e){setDoctor(e.target.value);},style:Object.assign({},INP,{width:150,marginBottom:0})}),
+          React.createElement("input",{placeholder:"Farmaceutico/a",value:pharmacist,onChange:function(e){setPharmacist(e.target.value);},style:Object.assign({},INP,{width:140,marginBottom:0})})
+        )
+      ),
+      tab==="import"&&React.createElement("div",null,
+        React.createElement("div",{style:{fontSize:11,marginBottom:6,display:"flex",gap:14,flexWrap:"wrap"}},
+          React.createElement("span",null,"\u2746 ",React.createElement("b",{style:{color:"#059669"}},"NUEVO")),
+          React.createElement("span",null,"\u25b2 ",React.createElement("b",{style:{color:"#d97706"}},"CAMBIO")),
+          React.createElement("span",null,"\u25cf ",React.createElement("b",{style:{color:"#1e40af"}},"MANTENER")),
+          React.createElement("span",null,"\uD83D\uDD34 ",React.createElement("b",{style:{color:"#dc2626"}},"SUSPENDIDO"))
+        ),
+        React.createElement("textarea",{value:importTxt,onChange:function(e){setImportTxt(e.target.value);},placeholder:"Pegar texto libre o formato HCE:\nELIQUIS 5MG 60 COMPRIMIDOS RECUBIERTOS PELICULA 1.0 cada 12 H\nPARACETAMOL ORAL 1 G 40 COMPRIMIDO 1.0 cada 8 H",style:{width:"100%",height:110,padding:"8px 10px",borderRadius:8,border:"1.5px solid #dbeafe",fontSize:12,resize:"vertical",boxSizing:"border-box"}}),
+        React.createElement("div",{style:{display:"flex",alignItems:"center",gap:12,marginTop:6}},
+          React.createElement("button",{onClick:doImport,style:{padding:"8px 24px",background:"#1a56db",color:"white",border:"none",borderRadius:8,fontWeight:800,fontSize:12,cursor:"pointer"}},"Importar / Fusionar"),
+          importMsg&&React.createElement("span",{style:{fontSize:11,color:"#059669",fontWeight:700}},importMsg),
+          !importMsg&&importTxt.length>2&&React.createElement("div",{style:{fontSize:11,color:"#64748b",display:"flex",gap:10}},
+            React.createElement("span",null,"\u2746 ",React.createElement("b",{style:{color:"#059669"}},preview.active.filter(function(x){return x.status==="new";}).length)),
+            React.createElement("span",null,"\u25b2 ",React.createElement("b",{style:{color:"#d97706"}},preview.active.filter(function(x){return x.status==="change";}).length)),
+            React.createElement("span",null,"\u25cf ",React.createElement("b",{style:{color:"#1e40af"}},preview.active.filter(function(x){return x.status==="maintain";}).length)),
+            React.createElement("span",null,"\uD83D\uDD34 ",React.createElement("b",{style:{color:"#dc2626"}},preview.susp.length))
+          )
+        )
+      ),
+      tab==="search"&&React.createElement("div",{style:{position:"relative",maxWidth:440}},
+        React.createElement("input",{placeholder:"Nombre o principio activo...",value:search,onChange:function(e){setSearch(e.target.value);},style:Object.assign({},INP,{marginBottom:0})}),
+        filtered.length>0&&React.createElement("div",{style:{position:"absolute",zIndex:99,top:"100%",left:0,right:0,background:"white",border:"1.5px solid #dbeafe",borderRadius:10,boxShadow:"0 8px 24px rgba(0,0,0,0.12)",maxHeight:260,overflowY:"auto"}},
+          filtered.map(function(d){return React.createElement("div",{key:d.id,onClick:function(){addFromDB(d);},style:{padding:"8px 12px",cursor:"pointer",borderBottom:"1px solid #f0f4ff",display:"flex",alignItems:"center",gap:8},onMouseEnter:function(e){e.currentTarget.style.background="#f0f4ff";},onMouseLeave:function(e){e.currentTarget.style.background="white";}},
+            React.createElement(MedIcon,{type:d.type,category:d.category,size:18}),
+            React.createElement("div",null,React.createElement("div",{style:{fontWeight:700,fontSize:12}},d.brand+(d.dosage?" - "+d.dosage:"")),React.createElement("div",{style:{fontSize:10,color:"#64748b"}},activeNamesToString(d.activeNames)))
+          );})
+        ),
+        React.createElement("div",{style:{marginTop:8,display:"flex",gap:8}},
+          React.createElement("button",{onClick:function(){setShowModal(true);},style:{padding:"7px 16px",background:"#f0f4ff",color:"#1a56db",border:"1.5px solid #dbeafe",borderRadius:8,fontWeight:700,fontSize:11,cursor:"pointer"}},"+ Añadir manualmente"),
+          search.trim().length>1&&React.createElement("button",{onClick:function(){var q=search.trim();setSearch("");var nm=mk(parseSingleMed(q,"maintain"));setMeds(function(p){return[].concat(p,[nm]);});searchCIMA(q).then(function(r){if(!r)return;setMeds(function(p){return p.map(function(x){if(x.uid!==nm.uid)return x;return Object.assign({},x,{activeNames:r.activeNames||x.activeNames,active:r.active||x.active,type:x.type||r.type,category:x.category||r.category,via:x.via||r.via,cimaResolved:true,unrecognized:false});});});});},style:{padding:"7px 16px",background:"#1a56db",color:"white",border:"none",borderRadius:8,fontWeight:700,fontSize:11,cursor:"pointer"}},'Buscar "'+search.trim()+'" en CIMA')
+        )
+      )
+    ),
+    meds.length===0
+      ?React.createElement("div",{style:{textAlign:"center",padding:"60px 20px",color:"#94a3b8"}},React.createElement("div",{style:{fontSize:48,marginBottom:12}},"\uD83D\uDC8A"),React.createElement("div",{style:{fontSize:14,fontWeight:600}},"Sin medicamentos"),React.createElement("div",{style:{fontSize:12,marginTop:4}},"Importa un bloque de texto o busca medicamentos para empezar"))
+      :React.createElement("div",{style:{padding:"12px 16px"}},
+        React.createElement("div",{style:{fontSize:11,color:"#64748b",marginBottom:8}},meds.length+" medicamento"+(meds.length!==1?"s":"")),
+        sortedMeds.map(function(m){
+          var st=STATUS_META[m.status]||STATUS_META.maintain;var rt=resolveIconType({type:m.type,category:m.category});var col=BOX_COL[rt]||"#1a56db";var isSusp=m.status==="suspend";
+          var hasDup=activeDups.has(m.uid),hasSuspConflict=sameAsSusp.has(m.uid),hasEquiv=equivDups.has(m.uid),hasPAVarias=paVarias.has(m.uid);
+          var hasNoAptoDisfagia=disfagia&&m.deglIncluir&&m.deglufarmInfo&&m.deglufarmInfo.apto===false&&!isNonOralType(m.type)&&!(m.deglManualText&&m.deglManualText.trim());
+          var borderColor=hasDup?"#d97706":hasSuspConflict?"#dc2626":hasEquiv?"#7c3aed":hasPAVarias?"#0891b2":st.border;
+          return React.createElement("div",{key:m.uid,style:{background:"white",borderRadius:12,marginBottom:8,border:"2px solid "+borderColor,opacity:isSusp?0.75:1,overflow:"hidden"}},
+            React.createElement("div",{style:{display:"flex",alignItems:"center",gap:8,padding:"8px 10px",background:isSusp?"#fef2f2":st.bg,flexWrap:"wrap"}},
+              React.createElement(MedIcon,{type:m.type,category:m.category,size:22}),
+              React.createElement("div",{style:{flex:1,minWidth:120}},
+                React.createElement("input",{value:m.brand,onChange:function(e){setBrandF(m.uid,e.target.value);},style:{fontWeight:800,fontSize:13,border:"none",background:"transparent",color:isSusp?"#9ca3af":"#1e293b",textDecoration:isSusp?"line-through":"none",width:"100%",outline:"none"}}),
+                React.createElement("input",{value:(m.activeNames||[]).map(function(n){return n.charAt(0)+n.slice(1).toLowerCase();}).join(" / "),onChange:function(e){setActiveNamesF(m.uid,e.target.value);},style:{fontSize:10,color:"#64748b",fontStyle:"italic",border:"none",background:"transparent",width:"100%",outline:"none"}}),
+                React.createElement("div",{style:{display:"flex",gap:4,flexWrap:"wrap",marginTop:2}},
+                  m.dosage&&React.createElement("span",{style:{fontSize:9,color:"#64748b"}},m.dosage),
+                  hasDup&&React.createElement("span",{style:{fontSize:9,background:"#fef3c7",color:"#92400e",border:"1px solid #fde68a",borderRadius:4,padding:"1px 5px",fontWeight:700}},"\u26A0\uFE0F Duplicado activo"),
+                  hasSuspConflict&&React.createElement("span",{style:{fontSize:9,background:"#fee2e2",color:"#991b1b",border:"1px solid #fecaca",borderRadius:4,padding:"1px 5px",fontWeight:700}},"\u26A0\uFE0F Conflicto con suspendido"),
+                  !hasDup&&hasEquiv&&React.createElement("span",{style:{fontSize:9,background:"#ede9fe",color:"#5b21b6",border:"1px solid #ddd6fe",borderRadius:4,padding:"1px 5px",fontWeight:700}},"\u26A0\uFE0F Mismo grupo terapeutico"),
+                  hasPAVarias&&React.createElement("span",{style:{fontSize:9,background:"#e0f2fe",color:"#0369a1",border:"1px solid #bae6fd",borderRadius:4,padding:"1px 5px",fontWeight:700}},"\uD83D\uDD0D Compruebe estado del medicamento"),
+                  hasNoAptoDisfagia&&React.createElement("span",{style:{fontSize:9,background:"#fee2e2",color:"#991b1b",border:"1px solid #dc2626",borderRadius:4,padding:"1px 5px",fontWeight:700}},"\u274C No apto disfagia")
+                )
+              ),
+              React.createElement("select",{value:m.status,onChange:function(e){setStatusF(m.uid,e.target.value);},style:{fontSize:10,fontWeight:700,padding:"3px 6px",borderRadius:6,border:"1.5px solid "+st.border,background:st.bg,color:st.color,cursor:"pointer"}},Object.keys(STATUS_META).map(function(k){return React.createElement("option",{key:k,value:k},STATUS_META[k].symbol+" "+STATUS_META[k].label);})),
+              React.createElement("select",{value:m.type,onChange:function(e){setMedTypeF(m.uid,e.target.value);},style:{fontSize:10,padding:"3px 6px",borderRadius:6,border:"1.5px solid #e2e8f0",background:"white",cursor:"pointer"}},ALL_TYPES.map(function(k){return React.createElement("option",{key:k,value:k},getEmoji(k)+" "+TYPE_ES[k]);})),
+              NON_ORAL.includes(m.category)&&React.createElement("select",{value:m.via||"",onChange:function(e){setViaF(m.uid,e.target.value);},style:{fontSize:10,padding:"3px 6px",borderRadius:6,border:"1.5px solid #e2e8f0",background:"white",cursor:"pointer"}},["Via inhalatoria","Via topica","Via transdermica"].concat(VIAS_PAR).map(function(v){return React.createElement("option",{key:v,value:v},v);})),
+              !m.cimaResolved&&React.createElement("button",{onClick:function(){enrichWithCIMA(m.uid);},style:{fontSize:9,padding:"3px 7px",background:"#fef3c7",color:"#92400e",border:"1px solid #fde68a",borderRadius:6,cursor:"pointer",fontWeight:700}},m.cimaLoading?"...":"CIMA?"),
+              m.unrecognized&&React.createElement("span",{style:{fontSize:9,color:"#dc2626",fontWeight:700}},"\u26A0\uFE0F"),
+              React.createElement("button",{onClick:function(){rmMed(m.uid);},style:{padding:"3px 8px",background:"#fee2e2",color:"#dc2626",border:"none",borderRadius:6,cursor:"pointer",fontWeight:800,fontSize:12}},"\u2715")
+            ),
+            !isSusp&&React.createElement("div",{style:{display:"grid",gridTemplateColumns:"repeat(6,1fr)",borderTop:"1px solid #f0f4ff"}},
+              SLOTS.map(function(sl){return React.createElement("div",{key:sl.key,style:{padding:"6px 4px",textAlign:"center",borderRight:"1px solid #f0f4ff"}},React.createElement("div",{style:{fontSize:9,color:"#94a3b8",marginBottom:2}},sl.emoji+" "+sl.label),React.createElement("input",{value:m.doses[sl.key]||"",onChange:function(e){setDoseF(m.uid,sl.key,e.target.value);},placeholder:"-",style:{width:"100%",textAlign:"center",border:"1px solid #e2e8f0",borderRadius:6,padding:"4px 2px",fontSize:13,fontWeight:700,color:col,background:m.doses[sl.key]?"#f0f4ff":"white",boxSizing:"border-box"}}));})
+            ),
+            React.createElement("div",{style:{display:"flex",gap:6,padding:"6px 10px",borderTop:"1px solid #f0f4ff",flexWrap:"wrap",alignItems:"center"}},
+              React.createElement("select",{value:m.tip||"",onChange:function(e){setTipF(m.uid,e.target.value);},style:{fontSize:10,padding:"3px 6px",borderRadius:6,border:"1px solid #e2e8f0",flex:"0 0 auto",maxWidth:200,cursor:"pointer"}},React.createElement("option",{value:""},"Sin consejo"),TIPS_PRESET.map(function(t){return React.createElement("option",{key:t,value:t},t);})),
+              React.createElement("input",{value:m.customTip||"",onChange:function(e){setCTipF(m.uid,e.target.value);},placeholder:"Notas adicionales...",style:{flex:1,fontSize:10,padding:"3px 8px",borderRadius:6,border:"1px solid #e2e8f0",minWidth:100}})
+            )
+          );
+        })
+      )
+  );
+}
